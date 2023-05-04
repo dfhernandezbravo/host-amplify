@@ -1,14 +1,12 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
 import { ErrorBoundary } from 'react-error-boundary';
 
 import dynamic from 'next/dynamic';
 
-const inter = Inter({ subsets: ['latin'] })
-const Header = dynamic(() => import('headerFooter/header'), { ssr: false, loading: () => <p>Loading...</p> })
-const Footer = dynamic(() => import('headerFooter/footer'), { ssr: false, loading: () => <p>Loading...</p>})
-const Home = dynamic(() => import('home/home'), { ssr: false, loading: () => <p>Loading...</p> })
+const Header = dynamic(() => import('headerFooter/header'), { ssr: false, loading: () => <p>Loading header...</p> })
+const Footer = dynamic(() => import('headerFooter/footer'), { ssr: false, loading: () => <p>Loading footer...</p>})
+const Home = dynamic(() => import('home/home'), { ssr: false, loading: () => <p>Loading home...</p> })
+const CartAside = dynamic(() => import('cart/cartAside'), { ssr: false, loading: () => <p>Loading cart...</p> })
 
 export default function HomeApp() {
   return (
@@ -24,6 +22,7 @@ export default function HomeApp() {
           <Header />
           <Home />
           <Footer />
+          <CartAside />
         </ErrorBoundary>
       </main>
     </>
