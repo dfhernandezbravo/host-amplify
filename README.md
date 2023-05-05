@@ -42,6 +42,14 @@ To run the application in production mode, run the following command:
 npm start
 ```
 
+## Build and run production mode
+
+To run the application in production mode, run the following command:
+
+```
+npm start:prod
+```
+
 ## Module Federation plugin
 
 Easy Headless is the host application where the rest of the applications will reside, which will be called remotely through the Module Federation plugin for NextJS.
