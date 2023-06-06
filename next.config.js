@@ -9,7 +9,7 @@ const remotes = (isServer) => {
   return {
     home: homeURI,
     headerFooter: headerFooterURI,
-    cart: cartURI
+    cart: cartURI,
   }
 }
 
