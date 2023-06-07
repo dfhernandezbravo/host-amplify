@@ -6,10 +6,14 @@ const remotes = (isServer) => {
   const headerFooterURI = `headerFooter@http://localhost:3001/_next/static/${location}/remoteEntry.js`;
   const homeURI = `home@http://localhost:3002/_next/static/${location}/remoteEntry.js`;
   const cartURI = `cart@http://localhost:3003/_next/static/${location}/remoteEntry.js`;
+  const plpURI = `plp@http://localhost:3004/_next/static/${location}/remoteEntry.js`;
+  const pdpURI = `pdp@http://localhost:3005/_next/static/${location}/remoteEntry.js`;
   return {
     home: homeURI,
     headerFooter: headerFooterURI,
     cart: cartURI,
+    plp: plpURI,
+    pdp: pdpURI
   }
 }
 
