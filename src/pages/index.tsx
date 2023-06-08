@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { ErrorBoundary } from 'react-error-boundary';
 
+
 import dynamic from 'next/dynamic';
 
 const Header = dynamic(() => import('headerFooter/header'), {
@@ -27,6 +28,7 @@ const CartAside = dynamic(() => import('cart/cartAside'), {
 });
 
 export default function HomeApp() {
+
   return (
     <>
       <Head>
