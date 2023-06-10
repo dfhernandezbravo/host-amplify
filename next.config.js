@@ -1,13 +1,46 @@
 /** @type {import('next').NextConfig} */
 const { NextFederationPlugin } = require('@module-federation/nextjs-mf');
 
+const environments =
+  { 
+    DEVELOPMENT: 'DEVELOPMENT',
+    PRODUCTION: 'PRODUCTION',
+    STAGING: 'STAGING'
+  };
+
+const getRemotesEntries = (entry) => {
+  const env = process.env.NEXT_PUBLIC_ENV || environments.DEVELOPMENT;
+  switch(entry){
+    case 'home':
+      if(env === environments.DEVELOPMENT ) return `home@${process.env.NEXT_PUBLIC_HOME_URI_DEV}/_next/static`;
+      if(env === environments.STAGING) return `home@${process.env.NEXT_PUBLIC_HOME_URI_STG}/_next/static`;
+      break;
+    case 'cart':
+      if(env === environments.DEVELOPMENT ) return `cart@${process.env.NEXT_PUBLIC_CART_URI_DEV}/_next/static`;
+      if(env === environments.STAGING) return `cart@${process.env.NEXT_PUBLIC_CART_URI_STG}/_next/static`;
+      break;
+    case 'header':
+      if(env === environments.DEVELOPMENT ) return `headerFooter@${process.env.NEXT_PUBLIC_HEADER_URI_DEV}/_next/static`;
+      if(env === environments.STAGING) return `headerFooter@${process.env.NEXT_PUBLIC_HEADER_URI_STG}/_next/static`;
+      break;
+    case 'plp':
+      if(env === environments.DEVELOPMENT ) return `plp@${process.env.NEXT_PUBLIC_PLP_URI_DEV}/_next/static`;
+      if(env === environments.STAGING) return `plp@${process.env.NEXT_PUBLIC_PLP_URI_STG}/_next/static`;
+      break;
+    case 'pdp':
+      if(env === environments.DEVELOPMENT ) return `pdp@${process.env.NEXT_PUBLIC_PDP_URI_DEV}/_next/static`;
+      if(env === environments.STAGING) return `pdp@${process.env.NEXT_PUBLIC_PDP_URI_STG}/_next/static`;
+      break;
+  }
+}
+
 const remotes = (isServer) => {
   const location = isServer ? 'ssr' : 'chunks';
-  const headerFooterURI = `headerFooter@http://localhost:3001/_next/static/${location}/remoteEntry.js`;
-  const homeURI = `home@http://localhost:3002/_next/static/${location}/remoteEntry.js`;
-  const cartURI = `cart@http://localhost:3003/_next/static/${location}/remoteEntry.js`;
-  const plpURI = `plp@http://localhost:3004/_next/static/${location}/remoteEntry.js`;
-  const pdpURI = `pdp@http://localhost:3005/_next/static/${location}/remoteEntry.js`;
+  const headerFooterURI = `${getRemotesEntries('header')}/${location}/remoteEntry.js`;
+  const homeURI = `${getRemotesEntries('home')}/${location}/remoteEntry.js`;
+  const cartURI = `${getRemotesEntries('cart')}/${location}/remoteEntry.js`;
+  const plpURI = `${getRemotesEntries('plp')}/${location}/remoteEntry.js`;
+  const pdpURI = `${getRemotesEntries('pdp')}/${location}/remoteEntry.js`;
   return {
     home: homeURI,
     headerFooter: headerFooterURI,
