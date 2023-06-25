@@ -6,13 +6,14 @@ export default async function handler(
 ) {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_CMS_URL}/home`,
+      `${process.env.NEXT_PUBLIC_CMS_URL}/home-headless`,
       {
         headers:{
             apikey: `${process.env.NEXT_PUBLIC_CMS_API_KEY}`
         }
       }
     );
+    console.log("DATA --->:", data)
     res.json(data);
   } catch (error) {
     console.log(error);
