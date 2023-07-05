@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import { ErrorBoundary } from 'react-error-boundary';
 
-
 import dynamic from 'next/dynamic';
+import { NextPageContext } from 'next';
+import { use, useEffect } from 'react';
+import detectOs from '@/helpers/detectOS';
 
 const Header = dynamic(() => import('headerFooter/header'), {
   ssr: false,
@@ -27,7 +29,12 @@ const CartAside = dynamic(() => import('cart/cartAside'), {
   loading: () => <></>,
 });
 
-export default function HomeApp() {
+export default function HomeApp(props: any) {
+  useEffect(() => {
+    (async () => {
+      await detectOs(props);
+    })();
+  }, []);
 
   return (
     <>
