@@ -8,6 +8,7 @@ type QueryResponse = {
         productId: string;
         productName: string;
         brand: string;
+        link: string;
         description: string;
         items: {
           name: string;
@@ -63,6 +64,7 @@ export default async function handler(
                 productId
                 productName
                 brand
+                link,
                 description
                 items {
                   name
