@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@elgorditosalsero/react-gtm-hook": "^2.7.2",
     "@module-federation/nextjs-mf": "^6.4.0",
     "@newrelic/next": "^0.5.1",
     "@types/node": "18.16.1",
