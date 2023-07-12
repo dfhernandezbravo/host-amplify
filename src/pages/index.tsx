@@ -1,30 +1,29 @@
-import Head from "next/head";
-import { ErrorBoundary } from "react-error-boundary";
-import useAnalytics, { EventData } from "@/analytics/hooks/useAnalytics";
-import { WINDOWS_EVENTS } from "@/events";
-import detectOs from "@/helpers/detectOS";
-import dynamic from "next/dynamic";
-import { useCallback, useEffect } from "react";
+import Head from 'next/head';
+import { ErrorBoundary } from 'react-error-boundary';
+import useAnalytics, { EventData } from '@/analytics/hooks/useAnalytics';
+import { WINDOWS_EVENTS } from '@/events';
+import detectOs from '@/helpers/detectOS';
+import dynamic from 'next/dynamic';
+import { useCallback, useEffect } from 'react';
 
-const Header = dynamic(() => import("headerFooter/header"), {
+import HomeSkeleton from '@/presentation/components/layouts/HomeSkeleton/HomeSkeleton';
+import LogoLoader from '@/presentation/modules/LogoLoader/LogoLoader';
+import HeaderSkeleton from '@/presentation/components/layouts/HeaderSkeleton/HeaderSkeleton';
+import FooterSkeleton from '@/presentation/components/layouts/FooterSkeleton/FooterSkeleton';
+
+const Header = dynamic(() => import('headerFooter/headers'), {
   ssr: false,
-  loading: () => (
-    <p style={{ height: "80px", width: "100vw" }}>Loading header...</p>
-  ),
+  loading: () => <HeaderSkeleton />,
 });
-const Footer = dynamic(() => import("headerFooter/footer"), {
+const Footer = dynamic(() => import('headerFooter/footers'), {
   ssr: false,
-  loading: () => (
-    <p style={{ height: "80px", width: "100vw" }}>Loading footer...</p>
-  ),
+  loading: () => <FooterSkeleton />,
 });
-const Home = dynamic(() => import("home/home"), {
+const Home = dynamic(() => import('home/homes'), {
   ssr: false,
-  loading: () => (
-    <p style={{ height: "1500px", width: "100vw" }}>Loading home...</p>
-  ),
+  loading: () => <HomeSkeleton />,
 });
-const CartAside = dynamic(() => import("cart/cartAside"), {
+const CartAside = dynamic(() => import('cart/cartAside'), {
   ssr: false,
   loading: () => <></>,
 });
@@ -55,9 +54,9 @@ export default function HomeApp(props: any) {
     <>
       <Head>
         <title>Easy.cl - Renueva el amor por tu hogar</title>
-        <meta name="description" content="Easy CL" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.webp" />
+        <meta name='description' content='Easy CL' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <link rel='icon' href='/favicon.webp' />
       </Head>
       <main>
         <ErrorBoundary FallbackComponent={() => <></>}>
