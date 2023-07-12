@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "@elgorditosalsero/react-gtm-hook": "^2.7.2",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@module-federation/nextjs-mf": "^6.4.0",
+    "@mui/material": "^5.13.7",
     "@newrelic/next": "^0.5.1",
     "@types/node": "18.16.1",
     "@types/react": "18.2.0",
