@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "NODE_OPTIONS='-r @newrelic/next' next start",
     "start:prod": "next build && next start -p 3000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@elgorditosalsero/react-gtm-hook": "^2.7.2",
@@ -39,5 +40,13 @@
     "firefox 67",
     "opera 51",
     "safari 12"
-  ]
+  ],
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.7",
+    "@commitlint/config-conventional": "^17.6.7",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3"
+  }
 }

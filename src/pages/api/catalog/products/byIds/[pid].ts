@@ -4,10 +4,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   _req: NextApiRequest,
-  res: NextApiResponse<any>
+  res: NextApiResponse<unknown>
 ) {
   try {
-    const pid: string | any = _req.query.pid || "";
+    const pid: string = `${_req.query.pid}`;
     const splitIds = pid.split(",");
     let result = "";
     for (let i = 0; i < splitIds.length; i++) {
@@ -19,7 +19,5 @@ export default async function handler(
       `http://www.easyclqa.myvtex.com/api/catalog_system/pub/products/search?${result}`
     );
     res.json(data);
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) { /* Empty */ }
 }
