@@ -23,6 +23,7 @@ const Home = dynamic(() => import('home/home'), {
   ssr: false,
   loading: () => <HomeSkeleton />,
 });
+
 const CartAside = dynamic(() => import('cart/cartAside'), {
   ssr: false,
   loading: () => <></>,
