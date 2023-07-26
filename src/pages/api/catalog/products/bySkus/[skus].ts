@@ -7,16 +7,16 @@ export default async function handler(
   res: NextApiResponse<unknown>
 ) {
   try {
-    const pid: string = `${_req.query.pid}`;
-    const splitIds = pid.split(",");
+    const skus: string = `${_req.query.skus}`;
+    const splitSkus = skus.split(",");
     let result = "";
-    for (let i = 0; i < splitIds.length; i++) {
-      result += `fq=productId:${splitIds[i]}${
-        i !== splitIds?.length - 1 ? "&" : ""
+    for (let i = 0; i < splitSkus.length; i++) {
+      result += `fq=skuId:${splitSkus[i]}${
+        i !== splitSkus?.length - 1 ? "&" : ""
       }`;
     }
     const { data } = await axios.get(
-      `https://easyclqa.vtexcommercestable.com.br/api/catalog_system/pub/products/search?${result}`
+      `https://www.easy.cl/api/catalog_system/pub/products/search?${result}`
     );
     res.json(data);
   } catch (error) { /* Empty */ }
