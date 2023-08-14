@@ -18,3 +18,30 @@ body {
 .header-footer-open-modal {
   overflow-y: hidden;
 }
+.header-footer-open-modal {
+  overflow-y: hidden;
+}
+.home-mcf .swiper-pagination-bullet{
+  border: 1px solid #9d9ea0;
+  background-color: #9d9ea0;
+  width: 10px;
+  height: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.home-mcf .swiper-pagination-bullet-active{
+  border: 1px solid #cc1515;
+  background-color: #cc1515;;
+  width: 33px;
+  height: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.home-mcf .custom-pagination-categories{
+  height: 33px;
+  background: transparent;
+  border: none
+}
+a{
+  text-decoration: none;
+}
