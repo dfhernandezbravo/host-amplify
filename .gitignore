@@ -35,6 +35,5 @@ yarn-error.log*
 next-env.d.ts
 
 newrelic.js
-.env
 newrelic_agent.log
 **/dist/
