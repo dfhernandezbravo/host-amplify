@@ -14,7 +14,7 @@ const PrivateWorkspace = dynamic(
   {
     ssr: false,
     loading: () => <HomeSkeleton />,
-  }
+  },
 );
 const Footer = dynamic(() => import('headerFooter/footer'), {
   ssr: false,

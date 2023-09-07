@@ -1,23 +1,23 @@
-import Head from "next/head";
-import { ErrorBoundary } from "react-error-boundary";
-import dynamic from "next/dynamic";
-import HomeSkeleton from "@/presentation/components/layouts/HomeSkeleton/HomeSkeleton";
-import HeaderSkeleton from "@/presentation/components/layouts/HeaderSkeleton/HeaderSkeleton";
-import FooterSkeleton from "@/presentation/components/layouts/FooterSkeleton/FooterSkeleton";
+import Head from 'next/head';
+import { ErrorBoundary } from 'react-error-boundary';
+import dynamic from 'next/dynamic';
+import HomeSkeleton from '@/presentation/components/layouts/HomeSkeleton/HomeSkeleton';
+import HeaderSkeleton from '@/presentation/components/layouts/HeaderSkeleton/HeaderSkeleton';
+import FooterSkeleton from '@/presentation/components/layouts/FooterSkeleton/FooterSkeleton';
 
-const Header = dynamic(() => import("headerFooter/header"), {
+const Header = dynamic(() => import('headerFooter/header'), {
   ssr: false,
   loading: () => <HeaderSkeleton />,
 });
-const PrivateWorkspace = dynamic(() => import("home/privateWorkspace"), {
+const PrivateWorkspace = dynamic(() => import('home/privateWorkspace'), {
   ssr: false,
-  loading: () => <HomeSkeleton/>,
+  loading: () => <HomeSkeleton />,
 });
-const Footer = dynamic(() => import("headerFooter/footer"), {
+const Footer = dynamic(() => import('headerFooter/footer'), {
   ssr: false,
   loading: () => <FooterSkeleton />,
 });
-const CartAside = dynamic(() => import("cart/cartAside"), {
+const CartAside = dynamic(() => import('cart/cartAside'), {
   ssr: false,
   loading: () => <></>,
 });

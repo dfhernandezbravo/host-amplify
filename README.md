@@ -55,4 +55,3 @@ npm start:prod
 Easy Headless is the host application where the rest of the applications will reside, which will be called remotely through the Module Federation plugin for NextJS.
 
 For more information about using the Module Federation plugin, please refer to the official NextJS documentation.
-

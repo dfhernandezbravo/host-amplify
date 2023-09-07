@@ -10,21 +10,13 @@ metadata:
   namespace: ${KUBE_NAMESPACE}
 spec:
   rules:
-  - host: ${CI_PROJECT_NAME}.${ENDPOINT}
-    http:
-      paths:
-      - backend:
-          service:
-            name: ${CI_PROJECT_NAME}
-            port:
-              name: http
-        pathType: ImplementationSpecific
-  - host: headless.${PUBLIC_ENDPOINT}
-    http:
-      paths:
-      - backend:
-          service:
-            name: ${CI_PROJECT_NAME}
-            port:
-              name: http
-        pathType: ImplementationSpecific
+    - host: ${CI_PROJECT_NAME}.${ENDPOINT}
+      http:
+        paths:
+          - backend:
+              service:
+                name: ${CI_PROJECT_NAME}
+                port:
+                  name: http
+            pathType: ImplementationSpecific
+

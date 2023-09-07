@@ -6,7 +6,7 @@ const BannerSkeleton = () => {
   return (
     <SkeletonContainer>
       <Skeleton
-        animation='wave'
+        animation="wave"
         height={600}
         style={{
           backgroundColor: '#E1E6EA',

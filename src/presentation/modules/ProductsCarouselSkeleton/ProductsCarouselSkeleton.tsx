@@ -22,38 +22,38 @@ const ProductsCarouselSkeleton = () => {
         <ProductSkeletonCard key={`product-skeleton-${i}`}>
           <ImageSkeleton>
             <Skeleton
-              animation='wave'
-              width='100%'
+              animation="wave"
+              width="100%"
               height={300}
               style={skeletonStyles}
             />
           </ImageSkeleton>
           <CardBodySkeleton>
             <Skeleton
-              animation='wave'
+              animation="wave"
               height={30}
-              width='40%'
+              width="40%"
               style={skeletonStyles}
             />
             <Skeleton
-              animation='wave'
+              animation="wave"
               height={30}
-              width='50%'
+              width="50%"
               style={skeletonStyles}
             />
             <Skeleton
-              animation='wave'
+              animation="wave"
               height={30}
-              width='65%'
+              width="65%"
               style={skeletonStyles}
             />
             <Skeleton
-              animation='wave'
+              animation="wave"
               height={30}
-              width='25%'
+              width="25%"
               style={skeletonStyles}
             />
-            <Skeleton animation='wave' height={55} style={skeletonStyles} />
+            <Skeleton animation="wave" height={55} style={skeletonStyles} />
           </CardBodySkeleton>
         </ProductSkeletonCard>
       ))}

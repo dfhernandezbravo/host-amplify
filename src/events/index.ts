@@ -1,3 +1,3 @@
 export enum WINDOWS_EVENTS {
-  Analytics = "ANALYTICS",
+  Analytics = 'ANALYTICS',
 }

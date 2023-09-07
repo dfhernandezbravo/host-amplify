@@ -8,10 +8,10 @@ export default async function handler(
     const { data } = await axios.get(
       `${process.env.NEXT_PUBLIC_CMS_URL}/home-headless`,
       {
-        headers:{
-            apikey: `${process.env.NEXT_PUBLIC_CMS_API_KEY}`
-        }
-      }
+        headers: {
+          apikey: `${process.env.NEXT_PUBLIC_CMS_API_KEY}`,
+        },
+      },
     );
     res.json(data);
   } catch (error) {

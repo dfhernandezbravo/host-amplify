@@ -1,4 +1,4 @@
-import { useGTMDispatch } from "@elgorditosalsero/react-gtm-hook";
+import { useGTMDispatch } from '@elgorditosalsero/react-gtm-hook';
 
 export type EventData = {
   event: string;

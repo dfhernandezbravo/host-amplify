@@ -6,7 +6,7 @@ const HeaderSkeleton = () => {
   return (
     <SkeletonContainer>
       <Skeleton
-        animation='pulse'
+        animation="pulse"
         height={600}
         style={{
           transformOrigin: '0 0',

@@ -1,5 +1,5 @@
-import axios from "axios";
-import type { NextApiRequest, NextApiResponse } from "next";
+import axios from 'axios';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 type DataResponse = {
   searches: {
@@ -31,11 +31,11 @@ type QueryResponse = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<DataResponse>
+  res: NextApiResponse<DataResponse>,
 ) {
   const { query } = req;
 
-  if (query.query === "") {
+  if (query.query === '') {
     res.json({ searches: [], categories: [] });
   }
   try {
@@ -59,9 +59,9 @@ export default async function handler(
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-      }
+      },
     );
 
     const { searches } = data.data.autocompleteSearchSuggestions;

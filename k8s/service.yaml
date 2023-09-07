@@ -7,10 +7,10 @@ metadata:
     app: ${CI_PROJECT_NAME}
 spec:
   ports:
-  - port: 8080
-    targetPort: http
-    protocol: TCP
-    name: http
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
   selector:
     app: ${CI_PROJECT_NAME}
   type: ClusterIP

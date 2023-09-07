@@ -6,7 +6,7 @@ const FooterSkeleton = () => {
   return (
     <SkeletonContainer>
       <Skeleton
-        animation='pulse'
+        animation="pulse"
         height={1000}
         style={{
           transformOrigin: '0 0',

@@ -43,21 +43,6 @@ staging:
     - ccom
     - staging
 
-# .unit_test: &unit_test
-#   stage: test
-#   image: registry.gitlab.com/cencosud-ds/cencommerce/utils/docker-images/node:16.18.0-alpine3.16
-#   script:
-#     - npm run test:ci
-#   artifacts:
-#     paths:
-#       - coverage/
-#     expire_in: 30 minutes
-#   allow_failure: true
-#   tags:
-#     - private
-#     - ccom
-#     - staging
-
 ######JOB: INSTALLL
 install dependencies:
   <<: *install_dependencies
@@ -67,8 +52,23 @@ linter:
   <<: *lint
   dependencies:
     - install dependencies
-######JOB: UT
-# unit test:
-#   <<: *unit_test
-#   dependencies:
-#     - install dependencies
+######LLamado a la imagen de docker
+pkg:container:
+  stage: package
+  extends: .docker
+  environment:
+    name: staging
+  rules:
+    - if: $CI_COMMIT_BRANCH != "master"
+  variables:
+    BUILD_IMAGE_EXTRA_ARGS: '--build-arg NEW_RELIC_APP_NAME=$NEW_RELIC_APP_NAME --build-arg NEW_RELIC_LICENSE_KEY=$NEW_RELIC_LICENSE_KEY --build-arg NEW_RELIC_LABELS=$NEW_RELIC_LABELS --build-arg NEXT_PUBLIC_HOME_URI=$NEXT_PUBLIC_HOME_URI --build-arg NEXT_PUBLIC_CART_URI=$NEXT_PUBLIC_CART_URI --build-arg NEXT_PUBLIC_HEADER_URI=$NEXT_PUBLIC_HEADER_URI --build-arg NEXT_PUBLIC_PLP_URI=$NEXT_PUBLIC_PLP_URI --build-arg NEXT_PUBLIC_PDP_URI=$NEXT_PUBLIC_PDP_URI --build-arg NEXT_PUBLIC_BFF_MOBILE_URL=$NEXT_PUBLIC_BFF_MOBILE_URL --build-arg NEXT_PUBLIC_CMS_URL=$NEXT_PUBLIC_CMS_URL --build-arg NEXT_PUBLIC_CMS_API_KEY=$NEXT_PUBLIC_CMS_API_KEY --build-arg NEXT_PUBLIC_VTEX_GRAPHQL=$NEXT_PUBLIC_VTEX_GRAPHQL --build-arg NEXT_PUBLIC_ENHANCEMENT=$NEXT_PUBLIC_ENHANCEMENT --build-arg NEXT_PUBLIC_HOST=$NEXT_PUBLIC_HOST --build-arg NEXT_PUBLIC_GTM_ID=$NEXT_PUBLIC_GTM_ID'
+
+pkg:production:
+  stage: package
+  extends: .docker
+  environment:
+    name: production
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+  variables:
+    BUILD_IMAGE_EXTRA_ARGS: '--build-arg NEW_RELIC_APP_NAME=$NEW_RELIC_APP_NAME --build-arg NEW_RELIC_LICENSE_KEY=$NEW_RELIC_LICENSE_KEY --build-arg NEW_RELIC_LABELS=$NEW_RELIC_LABELS --build-arg NEXT_PUBLIC_HOME_URI=$NEXT_PUBLIC_HOME_URI --build-arg NEXT_PUBLIC_CART_URI=$NEXT_PUBLIC_CART_URI --build-arg NEXT_PUBLIC_HEADER_URI=$NEXT_PUBLIC_HEADER_URI --build-arg NEXT_PUBLIC_PLP_URI=$NEXT_PUBLIC_PLP_URI --build-arg NEXT_PUBLIC_PDP_URI=$NEXT_PUBLIC_PDP_URI --build-arg NEXT_PUBLIC_BFF_MOBILE_URL=$NEXT_PUBLIC_BFF_MOBILE_URL --build-arg NEXT_PUBLIC_CMS_URL=$NEXT_PUBLIC_CMS_URL --build-arg NEXT_PUBLIC_CMS_API_KEY=$NEXT_PUBLIC_CMS_API_KEY --build-arg NEXT_PUBLIC_VTEX_GRAPHQL=$NEXT_PUBLIC_VTEX_GRAPHQL --build-arg NEXT_PUBLIC_ENHANCEMENT=$NEXT_PUBLIC_ENHANCEMENT --build-arg NEXT_PUBLIC_HOST=$NEXT_PUBLIC_HOST --build-arg NEXT_PUBLIC_GTM_ID=$NEXT_PUBLIC_GTM_ID'

@@ -7,7 +7,7 @@ const EventRibbonSkeleton = () => {
     <SkeletonContainer>
       <Skeleton
         height={300}
-        width='100%'
+        width="100%"
         style={{
           backgroundColor: '#8B9CA7',
           transformOrigin: '0 0',

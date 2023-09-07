@@ -1,9 +1,9 @@
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-const RemoteCart = dynamic(() => import("cart/cart"), {
+const RemoteCart = dynamic(() => import('cart/cart'), {
   ssr: false,
   loading: () => (
-    <p style={{ height: "80px", width: "100vw" }}>Loading cart...</p>
+    <p style={{ height: '80px', width: '100vw' }}>Loading cart...</p>
   ),
 });
 

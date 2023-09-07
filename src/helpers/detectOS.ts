@@ -2,7 +2,7 @@ import { NextPageContext } from 'next';
 
 const detectOs = async (ctx: NextPageContext) => {
   let isIos = (ctx?.req?.headers['user-agent'] || navigator.userAgent).match(
-    /iPhone|iPad|iPod/i
+    /iPhone|iPad|iPod/i,
   );
   let isDesktop = (
     ctx?.req?.headers['user-agent'] || navigator.userAgent

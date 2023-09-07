@@ -1,5 +1,5 @@
-import axios from "axios";
-import { NextApiRequest, NextApiResponse } from "next";
+import axios from 'axios';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 type QueryResponse = {
   data: {
@@ -31,16 +31,16 @@ type QueryResponse = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
-  if (req.method !== "POST") {
-    res.status(500).send("Method not allowed");
+  if (req.method !== 'POST') {
+    res.status(500).send('Method not allowed');
   }
 
   const { query, body } = req;
   const { selectedFacets } = body;
 
-  if (query.fullText === "" && !selectedFacets) {
+  if (query.fullText === '' && !selectedFacets) {
     res.json({ products: [] });
   }
 
@@ -55,8 +55,8 @@ export default async function handler(
               to: 4,
               selectedFacets: [
                 {
-                  key: "${selectedFacets ? selectedFacets.key : ""}"
-                  value: "${selectedFacets ? selectedFacets.value : ""}"
+                  key: "${selectedFacets ? selectedFacets.key : ''}"
+                  value: "${selectedFacets ? selectedFacets.value : ''}"
                 }
               ]
             ) @context(provider: "vtex.search-graphql") {
@@ -87,9 +87,9 @@ export default async function handler(
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-      }
+      },
     );
 
     res.json(data.data.productSearch);

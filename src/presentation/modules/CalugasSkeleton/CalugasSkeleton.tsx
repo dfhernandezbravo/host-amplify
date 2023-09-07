@@ -8,7 +8,7 @@ const CalugasSkeleton = () => {
       {[...Array(6)].map((caluga, i) => (
         <SkeletonContainer index={i} key={`calugas-skeleton-${i}`}>
           <Skeleton
-            animation='wave'
+            animation="wave"
             height={500}
             style={{
               transformOrigin: '0 0',

@@ -24,8 +24,8 @@ const CategoriesCarouselSkeleton = () => {
             <Skeleton
               height={48}
               width={48}
-              animation='wave'
-              variant='circular'
+              animation="wave"
+              variant="circular"
               style={{
                 marginBottom: '0.5rem',
                 backgroundColor: '#E1E6EA',
@@ -34,7 +34,7 @@ const CategoriesCarouselSkeleton = () => {
             <Skeleton
               width={70}
               height={25}
-              animation='wave'
+              animation="wave"
               style={{
                 backgroundColor: '#E1E6EA',
               }}

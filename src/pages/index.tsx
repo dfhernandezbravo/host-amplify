@@ -71,7 +71,7 @@ export default function HomeApp(props: any) {
       const customEvent = event as CustomEvent<EventData>;
       sendEvent(customEvent.detail);
     },
-    [sendEvent]
+    [sendEvent],
   );
 
   useEffect(() => {
@@ -90,9 +90,8 @@ export default function HomeApp(props: any) {
   }, []);
 
   useEffect(() => {
-    console.log(remoteConfig)
-  }, [remoteConfig])
-  
+    console.log(remoteConfig);
+  }, [remoteConfig]);
 
   if (showLogo) {
     return <LogoLoader />; // Render the component for 1 second

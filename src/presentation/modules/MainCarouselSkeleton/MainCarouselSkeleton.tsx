@@ -8,9 +8,9 @@ const MainCarouselSkeleton = () => {
     <>
       <SkeletonContainer>
         <Skeleton
-          animation='wave'
+          animation="wave"
           height={800}
-          width='100%'
+          width="100%"
           style={{
             transformOrigin: '0 0',
             backgroundColor: '#E1E6EA',

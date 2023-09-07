@@ -1,4 +1,4 @@
-import { GTMProvider } from "@elgorditosalsero/react-gtm-hook";
+import { GTMProvider } from '@elgorditosalsero/react-gtm-hook';
 
 interface Props {
   children: React.ReactNode;
@@ -6,7 +6,7 @@ interface Props {
 
 const AnalyticsProvider = ({ children }: Props) => {
   return (
-    <GTMProvider state={{ id: process.env.NEXT_PUBLIC_GTM_ID || "" }}>
+    <GTMProvider state={{ id: process.env.NEXT_PUBLIC_GTM_ID || '' }}>
       {children}
     </GTMProvider>
   );

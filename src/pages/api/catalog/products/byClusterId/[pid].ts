@@ -4,12 +4,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   _req: NextApiRequest,
-  res: NextApiResponse<any>
+  res: NextApiResponse<any>,
 ) {
   try {
     const { pid } = _req.query;
     const { data } = await axios.get(
-      `https://easycl.vtexcommercestable.com.br/api/catalog_system/pub/products/search?fq=productClusterIds:${pid}`
+      `https://easycl.vtexcommercestable.com.br/api/catalog_system/pub/products/search?fq=productClusterIds:${pid}`,
     );
     res.json(data);
   } catch (error) {
