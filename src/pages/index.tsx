@@ -42,12 +42,12 @@ export default function HomeApp(props: any) {
   const { sendEvent } = useAnalytics();
   const [showLogo, setShowLogo] = useState(true);
   const [remoteConfig, setRemoteConfig] = useState<RemoteConfig>({
-    isEnabledCart: false,
-    isEnabledFooter: false,
-    isEnabledHeader: false,
-    isEnabledHome: false,
-    isEnabledLevelCeroLandings: false,
-    isEnabledMiniCart: false,
+    isEnabledCart: true,
+    isEnabledFooter: true,
+    isEnabledHeader: true,
+    isEnabledHome: true,
+    isEnabledLevelCeroLandings: true,
+    isEnabledMiniCart: true,
   });
 
   useEffect(() => {
