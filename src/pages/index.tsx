@@ -89,9 +89,7 @@ export default function HomeApp(props: any) {
     });
   }, []);
 
-  useEffect(() => {
-    console.log(remoteConfig);
-  }, [remoteConfig]);
+  useEffect(() => {}, [remoteConfig]);
 
   if (showLogo) {
     return <LogoLoader />; // Render the component for 1 second
