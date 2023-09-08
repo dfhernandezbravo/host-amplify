@@ -9,13 +9,10 @@ const Header = dynamic(() => import('headerFooter/header'), {
   ssr: false,
   loading: () => <HeaderSkeleton />,
 });
-const PrivateWorkspace = dynamic(
-  () => import('home/pages/private/landing/index'),
-  {
-    ssr: false,
-    loading: () => <HomeSkeleton />,
-  },
-);
+const PrivateWorkspace = dynamic(() => import('home/privatelanding'), {
+  ssr: false,
+  loading: () => <HomeSkeleton />,
+});
 const Footer = dynamic(() => import('headerFooter/footer'), {
   ssr: false,
   loading: () => <FooterSkeleton />,
