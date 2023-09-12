@@ -25,6 +25,7 @@ const remotes = (isServer) => {
   const cartURI = `${getRemotesEntries('cart')}/${location}/remoteEntry.js`;
   const plpURI = `${getRemotesEntries('plp')}/${location}/remoteEntry.js`;
   const pdpURI = `${getRemotesEntries('pdp')}/${location}/remoteEntry.js`;
+  console.log('home uri:', homeURI);
   return {
     home: homeURI,
     headerFooter: headerFooterURI,

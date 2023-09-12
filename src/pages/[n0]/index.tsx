@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { ErrorBoundary } from 'react-error-boundary';
 import dynamic from 'next/dynamic';
-import HomeSkeleton from '@/presentation/components/layouts/HomeSkeleton/HomeSkeleton';
 import HeaderSkeleton from '@/presentation/components/layouts/HeaderSkeleton/HeaderSkeleton';
 import FooterSkeleton from '@/presentation/components/layouts/FooterSkeleton/FooterSkeleton';
 

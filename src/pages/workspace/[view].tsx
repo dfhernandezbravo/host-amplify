@@ -9,7 +9,7 @@ const Header = dynamic(() => import('headerFooter/header'), {
   ssr: false,
   loading: () => <HeaderSkeleton />,
 });
-const PrivateWorkspace = dynamic(() => import('home/privateWorkspace'), {
+const PrivateWorkspace = dynamic(() => import('home/privatelanding'), {
   ssr: false,
   loading: () => <HomeSkeleton />,
 });
@@ -22,7 +22,7 @@ const CartAside = dynamic(() => import('cart/cartAside'), {
   loading: () => <></>,
 });
 
-const Private = () => {
+const LandingPage = () => {
   return (
     <>
       <Head>
@@ -42,4 +42,4 @@ const Private = () => {
     </>
   );
 };
-export default Private;
+export default LandingPage;
