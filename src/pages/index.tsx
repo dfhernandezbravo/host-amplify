@@ -42,18 +42,33 @@ export default function HomeApp(props: any) {
   const { sendEvent } = useAnalytics();
   const [showLogo, setShowLogo] = useState(true);
   const [remoteConfig, setRemoteConfig] = useState<RemoteConfig>({
-    isEnabledCart: true,
-    isEnabledFooter: true,
-    isEnabledHeader: true,
-    isEnabledHome: true,
-    isEnabledLevelCeroLandings: true,
-    isEnabledMiniCart: true,
+    isEnabledCart: false,
+    isEnabledFooter: false,
+    isEnabledHeader: false,
+    isEnabledHome: false,
+    isEnabledLevelCeroLandings: false,
+    isEnabledMiniCart: false,
   });
+
+  const validateHybridation = () => {
+    const isHybridation = localStorage.getItem('isHybridation');
+    if (!isHybridation) {
+      setRemoteConfig({
+        isEnabledCart: true,
+        isEnabledFooter: true,
+        isEnabledHeader: true,
+        isEnabledHome: true,
+        isEnabledLevelCeroLandings: true,
+        isEnabledMiniCart: true,
+      });
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLogo(false);
-    }, 2000);
+      validateHybridation();
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -84,12 +99,11 @@ export default function HomeApp(props: any) {
       if (key?.length > 0 && key[0] === 'HYBRIDATION') {
         const dataEvent = JSON.parse(event.data.HYBRIDATION) as RemoteConfig;
         setRemoteConfig(dataEvent);
+        setShowLogo(false);
         localStorage.setItem('isHybridation', event.data.HYBRIDATION);
       }
     });
   }, []);
-
-  useEffect(() => {}, [remoteConfig]);
 
   if (showLogo) {
     return <LogoLoader />; // Render the component for 1 second
