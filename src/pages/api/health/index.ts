@@ -6,6 +6,6 @@ export default async function handler(
   _req: NextApiRequest,
   res: NextApiResponse<any>,
 ) {
-  console.log(' >>>> TEST HEALT HOST HEADLESS <<<< ');
+  console.log(' >>>>:: TEST HEALT HOST HEADLESS ::<<<< ');
   res.status(200).json({ message: 'healt test' });
 }
