@@ -1,3 +1,4 @@
+import HeaderSkeleton from '@/presentation/components/layouts/HeaderSkeleton/HeaderSkeleton';
 import dynamic from 'next/dynamic';
 
 const RemoteCart = dynamic(() => import('cart/cart'), {
@@ -7,6 +8,16 @@ const RemoteCart = dynamic(() => import('cart/cart'), {
   ),
 });
 
+const Header = dynamic(() => import('headerFooter/header'), {
+  ssr: false,
+  loading: () => <HeaderSkeleton />,
+});
+
 export default function Cart() {
-  return <RemoteCart />;
+  return  (
+    <>
+      <Header/>
+      <RemoteCart />
+    </>
+  )
 }
