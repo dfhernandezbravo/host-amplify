@@ -14,10 +14,10 @@ const Header = dynamic(() => import('headerFooter/header'), {
 });
 
 export default function Cart() {
-  return  (
+  return (
     <>
-      <Header/>
+      <Header />
       <RemoteCart />
     </>
-  )
+  );
 }
