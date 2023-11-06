@@ -1,11 +1,10 @@
 import HeaderSkeleton from '@/presentation/components/layouts/HeaderSkeleton/HeaderSkeleton';
+import LogoLoader from '@/presentation/modules/LogoLoader/LogoLoader';
 import dynamic from 'next/dynamic';
 
 const RemoteCart = dynamic(() => import('cart/cart'), {
   ssr: false,
-  loading: () => (
-    <p style={{ height: '80px', width: '100vw' }}>Loading cart...</p>
-  ),
+  loading: () => <LogoLoader />,
 });
 
 const Header = dynamic(() => import('headerFooter/header'), {
