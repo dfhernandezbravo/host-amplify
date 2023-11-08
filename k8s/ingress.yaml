@@ -19,13 +19,4 @@ spec:
                 port:
                   name: http
             pathType: ImplementationSpecific
-    - host: headless.${PUBLIC_ENDPOINT}
-      http:
-        paths:
-          - backend:
-              service:
-                name: ${CI_PROJECT_NAME}
-                port:
-                  name: http
-            pathType: ImplementationSpecific
 
