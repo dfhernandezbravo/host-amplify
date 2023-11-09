@@ -42,7 +42,9 @@ const remotes = (isServer) => {
 
 const nextConfig = {
   reactStrictMode: true,
+
   images: {
+    domains: ['easyclqa.vteximg.com.br'],
     remotePatterns: [
       {
         protocol: 'https',
