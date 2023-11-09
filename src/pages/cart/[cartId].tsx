@@ -22,14 +22,13 @@ interface ParsedUrlQueryForPage extends ParsedUrlQuery {
 export default function Cart() {
   const { query } = useRouter();
   const { cartId } = query as ParsedUrlQueryForPage;
-  console.log(cartId);
 
   return (
     <>
       <Header
         modules={{
           logo: true,
-          location: true,
+          location: false,
           categories: false,
           search: false,
           login: false,
