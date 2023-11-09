@@ -31,6 +31,12 @@ export default async function handler(
   };
 
   const parsedCookies = parseCookie(cookie!);
+  if (!parsedCookies?.CheckoutDataAccess) {
+    res
+      .status(403)
+      .send({ message: 'Should be send CheckoutDataAccess cookie' });
+    return;
+  }
 
   const query = `
   query getOrderGroup($orderGroup: String) {

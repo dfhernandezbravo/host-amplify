@@ -5,8 +5,6 @@ const getRemotesEntries = (entry) => {
   switch (entry) {
     case 'home':
       return `home@${process.env.NEXT_PUBLIC_HOME_URI}/_next/static`;
-    case 'orderPlaced':
-      return `orderPlaced@${process.env.NEXT_PUBLIC_ORDERPLACED_URI}/_next/static`;
     case 'cart':
       return `cart@${process.env.NEXT_PUBLIC_CART_URI}/_next/static`;
     case 'header':
@@ -15,6 +13,10 @@ const getRemotesEntries = (entry) => {
       return `plp@${process.env.NEXT_PUBLIC_PLP_URI}/_next/static`;
     case 'pdp':
       return `pdp@${process.env.NEXT_PUBLIC_PDP_URI}/_next/static`;
+    case 'orderPlaced':
+      return `orderPlaced@${process.env.NEXT_PUBLIC_ORDERPLACED_URI}/_next/static`;
+    case 'micuenta':
+      return `micuenta@${process.env.NEXT_PUBLIC_MICUENTA_URI}/_next/static`;
   }
 };
 
@@ -27,12 +29,16 @@ const remotes = (isServer) => {
   const orderPlacedURI = `${getRemotesEntries(
     'orderPlaced',
   )}/${location}/remoteEntry.js`;
+  const micuentaURI = `${getRemotesEntries(
+    'micuenta',
+  )}/${location}/remoteEntry.js`;
   const cartURI = `${getRemotesEntries('cart')}/${location}/remoteEntry.js`;
   const plpURI = `${getRemotesEntries('plp')}/${location}/remoteEntry.js`;
   const pdpURI = `${getRemotesEntries('pdp')}/${location}/remoteEntry.js`;
   return {
     home: homeURI,
     orderPlaced: orderPlacedURI,
+    micuenta: micuentaURI,
     headerFooter: headerFooterURI,
     cart: cartURI,
     plp: plpURI,
