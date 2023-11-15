@@ -1,0 +1,13 @@
+<svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="vtex__icon-arrow-back"
+      width="17"
+      height="16"
+      viewBox="0 0 16 11"
+      fill="none"
+    >
+      <path
+        d="M.5 5.5c0 .258.083.43.25.602L5.5 11l1.167-1.203-3.334-3.438H16V4.641H3.333l3.334-3.438L5.5 0 .75 4.898A.792.792 0 00.5 5.5z"
+        fill="currentColor"
+      />
+    </svg>
