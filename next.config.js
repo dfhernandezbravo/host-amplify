@@ -15,8 +15,8 @@ const getRemotesEntries = (entry) => {
       return `pdp@${process.env.NEXT_PUBLIC_PDP_URI}/_next/static`;
     case 'orderPlaced':
       return `orderPlaced@${process.env.NEXT_PUBLIC_ORDERPLACED_URI}/_next/static`;
-    case 'micuenta':
-      return `micuenta@${process.env.NEXT_PUBLIC_MICUENTA_URI}/_next/static`;
+    case 'account':
+      return `account@${process.env.NEXT_PUBLIC_ACCOUNT_URI}/_next/static`;
   }
 };
 
@@ -29,8 +29,8 @@ const remotes = (isServer) => {
   const orderPlacedURI = `${getRemotesEntries(
     'orderPlaced',
   )}/${location}/remoteEntry.js`;
-  const micuentaURI = `${getRemotesEntries(
-    'micuenta',
+  const accountURI = `${getRemotesEntries(
+    'account',
   )}/${location}/remoteEntry.js`;
   const cartURI = `${getRemotesEntries('cart')}/${location}/remoteEntry.js`;
   const plpURI = `${getRemotesEntries('plp')}/${location}/remoteEntry.js`;
@@ -38,7 +38,7 @@ const remotes = (isServer) => {
   return {
     home: homeURI,
     orderPlaced: orderPlacedURI,
-    micuenta: micuentaURI,
+    account: accountURI,
     headerFooter: headerFooterURI,
     cart: cartURI,
     plp: plpURI,
@@ -72,6 +72,30 @@ const nextConfig = {
       }),
     );
     return config;
+  },
+  async redirects() {
+    return [
+      // {
+      //   source: '/mi-cuenta',
+      //   destination: '/mi-cuenta/mi-perfil',
+      //   permanent: true,
+      // },
+      {
+        source: '/mi-cuenta/mis-tarjetas((?!$).*)',
+        destination: '/mi-cuenta/mi-perfil',
+        permanent: true,
+      },
+      {
+        source: '/mi-cuenta/mi-perfil((?!$).*)',
+        destination: '/mi-cuenta/mi-perfil',
+        permanent: true,
+      },
+      {
+        source: '/mi-cuenta/mis-compras((?!$).*)',
+        destination: '/mi-cuenta/mi-perfil',
+        permanent: true,
+      },
+    ];
   },
 };
 
