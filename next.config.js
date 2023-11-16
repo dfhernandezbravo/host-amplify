@@ -75,25 +75,25 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // {
+      //   source: '/mi-cuenta',
+      //   destination: '/mi-cuenta/mi-perfil',
+      //   permanent: true,
+      // },
       {
-        source: '/mi-cuenta',
+        source: '/mi-cuenta/mis-tarjetas((?!$).*)',
         destination: '/mi-cuenta/mi-perfil',
         permanent: true,
       },
       {
-        source: '/mi-cuenta/mis-tarjetas((?!$).*)',
-        destination: '/mi-cuenta/mi-perfil',
-        permanent: false,
-      },
-      {
         source: '/mi-cuenta/mi-perfil((?!$).*)',
         destination: '/mi-cuenta/mi-perfil',
-        permanent: false,
+        permanent: true,
       },
       {
         source: '/mi-cuenta/mis-compras((?!$).*)',
         destination: '/mi-cuenta/mi-perfil',
-        permanent: false,
+        permanent: true,
       },
     ];
   },
