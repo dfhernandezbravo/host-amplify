@@ -31,10 +31,10 @@ export default async function handler(
   };
 
   const parsedCookies = parseCookie(cookie!);
+  console.log('parsedCookies->', parsedCookies);
+
   if (!parsedCookies?.CheckoutDataAccess) {
-    res
-      .status(403)
-      .send({ message: 'Should be send CheckoutDataAccess cookie' });
+    res.status(403).send({ message: 'An error occurred' });
     return;
   }
 
@@ -672,6 +672,11 @@ export default async function handler(
     headers,
     data: bodyData,
   });
+
+  if (data.errors.length > 0) {
+    res.status(403).send({ message: 'An error occurred' });
+    return;
+  }
 
   const vtexData = data.data.orderGroup;
 

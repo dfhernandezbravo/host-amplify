@@ -1,5 +1,6 @@
 export interface VtexOrder {
   data: Data;
+  errors: any[];
 }
 
 export interface Data {
