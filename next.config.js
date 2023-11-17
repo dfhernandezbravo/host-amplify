@@ -80,21 +80,21 @@ const nextConfig = {
       //   destination: '/mi-cuenta/mi-perfil',
       //   permanent: true,
       // },
-      {
-        source: '/mi-cuenta/mis-tarjetas((?!$).*)',
-        destination: '/mi-cuenta/mi-perfil',
-        permanent: true,
-      },
-      {
-        source: '/mi-cuenta/mi-perfil((?!$).*)',
-        destination: '/mi-cuenta/mi-perfil',
-        permanent: true,
-      },
-      {
-        source: '/mi-cuenta/mis-compras((?!$).*)',
-        destination: '/mi-cuenta/mi-perfil',
-        permanent: true,
-      },
+      // {
+      //   source: '/mi-cuenta/mis-tarjetas((?!$).*)',
+      //   destination: '/mi-cuenta/mi-perfil',
+      //   permanent: true,
+      // },
+      // {
+      //   source: '/mi-cuenta/mi-perfil((?!$).*)',
+      //   destination: '/mi-cuenta/mi-perfil',
+      //   permanent: true,
+      // },
+      // {
+      //   source: '/mi-cuenta/mis-compras((?!$).*)',
+      //   destination: '/mi-cuenta/mi-perfil',
+      //   permanent: true,
+      // },
     ];
   },
 };
