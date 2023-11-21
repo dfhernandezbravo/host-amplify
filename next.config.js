@@ -13,8 +13,8 @@ const getRemotesEntries = (entry) => {
       return `plp@${process.env.NEXT_PUBLIC_PLP_URI}/_next/static`;
     case 'pdp':
       return `pdp@${process.env.NEXT_PUBLIC_PDP_URI}/_next/static`;
-    case 'orderPlaced':
-      return `orderPlaced@${process.env.NEXT_PUBLIC_ORDERPLACED_URI}/_next/static`;
+    case 'confirmation':
+      return `confirmation@${process.env.NEXT_PUBLIC_ORDERPLACED_URI}/_next/static`;
     case 'account':
       return `account@${process.env.NEXT_PUBLIC_ACCOUNT_URI}/_next/static`;
   }
@@ -26,8 +26,8 @@ const remotes = (isServer) => {
     'header',
   )}/${location}/remoteEntry.js`;
   const homeURI = `${getRemotesEntries('home')}/${location}/remoteEntry.js`;
-  const orderPlacedURI = `${getRemotesEntries(
-    'orderPlaced',
+  const confirmationURI = `${getRemotesEntries(
+    'confirmation',
   )}/${location}/remoteEntry.js`;
   const accountURI = `${getRemotesEntries(
     'account',
@@ -37,7 +37,7 @@ const remotes = (isServer) => {
   const pdpURI = `${getRemotesEntries('pdp')}/${location}/remoteEntry.js`;
   return {
     home: homeURI,
-    orderPlaced: orderPlacedURI,
+    confirmation: confirmationURI,
     account: accountURI,
     headerFooter: headerFooterURI,
     cart: cartURI,
@@ -80,21 +80,21 @@ const nextConfig = {
       //   destination: '/mi-cuenta/mi-perfil',
       //   permanent: true,
       // },
-      {
-        source: '/mi-cuenta/mis-tarjetas((?!$).*)',
-        destination: '/mi-cuenta/mi-perfil',
-        permanent: true,
-      },
-      {
-        source: '/mi-cuenta/mi-perfil((?!$).*)',
-        destination: '/mi-cuenta/mi-perfil',
-        permanent: true,
-      },
-      {
-        source: '/mi-cuenta/mis-compras((?!$).*)',
-        destination: '/mi-cuenta/mi-perfil',
-        permanent: true,
-      },
+      // {
+      //   source: '/mi-cuenta/mis-tarjetas((?!$).*)',
+      //   destination: '/mi-cuenta/mi-perfil',
+      //   permanent: true,
+      // },
+      // {
+      //   source: '/mi-cuenta/mi-perfil((?!$).*)',
+      //   destination: '/mi-cuenta/mi-perfil',
+      //   permanent: true,
+      // },
+      // {
+      //   source: '/mi-cuenta/mis-compras((?!$).*)',
+      //   destination: '/mi-cuenta/mi-perfil',
+      //   permanent: true,
+      // },
     ];
   },
 };
