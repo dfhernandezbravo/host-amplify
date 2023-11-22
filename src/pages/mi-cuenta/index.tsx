@@ -1,3 +1,7 @@
+import useBreakpoints from '@/presentation/hooks/useBreakpoints';
+import dynamic from 'next/dynamic';
+import React from 'react';
+import { useRouter } from 'next/router';
 export enum To {
   Local = 'local',
   External = 'external',
@@ -24,7 +28,7 @@ const SIDEBAR_ROUTES: SidebarRoute[] = [
     id: 'cotizacion-de-pedido',
     label: 'Cotización de pedido',
     isActive: true,
-    isDefault: true,
+    isDefault: false,
     redirect: {
       to: To.Local,
       target: null,
@@ -79,7 +83,7 @@ const SIDEBAR_ROUTES: SidebarRoute[] = [
     id: 'mi-perfil',
     label: 'Mi perfil',
     isActive: true,
-    isDefault: false,
+    isDefault: true,
     redirect: {
       to: To.Local,
       target: null,
@@ -121,25 +125,25 @@ const SIDEBAR_ROUTES: SidebarRoute[] = [
   },
 ];
 
-import React from 'react';
+export const ROOT_PATH = 'mi-cuenta';
+interface SidebarProps {
+  display: string;
+}
 
-const index = () => {
-  return null;
+const SidebarComponent = dynamic(() => import(`account/sidebar`), {
+  ssr: false,
+  loading: () => <h1>Cargando ...</h1>,
+}) as React.FC<SidebarProps>;
+
+const Index = () => {
+  const router = useRouter();
+  const breakpoints = useBreakpoints();
+  const routeByDefault = SIDEBAR_ROUTES.find((route) => route.isDefault);
+  if (breakpoints.active !== 'xs' && routeByDefault) {
+    router.push(`/${ROOT_PATH}/${routeByDefault.redirect.url}`);
+  }
+  return <SidebarComponent display="block" />;
+  // return SidebarComponent({ display: 'block' });
 };
 
-export default index;
-
-export async function getServerSideProps() {
-  const routeByDefault = SIDEBAR_ROUTES.find((route) => route.isDefault);
-  if (routeByDefault) {
-    return {
-      redirect: {
-        destination: `/mi-cuenta/${routeByDefault.redirect.url}`,
-        permanent: true,
-      },
-    };
-  }
-  return {
-    props: {},
-  };
-}
+export default Index;
