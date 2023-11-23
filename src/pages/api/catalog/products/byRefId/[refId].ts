@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   try {
     const { data } = await axios.get(
-      `https://easyclqa.myvtex.com/api/catalog_system/pub/products/search?fq=alternateIds_RefId:${_req.query.sku}`,
+      `https://easyclqa.myvtex.com/api/catalog_system/pub/products/search?fq=alternateIds_RefId:${_req.query.refId}`,
     );
     res.json(data[0]);
   } catch (error) {
