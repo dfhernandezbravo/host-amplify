@@ -143,7 +143,6 @@ const Index = () => {
     router.push(`/${ROOT_PATH}/${routeByDefault.redirect.url}`);
   }
   return <SidebarComponent display="block" />;
-  // return SidebarComponent({ display: 'block' });
 };
 
 export default Index;
