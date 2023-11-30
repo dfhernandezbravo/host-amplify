@@ -1,4 +1,5 @@
 import { useGTMDispatch } from '@elgorditosalsero/react-gtm-hook';
+import { Console } from 'console';
 
 export type EventData = {
   event: string;
