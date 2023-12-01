@@ -63,10 +63,10 @@ spec:
             timeoutSeconds: 30
           resources:
             requests:
-              memory: 350Mi
+              memory: 700Mi
               cpu: '1000m'
             limits:
-              memory: 350Mi
+              memory: 700Mi
               cpu: '1000m'
       imagePullSecrets:
         - name: gitlab-registry-credentials
