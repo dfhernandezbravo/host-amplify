@@ -1,9 +1,12 @@
 import { HeaderProps } from '@/@types/header-props';
+import useAnalytics, { EventData } from '@/analytics/hooks/useAnalytics';
+import { WINDOWS_EVENTS } from '@/events';
 import HeaderSkeleton from '@/presentation/components/layouts/HeaderSkeleton/HeaderSkeleton';
 import LogoLoader from '@/presentation/modules/LogoLoader/LogoLoader';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
+import { useCallback, useEffect } from 'react';
 
 const RemoteCart = dynamic(() => import('cart/cart'), {
   ssr: false,
@@ -22,6 +25,20 @@ interface ParsedUrlQueryForPage extends ParsedUrlQuery {
 export default function Cart() {
   const { query } = useRouter();
   const { cartId } = query as ParsedUrlQueryForPage;
+  const { sendEvent } = useAnalytics();
+
+  const handleAnalyticsEvent = useCallback(
+    (event: Event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      const customEvent = event as CustomEvent<EventData>;
+      sendEvent(customEvent.detail);
+    },
+    [sendEvent],
+  );
+  useEffect(() => {
+    document.addEventListener(WINDOWS_EVENTS.Analytics, handleAnalyticsEvent);
+  }, [handleAnalyticsEvent]);
 
   return (
     <>

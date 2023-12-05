@@ -1,4 +1,4 @@
-export interface VtexOrder {
+export interface OrderStruct {
   data: Data;
   errors: any[];
 }
