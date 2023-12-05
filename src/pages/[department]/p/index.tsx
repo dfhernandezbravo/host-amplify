@@ -3,6 +3,7 @@ import HeaderSkeleton from '@/presentation/components/layouts/HeaderSkeleton/Hea
 import LogoLoader from '@/presentation/modules/LogoLoader/LogoLoader';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 const Pdp = dynamic(() => import('pdp/pdp'), {
   ssr: false,
@@ -25,6 +26,12 @@ const CartAside = dynamic(() => import('cart/cartAside'), {
 });
 
 const PdpComponent = () => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('isHeadless', 'true');
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -36,8 +43,8 @@ const PdpComponent = () => {
       <main>
         <Header />
         <Pdp />
-        <CartAside />
         <Footer />
+        <CartAside />
       </main>
     </>
   );
