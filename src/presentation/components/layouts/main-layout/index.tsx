@@ -1,27 +1,29 @@
 import Head from 'next/head';
-import { ErrorBoundary } from 'react-error-boundary';
+import React, { ReactNode } from 'react';
+import { HeaderProps } from '@/@types/header-props';
 import dynamic from 'next/dynamic';
-import HeaderSkeleton from '@/presentation/components/layouts/HeaderSkeleton/HeaderSkeleton';
-import FooterSkeleton from '@/presentation/components/layouts/FooterSkeleton/FooterSkeleton';
+import FooterSkeleton from '../FooterSkeleton/FooterSkeleton';
 
-const Header = dynamic(() => import('headerFooter/header'), {
-  ssr: false,
-  loading: () => <HeaderSkeleton />,
-});
-const Landing = dynamic(() => import('home/landingN0'), {
+const Header = dynamic<HeaderProps>(() => import('headerFooter/header'), {
   ssr: false,
   loading: () => <></>,
 });
+
 const Footer = dynamic(() => import('headerFooter/footer'), {
   ssr: false,
   loading: () => <FooterSkeleton />,
 });
+
 const CartAside = dynamic(() => import('cart/cartAside'), {
   ssr: false,
   loading: () => <></>,
 });
 
-const LandingN0 = () => {
+type MainLayoutStruct = {
+  children: ReactNode;
+};
+
+const MainLayout = ({ children }: MainLayoutStruct) => {
   return (
     <>
       <Head>
@@ -31,14 +33,13 @@ const LandingN0 = () => {
         <link rel="icon" href="/favicon.webp" />
       </Head>
       <main>
-        <ErrorBoundary FallbackComponent={() => <></>}>
-          <Header />
-          <Landing />
-          <Footer />
-          <CartAside />
-        </ErrorBoundary>
+        <Header />
+        {children}
+        <Footer />
+        <CartAside />
       </main>
     </>
   );
 };
-export default LandingN0;
+
+export default MainLayout;

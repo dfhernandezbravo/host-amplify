@@ -1,3 +1,4 @@
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -63,7 +64,6 @@ export default async function handler(
         },
       },
     );
-
     const { searches } = data.data.autocompleteSearchSuggestions;
 
     const dataResponse: DataResponse = {
@@ -74,6 +74,7 @@ export default async function handler(
     };
     res.json(dataResponse);
   } catch (error) {
-    console.log(error);
+    console.log(' >>>ERROR <<< ::', error);
+    throw new Error('Oh no!!');
   }
 }

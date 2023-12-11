@@ -1,6 +1,6 @@
-import { Skeleton } from '@mui/material';
 import React from 'react';
 import { CalugasContainer, SkeletonContainer } from './CalugasSkeleton.styles';
+import { Skeleton } from '@cencosud-ds/easy-design-system';
 
 const CalugasSkeleton = () => {
   return (
@@ -9,11 +9,7 @@ const CalugasSkeleton = () => {
         <SkeletonContainer index={i} key={`calugas-skeleton-${i}`}>
           <Skeleton
             animation="wave"
-            height={500}
-            style={{
-              transformOrigin: '0 0',
-              backgroundColor: '#E1E6EA',
-            }}
+            height="500px"
             key={`caluga-skeleton-${i}`}
           />
         </SkeletonContainer>

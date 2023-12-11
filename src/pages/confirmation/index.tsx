@@ -1,10 +1,13 @@
+import LogoLoader from '@/presentation/modules/LogoLoader/LogoLoader';
 import dynamic from 'next/dynamic';
 
 const Confirmation = dynamic(() => import('confirmation/confirmation'), {
   ssr: false,
-  loading: () => <h1>Cargando ...</h1>,
+  loading: () => <LogoLoader />,
 });
 
-const ConfirmationPage = () => <Confirmation />;
+const ConfirmationPage = () => {
+  return <Confirmation />;
+};
 
 export default ConfirmationPage;

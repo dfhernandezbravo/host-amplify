@@ -8,7 +8,6 @@ type QueryResponse = {
         productId: string;
         productName: string;
         brand: string;
-        link: string;
         description: string;
         items: {
           name: string;
@@ -29,6 +28,61 @@ type QueryResponse = {
   };
 };
 
+async function getData(
+  query: Partial<{
+    [key: string]: string | string[];
+  }>,
+  selectedFacets: { key: string; value: string },
+) {
+  const { data } = await axios.post<QueryResponse>(
+    `${process.env.NEXT_PUBLIC_VTEX_GRAPHQL}`,
+    {
+      query: `
+        query {
+          productSearch(
+            fullText: "${query.fullText}", 
+            to: 4,
+            selectedFacets: [
+              {
+                key: "${selectedFacets ? selectedFacets.key : ''}"
+                value: "${selectedFacets ? selectedFacets.value : ''}"
+              }
+            ]
+          ) @context(provider: "vtex.search-graphql") {
+            products {
+              productId
+              productName
+              brand
+              link
+              description
+              items {
+                name
+                images {
+                  imageUrl
+                  imageTag
+                  imageLabel
+                }
+                sellers {
+                  commertialOffer {
+                    Price
+                    ListPrice
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+  return data.data.productSearch;
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -45,55 +99,8 @@ export default async function handler(
   }
 
   try {
-    const { data } = await axios.post<QueryResponse>(
-      `${process.env.NEXT_PUBLIC_VTEX_GRAPHQL}`,
-      {
-        query: `
-          query {
-            productSearch(
-              fullText: "${query.fullText}", 
-              to: 4,
-              selectedFacets: [
-                {
-                  key: "${selectedFacets ? selectedFacets.key : ''}"
-                  value: "${selectedFacets ? selectedFacets.value : ''}"
-                }
-              ]
-            ) @context(provider: "vtex.search-graphql") {
-              products {
-                productId
-                productName
-                brand
-                link,
-                description
-                items {
-                  name
-                  images {
-                    imageUrl
-                    imageTag
-                    imageLabel
-                  }
-                  sellers {
-                    commertialOffer {
-                      Price
-                      ListPrice
-                    }
-                  }
-                }
-              }
-            }
-          }
-        `,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
-
-    res.json(data.data.productSearch);
-  } catch (error: any) {
+    res.json(await getData(query, selectedFacets));
+  } catch (error) {
     res.status(500).json(error);
   }
 }
