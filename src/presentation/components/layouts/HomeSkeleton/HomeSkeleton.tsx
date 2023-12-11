@@ -1,5 +1,4 @@
 import CalugasSkeleton from '@/presentation/modules/CalugasSkeleton/CalugasSkeleton';
-import EventRibbonSkeleton from '@/presentation/modules/EventRibbonSkeleton/EventRibbonSkeleton';
 import MainCarouselSkeleton from '@/presentation/modules/MainCarouselSkeleton/MainCarouselSkeleton';
 import React from 'react';
 import { Container, HomeSkeletonContainer } from './HomeSkeleton.styles';
@@ -11,7 +10,6 @@ import BannerSkeleton from '@/presentation/modules/BannerSkeleton/BannerSkeleton
 const HomeSkeleton = () => {
   return (
     <HomeSkeletonContainer>
-      <EventRibbonSkeleton />
       <MainCarouselSkeleton />
       <Container>
         <FeaturedCategoriesSkeleton />

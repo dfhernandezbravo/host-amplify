@@ -4,9 +4,6 @@ import { CSSProperties } from 'react';
 import Animation, {
   Props as AnimationProps,
 } from '../../components/atoms/Animation';
-import { Container } from './LogoLoader.styles';
-
-// Styled component
 
 // Definitions
 export type Props = {
@@ -17,12 +14,25 @@ export type Props = {
 
 const LogoLoader = (props: Props) => {
   // Props
-  const { icon = 'logo-easy', style } = props;
+  const { icon = 'logo-easy', style, loop = true } = props;
 
   return (
-    <Container>
-      <Animation name={icon} style={style} loop={true} />
-    </Container>
+    <div
+      style={{
+        zIndex: 99999,
+        width: '100dvw',
+        height: '100dvh',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+      }}
+    >
+      <Animation name={icon} style={style} loop={loop} />
+    </div>
   );
 };
 

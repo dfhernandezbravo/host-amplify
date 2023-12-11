@@ -1,5 +1,5 @@
 export type HeaderProps = {
-  modules: {
+  modules?: {
     logo: boolean;
     location: boolean;
     categories: boolean;
@@ -9,5 +9,5 @@ export type HeaderProps = {
     topBrands: boolean;
     footerHeader: boolean;
   };
-  cartId: string;
+  cartId?: string;
 };
