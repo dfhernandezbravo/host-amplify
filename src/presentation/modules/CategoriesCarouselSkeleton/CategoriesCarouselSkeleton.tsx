@@ -5,9 +5,9 @@ import {
   Container,
   Icon,
 } from './CategoriesCarouselSkeleton.styles';
-import { Skeleton } from '@mui/material';
 import useBreakpoints from '@/presentation/hooks/useBreakpoints';
 import CarouselDots from './CarouselDots/CarouselDots';
+import { Skeleton } from '@cencosud-ds/easy-design-system';
 
 const CategoriesCarouselSkeleton = () => {
   const { isXs, isSm, isMd } = useBreakpoints();
@@ -22,23 +22,12 @@ const CategoriesCarouselSkeleton = () => {
             index={i}
           >
             <Skeleton
-              height={48}
-              width={48}
+              height="48px"
+              width="48px"
               animation="wave"
-              variant="circular"
-              style={{
-                marginBottom: '0.5rem',
-                backgroundColor: '#E1E6EA',
-              }}
+              borderRadius="50%"
             />
-            <Skeleton
-              width={70}
-              height={25}
-              animation="wave"
-              style={{
-                backgroundColor: '#E1E6EA',
-              }}
-            />
+            <Skeleton width="70px" height="25px" animation="wave" />
           </CategorySkeleton>
         ))}
         <CarouselNavButton>

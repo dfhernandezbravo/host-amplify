@@ -1,5 +1,4 @@
-import styled from '@emotion/styled';
-
+import styled from 'styled-components';
 export const HomeSkeletonContainer = styled.div`
   background-color: #f1f3f4;
 `;
