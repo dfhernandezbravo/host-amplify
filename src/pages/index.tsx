@@ -40,9 +40,25 @@ export default function HomeApp(props: any) {
     }
   }, []);
 
+  console.log('>>> props in host <<<::', props);
+
   return (
     <MainLayout>
-      <Home />
+      <Home {...props} />
     </MainLayout>
   );
 }
+
+export const getServerSideProps = async (ctx: any) => {
+  const home = await import('home/home');
+  if (home.getServerSideProps) {
+    console.log('>>> Inside return <<::');
+    console.log('CTX::', ctx);
+    return home.getServerSideProps(ctx);
+  }
+  return {
+    props: {},
+  };
+};
+
+export const revalidate = 30;
