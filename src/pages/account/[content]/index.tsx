@@ -10,7 +10,9 @@ const Content = () => {
   const ContentComponent = AccountComponents[content as AccountPaths];
   return ContentComponent ? (
     <MainLayout>
-      <ContentComponent />
+      <div>
+        <ContentComponent />
+      </div>
     </MainLayout>
   ) : null;
 };

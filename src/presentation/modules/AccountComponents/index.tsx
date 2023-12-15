@@ -3,53 +3,56 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { AccountComponentProps } from '@/@types/account';
 
-const OrderQuoteComponent = dynamic(
-  () => import('account/cotizacion-de-pedido'),
-  { ssr: false, loading: () => <LogoLoader /> },
+const OrderQuoteComponent = dynamic(() => import('account/order-quotation'), {
+  ssr: false,
+  loading: () => <LogoLoader />,
+});
+const favoritesComponent = dynamic(() => import('account/favorites'), {
+  ssr: false,
+  loading: () => <LogoLoader />,
+});
+const TargetsComponent = dynamic(() => import('account/cards'), {
+  ssr: false,
+  loading: () => <LogoLoader />,
+});
+const OrdersComponent = dynamic(() => import('account/orders'), {
+  ssr: false,
+  loading: () => <LogoLoader />,
+});
+const OrganizationComponent = dynamic(() => import('account/organization'), {
+  ssr: false,
+  loading: () => <LogoLoader />,
+});
+const ProfileComponent = dynamic(() => import('account/profile'), {
+  ssr: false,
+  loading: () => <LogoLoader />,
+});
+const AuthenticationComponent = dynamic(
+  () => import('account/authentication'),
+  {
+    ssr: false,
+    loading: () => <LogoLoader />,
+  },
 );
-const MyfavoritesComponent = dynamic(() => import('account/mis-favoritos'), {
+const AddressComponent = dynamic(() => import('account/addresses'), {
   ssr: false,
   loading: () => <LogoLoader />,
 });
-const MyTargetsComponent = dynamic(() => import('account/mis-tarjetas'), {
-  ssr: false,
-  loading: () => <LogoLoader />,
-});
-const OrdersComponent = dynamic(() => import('account/pedidos'), {
-  ssr: false,
-  loading: () => <LogoLoader />,
-});
-const MyOrganizationComponent = dynamic(
-  () => import('account/mi-organizacion'),
-  { ssr: false, loading: () => <LogoLoader /> },
-);
-const MyProfileComponent = dynamic(() => import('account/mi-perfil'), {
-  ssr: false,
-  loading: () => <LogoLoader />,
-});
-const AuthenticationComponent = dynamic(() => import('account/autenticacion'), {
-  ssr: false,
-  loading: () => <LogoLoader />,
-});
-const AddressComponent = dynamic(() => import('account/direcciones'), {
-  ssr: false,
-  loading: () => <LogoLoader />,
-});
-const MyPurchasesComponent = dynamic(() => import('account/mis-compras'), {
+const PurchasesComponent = dynamic(() => import('account/purchases'), {
   ssr: false,
   loading: () => <LogoLoader />,
 });
 
 const AccountComponents: AccountComponentProps = {
-  'cotizacion-de-pedido': OrderQuoteComponent,
-  'mis-favoritos': MyfavoritesComponent,
-  'mis-tarjetas': MyTargetsComponent,
-  pedidos: OrdersComponent,
-  'mi-organizacion': MyOrganizationComponent,
-  'mi-perfil': MyProfileComponent,
-  autenticacion: AuthenticationComponent,
-  direcciones: AddressComponent,
-  'mis-compras': MyPurchasesComponent,
+  'order-quotation': OrderQuoteComponent,
+  favorites: favoritesComponent,
+  cards: TargetsComponent,
+  orders: OrdersComponent,
+  organization: OrganizationComponent,
+  profile: ProfileComponent,
+  authentication: AuthenticationComponent,
+  addresses: AddressComponent,
+  purchases: PurchasesComponent,
 };
 
 export default AccountComponents;
