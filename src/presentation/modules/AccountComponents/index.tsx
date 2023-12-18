@@ -5,42 +5,42 @@ import { AccountComponentProps } from '@/@types/account';
 
 const OrderQuoteComponent = dynamic(() => import('account/order-quotation'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <p>loading...</p>,
 });
 const favoritesComponent = dynamic(() => import('account/favorites'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <p>loading...</p>,
 });
 const TargetsComponent = dynamic(() => import('account/cards'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <p>loading...</p>,
 });
 const OrdersComponent = dynamic(() => import('account/orders'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <p>loading...</p>,
 });
 const OrganizationComponent = dynamic(() => import('account/organization'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <p>loading...</p>,
 });
 const ProfileComponent = dynamic(() => import('account/profile'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <p>loading...</p>,
 });
 const AuthenticationComponent = dynamic(
   () => import('account/authentication'),
   {
     ssr: false,
-    loading: () => <LogoLoader />,
+    loading: () => <p>loading...</p>,
   },
 );
 const AddressComponent = dynamic(() => import('account/addresses'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <p>loading...</p>,
 });
 const PurchasesComponent = dynamic(() => import('account/purchases'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <p>loading...</p>,
 });
 
 const AccountComponents: AccountComponentProps = {
