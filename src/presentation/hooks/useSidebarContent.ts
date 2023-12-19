@@ -39,7 +39,7 @@ function useSidebarContent() {
       setLoading(true);
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BFF_WEB_URL}/cms/group/${GROUP_NAME}/${PARAM_NAME}`,
+          `${process.env.NEXT_PUBLIC_BFF_WEB_URL}cms/group/${GROUP_NAME}/${PARAM_NAME}`,
           {
             headers: {
               'x-api-key': process.env.NEXT_PUBLIC_API_KEY_BFF_WEB!,
