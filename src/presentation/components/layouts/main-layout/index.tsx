@@ -14,10 +14,10 @@ const Footer = dynamic(() => import('headerFooter/footer'), {
   loading: () => <FooterSkeleton />,
 });
 
-const CartAside = dynamic(() => import('cart/cartAside'), {
-  ssr: false,
-  loading: () => <></>,
-});
+// const CartAside = dynamic(() => import('cart/cartAside'), {
+//   ssr: false,
+//   loading: () => <></>,
+// });
 
 type MainLayoutStruct = {
   children: ReactNode;
@@ -36,7 +36,7 @@ const MainLayout = ({ children }: MainLayoutStruct) => {
         <Header />
         {children}
         <Footer />
-        <CartAside />
+        {/* <CartAside /> */}
       </main>
     </>
   );
