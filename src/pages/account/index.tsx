@@ -19,10 +19,8 @@ export const ROOT_PATH = 'account';
 
 const Account = () => {
   const { device } = useDevice();
-  console.log('device->', device);
 
   const router = useRouter();
-  const { active } = useBreakpoints();
   const { data, error, loading } = useSidebarContent();
 
   if ((!loading && !data) || loading) {
