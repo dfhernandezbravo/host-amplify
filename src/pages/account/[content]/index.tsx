@@ -5,10 +5,11 @@ import { AccountPaths } from '@/@types/account';
 import MainLayout from '@/presentation/components/layouts/main-layout';
 import dynamic from 'next/dynamic';
 import { Container } from '@/presentation/modules/AccountComponents/styles';
+import AccountSidebarSkeleton from '@/presentation/components/atoms/AccountSidebarSkeleton';
 
 const Sidebar = dynamic(() => import('account/sidebar'), {
   ssr: false,
-  loading: () => <p>loading...</p>,
+  loading: () => <AccountSidebarSkeleton />,
 });
 
 const Content = () => {

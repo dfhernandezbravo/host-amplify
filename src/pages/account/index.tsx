@@ -3,14 +3,14 @@ import MainLayout from '@/presentation/components/layouts/main-layout';
 import useBreakpoints from '@/presentation/hooks/useBreakpoints';
 import useSidebarContent from '@/presentation/hooks/useSidebarContent';
 import { useRouter } from 'next/router';
-import LogoLoader from '@/presentation/modules/LogoLoader/LogoLoader';
 import { ComponentType } from 'react';
+import AccountSidebarSkeleton from '@/presentation/components/atoms/AccountSidebarSkeleton';
 
 const Sidebar: ComponentType<{ display: string }> = dynamic(
   () => import('account/sidebar'),
   {
     ssr: false,
-    loading: () => <p>loading...</p>,
+    loading: () => <AccountSidebarSkeleton />,
   },
 );
 
@@ -21,8 +21,8 @@ const Account = () => {
   const { active } = useBreakpoints();
   const { data, error, loading } = useSidebarContent();
 
-  if ((loading && !data) || loading) {
-    return <LogoLoader />;
+  if ((!loading && !data) || loading) {
+    return <AccountSidebarSkeleton />;
   }
 
   if (active !== 'xs' && data) {

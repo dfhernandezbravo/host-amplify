@@ -1,46 +1,47 @@
-import LogoLoader from '@/presentation/modules/LogoLoader/LogoLoader';
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { AccountComponentProps } from '@/@types/account';
+import AccountContentSkeleton from '@/presentation/components/atoms/AccountContentSkeleton';
+import AccountSidebarSkeleton from '@/presentation/components/atoms/AccountSidebarSkeleton';
 
 const OrderQuoteComponent = dynamic(() => import('account/order-quotation'), {
   ssr: false,
-  loading: () => <p>loading...</p>,
+  loading: () => <AccountContentSkeleton />,
 });
 const favoritesComponent = dynamic(() => import('account/favorites'), {
   ssr: false,
-  loading: () => <p>loading...</p>,
+  loading: () => <AccountContentSkeleton />,
 });
 const TargetsComponent = dynamic(() => import('account/cards'), {
   ssr: false,
-  loading: () => <p>loading...</p>,
+  loading: () => <AccountContentSkeleton />,
 });
 const OrdersComponent = dynamic(() => import('account/orders'), {
   ssr: false,
-  loading: () => <p>loading...</p>,
+  loading: () => <AccountContentSkeleton />,
 });
 const OrganizationComponent = dynamic(() => import('account/organization'), {
   ssr: false,
-  loading: () => <p>loading...</p>,
+  loading: () => <AccountContentSkeleton />,
 });
 const ProfileComponent = dynamic(() => import('account/profile'), {
   ssr: false,
-  loading: () => <p>loading...</p>,
+  loading: () => <AccountContentSkeleton />,
 });
 const AuthenticationComponent = dynamic(
   () => import('account/authentication'),
   {
     ssr: false,
-    loading: () => <p>loading...</p>,
+    loading: () => <AccountContentSkeleton />,
   },
 );
 const AddressComponent = dynamic(() => import('account/addresses'), {
   ssr: false,
-  loading: () => <p>loading...</p>,
+  loading: () => <AccountContentSkeleton />,
 });
 const PurchasesComponent = dynamic(() => import('account/purchases'), {
   ssr: false,
-  loading: () => <p>loading...</p>,
+  loading: () => <AccountContentSkeleton />,
 });
 
 const AccountComponents: AccountComponentProps = {
