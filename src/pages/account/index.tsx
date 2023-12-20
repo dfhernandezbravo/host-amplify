@@ -5,6 +5,7 @@ import useSidebarContent from '@/presentation/hooks/useSidebarContent';
 import { useRouter } from 'next/router';
 import { ComponentType } from 'react';
 import AccountSidebarSkeleton from '@/presentation/components/atoms/AccountSidebarSkeleton';
+import { useDevice } from '@cencosud-ds/easy-design-system';
 
 const Sidebar: ComponentType<{ display: string }> = dynamic(
   () => import('account/sidebar'),
@@ -17,6 +18,9 @@ const Sidebar: ComponentType<{ display: string }> = dynamic(
 export const ROOT_PATH = 'account';
 
 const Account = () => {
+  const { device } = useDevice();
+  console.log('device->', device);
+
   const router = useRouter();
   const { active } = useBreakpoints();
   const { data, error, loading } = useSidebarContent();
@@ -25,9 +29,9 @@ const Account = () => {
     return <AccountSidebarSkeleton />;
   }
 
-  if (active !== 'xs' && data) {
+  if (device !== 'Phone' && data) {
     const routeByDefault = data.value.find((route) => route.isDefault);
-    router.push(`/${ROOT_PATH}/${routeByDefault!.redirect.url}`);
+    router.push(`/${ROOT_PATH}/${routeByDefault!.redirect.url || 'profile'}`);
     return null;
   }
 

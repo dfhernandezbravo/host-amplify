@@ -2,7 +2,6 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { AccountComponentProps } from '@/@types/account';
 import AccountContentSkeleton from '@/presentation/components/atoms/AccountContentSkeleton';
-import AccountSidebarSkeleton from '@/presentation/components/atoms/AccountSidebarSkeleton';
 
 const OrderQuoteComponent = dynamic(() => import('account/order-quotation'), {
   ssr: false,
