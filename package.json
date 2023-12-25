@@ -13,7 +13,7 @@
     "format": "prettier --write . --config .prettierrc"
   },
   "dependencies": {
-    "@cencosud-ds/easy-design-system": "^1.1.2",
+    "@cencosud-ds/easy-design-system": "^1.1.9",
     "@elgorditosalsero/react-gtm-hook": "^2.7.2",
     "@emotion/react": "^11.11.1",
     "@module-federation/nextjs-mf": "^6.4.0",

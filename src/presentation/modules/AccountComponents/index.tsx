@@ -1,46 +1,46 @@
-import LogoLoader from '@/presentation/modules/LogoLoader/LogoLoader';
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { AccountComponentProps } from '@/@types/account';
+import AccountContentSkeleton from '@/presentation/components/atoms/AccountContentSkeleton';
 
 const OrderQuoteComponent = dynamic(() => import('account/order-quotation'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <AccountContentSkeleton />,
 });
 const favoritesComponent = dynamic(() => import('account/favorites'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <AccountContentSkeleton />,
 });
 const TargetsComponent = dynamic(() => import('account/cards'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <AccountContentSkeleton />,
 });
 const OrdersComponent = dynamic(() => import('account/orders'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <AccountContentSkeleton />,
 });
 const OrganizationComponent = dynamic(() => import('account/organization'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <AccountContentSkeleton />,
 });
 const ProfileComponent = dynamic(() => import('account/profile'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <AccountContentSkeleton />,
 });
 const AuthenticationComponent = dynamic(
   () => import('account/authentication'),
   {
     ssr: false,
-    loading: () => <LogoLoader />,
+    loading: () => <AccountContentSkeleton />,
   },
 );
 const AddressComponent = dynamic(() => import('account/addresses'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <AccountContentSkeleton />,
 });
 const PurchasesComponent = dynamic(() => import('account/purchases'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <AccountContentSkeleton />,
 });
 
 const AccountComponents: AccountComponentProps = {
