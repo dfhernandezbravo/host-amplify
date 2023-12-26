@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import MainLayout from '@/presentation/components/layouts/main-layout';
-import useBreakpoints from '@/presentation/hooks/useBreakpoints';
 import useSidebarContent from '@/presentation/hooks/useSidebarContent';
 import { useRouter } from 'next/router';
 import { ComponentType } from 'react';
