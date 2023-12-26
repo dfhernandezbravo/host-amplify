@@ -1,19 +1,28 @@
 import MainLayout from '@/presentation/components/layouts/main-layout';
 import LogoLoader from '@/presentation/modules/LogoLoader/LogoLoader';
 import dynamic from 'next/dynamic';
-import React from 'react';
 
-const Plp = dynamic(() => import('plp/plp'), {
+const Plp = dynamic(() => import('plp/plp-product'), {
   ssr: false,
   loading: () => <LogoLoader />,
 });
 
-const PlpPage = () => {
+export const getServerSideProps = async (ctx: any) => {
+  const plp = await import('plp/plp-product');
+  if (plp.getServerSideProps) {
+    return plp.getServerSideProps(ctx);
+  }
+  return {
+    props: {},
+  };
+};
+
+const PlpProduct = (props: any) => {
   return (
     <MainLayout>
-      <Plp />
+      <Plp {...props} />
     </MainLayout>
   );
 };
 
-export default PlpPage;
+export default PlpProduct;
