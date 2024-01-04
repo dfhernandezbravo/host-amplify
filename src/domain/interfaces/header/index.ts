@@ -1,4 +1,4 @@
-export type HeaderProps = {
+export interface HeaderProps {
   modules?: {
     logo: boolean;
     location: boolean;
@@ -10,4 +10,4 @@ export type HeaderProps = {
     footerHeader: boolean;
   };
   cartId?: string;
-};
+}

@@ -1,8 +1,8 @@
-import { HeaderProps } from '@/@types/header-props';
-import useAnalytics, { EventData } from '@/analytics/hooks/useAnalytics';
-import { WINDOWS_EVENTS } from '@/events';
-import HeaderSkeleton from '@/presentation/components/layouts/HeaderSkeleton/HeaderSkeleton';
-import LogoLoader from '@/presentation/modules/LogoLoader/LogoLoader';
+import { WINDOWS_EVENTS } from '@/application/infra/events';
+import { HeaderProps } from '@/domain/interfaces/header';
+import HeaderSkeleton from '@/presentation/components/skeletons/HeaderSkeleton/HeaderSkeleton';
+import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoader';
+import useAnalytics, { EventData } from '@/presentation/hooks/use-analytics';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';

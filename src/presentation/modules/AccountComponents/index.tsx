@@ -1,7 +1,7 @@
-import React from 'react';
+import { AccountComponentProps } from '@/domain/interfaces/account';
+import AccountContentSkeleton from '@/presentation/components/skeletons/AccountContentSkeleton';
 import dynamic from 'next/dynamic';
-import { AccountComponentProps } from '@/@types/account';
-import AccountContentSkeleton from '@/presentation/components/atoms/AccountContentSkeleton';
+import React from 'react';
 
 const OrderQuoteComponent = dynamic(() => import('account/order-quotation'), {
   ssr: false,

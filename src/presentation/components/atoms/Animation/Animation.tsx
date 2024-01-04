@@ -2,7 +2,7 @@ import { CSSProperties, useEffect, useState } from 'react';
 import Lottie from 'lottie-react';
 
 // Animations
-import Animations from '../../../../assets/animations/list.json';
+import Animations from '../../../assets/animations/list.json';
 
 // Definitions
 export type Props = {
@@ -33,7 +33,7 @@ const Animation = (props: Props) => {
   const methods = {
     getAnimation: async () => {
       const json = Animations[name];
-      const file = await import(`../../../../assets/animations/${json}`);
+      const file = await import(`../../../assets/animations/${json}`);
       if (file) setAnimation(file);
     },
   };

@@ -2,12 +2,12 @@ import MainLayout from '@/presentation/components/layouts/main-layout';
 import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoader';
 import dynamic from 'next/dynamic';
 
-const Plp = dynamic(() => import('plp/plp-search'), {
+const Plp = dynamic(() => import('plp/plp-cluster'), {
   ssr: false,
   loading: () => <LogoLoader />,
 });
 
-const SearchPLPPage = () => {
+const ClusterPLPPage = () => {
   return (
     <MainLayout>
       <Plp />
@@ -15,4 +15,4 @@ const SearchPLPPage = () => {
   );
 };
 
-export default SearchPLPPage;
+export default ClusterPLPPage;

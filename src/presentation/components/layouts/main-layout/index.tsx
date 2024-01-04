@@ -1,12 +1,13 @@
+import { HeaderProps } from '@/domain/interfaces/header';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import React, { ReactNode } from 'react';
-import { HeaderProps } from '@/@types/header-props';
-import dynamic from 'next/dynamic';
-import FooterSkeleton from '../FooterSkeleton/FooterSkeleton';
+import FooterSkeleton from '../../skeletons/FooterSkeleton/FooterSkeleton';
+import HeaderSkeleton from '../../skeletons/HeaderSkeleton/HeaderSkeleton';
 
 const Header = dynamic<HeaderProps>(() => import('headerFooter/header'), {
   ssr: false,
-  loading: () => <></>,
+  loading: () => <HeaderSkeleton />,
 });
 
 const Footer = dynamic(() => import('headerFooter/footer'), {
@@ -28,9 +29,6 @@ const MainLayout = ({ children }: MainLayoutStruct) => {
     <>
       <Head>
         <title>Easy.cl - Renueva el amor por tu hogar</title>
-        <meta name="description" content="Easy CL" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.webp" />
       </Head>
       <main>
         <Header />

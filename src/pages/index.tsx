@@ -1,8 +1,8 @@
-import useAnalytics, { EventData } from '@/analytics/hooks/useAnalytics';
-import { WINDOWS_EVENTS } from '@/events';
+import { WINDOWS_EVENTS } from '@/application/infra/events';
 import detectOs from '@/helpers/detectOS';
 import MainLayout from '@/presentation/components/layouts/main-layout';
-import LogoLoader from '@/presentation/modules/LogoLoader/LogoLoader';
+import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoader';
+import useAnalytics, { EventData } from '@/presentation/hooks/use-analytics';
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect } from 'react';
 
@@ -40,8 +40,6 @@ export default function HomeApp(props: any) {
     }
   }, []);
 
-  console.log('>>> props in host <<<::', props);
-
   return (
     <MainLayout>
       <Home {...props} />
@@ -52,8 +50,6 @@ export default function HomeApp(props: any) {
 export const getServerSideProps = async (ctx: any) => {
   const home = await import('home/home');
   if (home.getServerSideProps) {
-    console.log('>>> Inside return <<::');
-    console.log('CTX::', ctx);
     return home.getServerSideProps(ctx);
   }
   return {
