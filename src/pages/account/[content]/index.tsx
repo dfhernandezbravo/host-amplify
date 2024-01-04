@@ -1,11 +1,11 @@
+import { AccountPaths } from '@/domain/interfaces/account';
+import MainLayout from '@/presentation/components/layouts/main-layout';
+import AccountSidebarSkeleton from '@/presentation/components/skeletons/AccountSidebarSkeleton';
+import AccountComponents from '@/presentation/modules/AccountComponents';
+import { Container } from '@/presentation/modules/AccountComponents/styles';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React from 'react';
-import AccountComponents from '@/presentation/modules/AccountComponents';
-import { AccountPaths } from '@/@types/account';
-import MainLayout from '@/presentation/components/layouts/main-layout';
-import dynamic from 'next/dynamic';
-import { Container } from '@/presentation/modules/AccountComponents/styles';
-import AccountSidebarSkeleton from '@/presentation/components/atoms/AccountSidebarSkeleton';
 
 const Sidebar = dynamic(() => import('account/sidebar'), {
   ssr: false,

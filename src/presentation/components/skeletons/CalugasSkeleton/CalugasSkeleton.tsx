@@ -5,7 +5,7 @@ import { Skeleton } from '@cencosud-ds/easy-design-system';
 const CalugasSkeleton = () => {
   return (
     <CalugasContainer>
-      {[...Array(6)].map((caluga, i) => (
+      {[...Array(6)].map((_caluga, i) => (
         <SkeletonContainer index={i} key={`calugas-skeleton-${i}`}>
           <Skeleton
             animation="wave"

@@ -1,10 +1,10 @@
-import dynamic from 'next/dynamic';
 import MainLayout from '@/presentation/components/layouts/main-layout';
+import AccountSidebarSkeleton from '@/presentation/components/skeletons/AccountSidebarSkeleton';
 import useSidebarContent from '@/presentation/hooks/useSidebarContent';
+import { useDevice } from '@cencosud-ds/easy-design-system';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { ComponentType } from 'react';
-import AccountSidebarSkeleton from '@/presentation/components/atoms/AccountSidebarSkeleton';
-import { useDevice } from '@cencosud-ds/easy-design-system';
 
 const Sidebar: ComponentType<{ display: string }> = dynamic(
   () => import('account/sidebar'),

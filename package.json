@@ -13,11 +13,12 @@
     "format": "prettier --write . --config .prettierrc"
   },
   "dependencies": {
-    "@cencosud-ds/easy-design-system": "^1.1.9",
+    "@cencosud-ds/easy-design-system": "^1.1.15",
     "@elgorditosalsero/react-gtm-hook": "^2.7.2",
     "@emotion/react": "^11.11.1",
     "@module-federation/nextjs-mf": "^6.4.0",
     "@newrelic/next": "^0.7.0",
+    "@reduxjs/toolkit": "^2.0.1",
     "axios": "^1.4.0",
     "lottie-react": "^2.4.0",
     "newrelic": "^11.2.1",
@@ -25,6 +26,9 @@
     "prettier": "^3.0.3",
     "react": "^18",
     "react-dom": "^18",
+    "react-query": "^3.39.3",
+    "react-redux": "^9.0.4",
+    "redux-persist": "^6.0.0",
     "sass": "^1.62.1",
     "styled-components": "^6.1.1",
     "webpack": "^5.80.0"

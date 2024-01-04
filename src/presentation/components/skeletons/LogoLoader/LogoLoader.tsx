@@ -1,9 +1,7 @@
 import { CSSProperties } from 'react';
 
 // Components
-import Animation, {
-  Props as AnimationProps,
-} from '../../components/atoms/Animation';
+import Animation, { Props as AnimationProps } from '../../atoms/Animation';
 
 // Definitions
 export type Props = {
