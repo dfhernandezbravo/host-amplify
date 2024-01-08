@@ -42,6 +42,10 @@ const PurchasesComponent = dynamic(() => import('account/purchases'), {
   ssr: false,
   loading: () => <AccountContentSkeleton />,
 });
+const BankAccount = dynamic(() => import('account/bank-account'), {
+  ssr: false,
+  loading: () => <AccountContentSkeleton />,
+});
 
 const AccountComponents: AccountComponentProps = {
   'order-quotation': OrderQuoteComponent,
@@ -53,6 +57,7 @@ const AccountComponents: AccountComponentProps = {
   authentication: AuthenticationComponent,
   addresses: AddressComponent,
   purchases: PurchasesComponent,
+  'bank-account': BankAccount,
 };
 
 export default AccountComponents;

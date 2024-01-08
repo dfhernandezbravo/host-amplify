@@ -9,7 +9,8 @@ export type AccountPaths =
   | 'profile'
   | 'authentication'
   | 'addresses'
-  | 'purchases';
+  | 'purchases'
+  | 'bank-account';
 
 export type AccountComponentProps = {
   [key in AccountPaths]: ComponentType<{}>;
