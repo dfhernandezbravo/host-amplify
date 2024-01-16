@@ -1,7 +1,7 @@
-import bffPublicClient from '@/application/data-source/bff-public-instance';
+import bffPrivateClient from '@/application/data-source/bff-private-instance';
 import { ShoppingCartService } from '@/domain/interfaces/shopping-cart/http-service';
 
-const httpInstance = bffPublicClient;
+const httpInstance = bffPrivateClient;
 
 const shoppingCartService: ShoppingCartService = {
   getShoppingCartId: () => httpInstance.get('/shoppingcart'),

@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
+import Cookies from 'universal-cookie';
+import { AUTHCOOKIES } from '../infra/cookies';
 
 const bffPrivateClient = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BFF_WEB_URL}`,
@@ -10,10 +11,11 @@ const bffPrivateClient = axios.create({
 });
 
 bffPrivateClient.interceptors.request.use(function (config) {
-  const [cookie] = useCookies(['accessToken', 'refreshToken']);
-  const accessToken = cookie.accessToken;
+  const cookies = new Cookies();
+  const accessToken = cookies.get(AUTHCOOKIES.ACCESS_TOKEN);
 
-  config.headers.Authorization = `Bearer ${accessToken}`;
+  if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
+
   return config;
 });
 
