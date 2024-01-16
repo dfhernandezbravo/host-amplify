@@ -75,8 +75,8 @@ RUN echo "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY --- $NEXT_PUBLIC_GOOGLE_MAPS_API_KEY"
 RUN echo "NEXT_PUBLIC_BFF_WEB_URL --- $NEXT_PUBLIC_BFF_WEB_URL"
 RUN echo "NEXT_PUBLIC_API_KEY_BFF_WEB --- $NEXT_PUBLIC_API_KEY_BFF_WEB"
 
-RUN npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=$NPM_TOKEN
-RUN echo "npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=$NPM_TOKEN"
+RUN npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=glpat-8ASRwMRojB3hcxaFgx3J
+RUN echo "npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=glpat-8ASRwMRojB3hcxaFgx3J"
 
 RUN NODE_ENV='' yarn install && \
 yarn build
