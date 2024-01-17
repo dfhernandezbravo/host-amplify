@@ -5,8 +5,10 @@ const authService = (httpInstance = bffPrivateClient): AuthService => {
   return {
     authGuest: () => httpInstance.post('/auth/guests/signIn', {}),
     signIn: (request) => httpInstance.post('/auth/signIn', request),
-    signInPassword: (request) => httpInstance.post('/auth/password', request),
+    setPassword: (request) => httpInstance.post('/auth/password', request),
     signUp: (request) => httpInstance.post('/auth/signUp', request),
+    accessKeyValidation: (request) =>
+      httpInstance.post('/auth/accessKey/validation', request),
   };
 };
 
