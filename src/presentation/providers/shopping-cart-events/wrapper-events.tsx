@@ -21,7 +21,8 @@ const WrapperEvents = ({ children }: Props) => {
   const { updateItemToCart } = useUpdateItemShoppingCart();
   const { removeItemShoppingCart } = useRemoveItemShoppingCart();
   const { removeAllItemsShoppingCart } = useRemoveAllItemsShoppingCart();
-  const { updateCart } = useUpdateShoppingCart();
+  const { updateCart, updateShoppingCartWithoutItems } =
+    useUpdateShoppingCart();
   const { dispatchGetCartId, dispatchCartEvent } = useDispatchCartId();
   const { refreshCartId } = useGetCartId();
 
@@ -59,6 +60,10 @@ const WrapperEvents = ({ children }: Props) => {
         SHOPPING_CART_EVENTS.REFRESH_CART_ID,
         refreshCartId,
       );
+      document.addEventListener(
+        SHOPPING_CART_EVENTS.DISPATCH_SHOPPING_CART_WITHOUT_ITEMS,
+        updateShoppingCartWithoutItems,
+      );
     }
 
     return () => {
@@ -94,6 +99,10 @@ const WrapperEvents = ({ children }: Props) => {
         SHOPPING_CART_EVENTS.REFRESH_CART_ID,
         refreshCartId,
       );
+      document.removeEventListener(
+        SHOPPING_CART_EVENTS.DISPATCH_SHOPPING_CART_WITHOUT_ITEMS,
+        updateShoppingCartWithoutItems,
+      );
     };
   }, [
     cartId,
@@ -106,6 +115,7 @@ const WrapperEvents = ({ children }: Props) => {
     dispatchGetCartId,
     dispatchCartEvent,
     refreshCartId,
+    updateShoppingCartWithoutItems,
   ]);
 
   useEffect(() => {
