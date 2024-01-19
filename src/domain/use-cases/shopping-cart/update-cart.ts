@@ -1,10 +1,12 @@
 import { UpdateShoppingCartEvent } from '@/domain/interfaces/shopping-cart/events/update-cart';
-import { useAppDispatch } from '@/presentation/hooks/use-store';
+import { useAppDispatch, useAppSelector } from '@/presentation/hooks/use-store';
 import { updateShoppingCart } from '@/presentation/providers/store/modules/shopping-cart/slice';
+import { ShoppingCart } from '@cencosud-ds/easy-design-system';
 import { useCallback } from 'react';
 
 const useUpdateShoppingCart = () => {
   const dispatch = useAppDispatch();
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCart);
 
   const updateCart = useCallback(
     (event: Event) => {
@@ -20,8 +22,22 @@ const useUpdateShoppingCart = () => {
     [dispatch],
   );
 
+  const updateShoppingCartWithoutItems = useCallback(
+    (event: Event) => {
+      event.stopImmediatePropagation();
+
+      if (!shoppingCart) return;
+
+      const newShoppingCart: ShoppingCart = { ...shoppingCart, items: [] };
+
+      dispatch(updateShoppingCart(newShoppingCart));
+    },
+    [shoppingCart, dispatch, updateShoppingCart],
+  );
+
   return {
     updateCart,
+    updateShoppingCartWithoutItems,
   };
 };
 
