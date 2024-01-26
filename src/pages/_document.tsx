@@ -2,6 +2,10 @@ import { Head, Html, Main, NextScript } from 'next/document';
 import Script from 'next/script';
 
 const sourcegoogleMap = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`;
+const contentRobots =
+  process.env.NEXT_PUBLIC_ENV === 'PRODUCTION'
+    ? 'index, follow'
+    : 'noindex, nofollow';
 export default function Document() {
   return (
     <Html lang="en">
@@ -17,6 +21,7 @@ export default function Document() {
         />
         <meta name="description" content="Easy CL" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content={contentRobots} />
         <link rel="icon" href="/favicon.webp" />
       </Head>
       <body>

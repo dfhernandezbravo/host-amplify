@@ -10,7 +10,6 @@ const shoppingCartSlice = createSlice({
       state,
       { payload }: { payload: ShoppingCart | null },
     ) => {
-      //console.log('payload', payload);
       state.shoppingCart = payload;
     },
     setCartId: (state, { payload }: { payload: string }) => {
