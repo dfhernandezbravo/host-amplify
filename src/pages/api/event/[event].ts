@@ -6,12 +6,12 @@ export default async function handler(
 ) {
   //https://cl-ccom-cms-delivery.ecomm.cencosud.com/views/cl/easy/EasyWeb
   try {
-    console.log('key:', `${process.env.NEXT_PUBLIC_CMS_API_KEY}`);
+    //console.log('key:', `${process.env.NEXT_PUBLIC_CMS_API_KEY}`);
     const event: string = `${_req.query.event}`;
-    console.log(
+    /* console.log(
       'route:',
       `${`${process.env.NEXT_PUBLIC_CMS_URL}/event/${event}`}`,
-    );
+    ); */
     const { data } = await axios.get(
       `${process.env.NEXT_PUBLIC_CMS_URL}/home-headless/event/${event}`,
       {
@@ -22,6 +22,6 @@ export default async function handler(
     );
     res.json(data);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }

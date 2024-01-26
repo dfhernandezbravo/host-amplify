@@ -48,6 +48,6 @@ export default async function getProductReviews(
 
     res.status(200).json(newSignature);
   } catch (error) {
-    console.log('Error', error);
+    console.error('Error', error);
   }
 }

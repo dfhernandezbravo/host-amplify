@@ -12,7 +12,7 @@ export default async function handler(
       `${process.env.NEXT_PUBLIC_CMS_REMOTE_CONFIG_URL}/${groupName}/${paramName}`,
       { headers: { apikey: process.env.NEXT_PUBLIC_CMS_API_KEY } },
     );
-    console.log('--->>>> DATA AWS <<<<<----:', data);
+    //console.log('--->>>> DATA AWS <<<<<----:', data);
     res.status(200).json(data);
   } catch (error) {
     res.json(error);

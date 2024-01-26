@@ -6,7 +6,7 @@ export default async function handler(
   _req: NextApiRequest,
   res: NextApiResponse<any>,
 ) {
-  console.log(_req.query.cartId);
+  //console.log(_req.query.cartId);
 
   const headers = {
     'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ export default async function handler(
     const response = await axios.get(request, { headers });
     res.status(200).json(response.data);
   } catch (error) {
-    console.log({ error });
+    console.error({ error });
   }
   // res.status(200).json({ message: "healt test" });
 }
