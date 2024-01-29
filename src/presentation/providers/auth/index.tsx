@@ -2,7 +2,7 @@ import { AUTHCOOKIES } from '@/application/infra/cookies';
 import { signInGuest } from '@/domain/use-cases/auth/sign-in-guest';
 import { getShoppingCart } from '@/domain/use-cases/shopping-cart/get-cart';
 import { useAppDispatch, useAppSelector } from '@/presentation/hooks/use-store';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import { useQuery } from 'react-query';
 import { updateShoppingCart } from '../store/modules/shopping-cart/slice';
@@ -29,14 +29,14 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
     },
   });
 
-  const refreshCart = async () => {
+  const refreshCart = useCallback(async () => {
     const shoppingCart = await getShoppingCart(cartId);
     if (shoppingCart) dispatch(updateShoppingCart(shoppingCart));
-  };
+  }, [cartId, dispatch]);
 
   useEffect(() => {
     if (cookies.accessToken) refreshCart();
-  }, [cookies.accessToken]);
+  }, [cookies.accessToken, refreshCart]);
 
   return <AuthEvents>{children}</AuthEvents>;
 };
