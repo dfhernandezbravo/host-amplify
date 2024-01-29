@@ -1,12 +1,12 @@
 import MainLayout from '@/presentation/components/layouts/main-layout';
-import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoader';
+import PdpSkeleton from '@/presentation/components/skeletons/pdp-skeleton/pdp-skeleton';
 import { GetStaticPaths, GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 
 const Pdp = dynamic(() => import('pdp/pdp'), {
   ssr: false,
-  loading: () => <LogoLoader />,
+  loading: () => <PdpSkeleton />,
 });
 
 const PdpComponent = (props: any) => {
