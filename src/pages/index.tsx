@@ -1,77 +1,19 @@
-import Head from 'next/head';
-import { ErrorBoundary } from 'react-error-boundary';
-import useAnalytics, { EventData } from '@/analytics/hooks/useAnalytics';
-import { WINDOWS_EVENTS } from '@/events';
+import { WINDOWS_EVENTS } from '@/application/infra/events';
 import detectOs from '@/helpers/detectOS';
+import MainLayout from '@/presentation/components/layouts/main-layout';
+import HomeSkeleton from '@/presentation/components/skeletons/HomeSkeleton/HomeSkeleton';
+import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoader';
+import useAnalytics, { EventData } from '@/presentation/hooks/use-analytics';
 import dynamic from 'next/dynamic';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
-import HomeSkeleton from '@/presentation/components/layouts/HomeSkeleton/HomeSkeleton';
-import LogoLoader from '@/presentation/modules/LogoLoader/LogoLoader';
-import HeaderSkeleton from '@/presentation/components/layouts/HeaderSkeleton/HeaderSkeleton';
-import FooterSkeleton from '@/presentation/components/layouts/FooterSkeleton/FooterSkeleton';
-
-const Header = dynamic(() => import('headerFooter/header'), {
-  ssr: false,
-  loading: () => <HeaderSkeleton />,
-});
-const Footer = dynamic(() => import('headerFooter/footer'), {
-  ssr: false,
-  loading: () => <FooterSkeleton />,
-});
 const Home = dynamic(() => import('home/home'), {
   ssr: false,
   loading: () => <HomeSkeleton />,
 });
 
-const CartAside = dynamic(() => import('cart/cartAside'), {
-  ssr: false,
-  loading: () => <></>,
-});
-
-type RemoteConfig = {
-  isEnabledCart: boolean;
-  isEnabledFooter: boolean;
-  isEnabledHeader: boolean;
-  isEnabledHome: boolean;
-  isEnabledLevelCeroLandings: boolean;
-  isEnabledMiniCart: boolean;
-};
-
 export default function HomeApp(props: any) {
   const { sendEvent } = useAnalytics();
-  const [showLogo, setShowLogo] = useState(true);
-  const [remoteConfig, setRemoteConfig] = useState<RemoteConfig>({
-    isEnabledCart: false,
-    isEnabledFooter: false,
-    isEnabledHeader: false,
-    isEnabledHome: false,
-    isEnabledLevelCeroLandings: false,
-    isEnabledMiniCart: false,
-  });
-
-  const validateHybridation = () => {
-    const isHybridation = localStorage.getItem('isHybridation');
-    if (!isHybridation) {
-      setRemoteConfig({
-        isEnabledCart: true,
-        isEnabledFooter: true,
-        isEnabledHeader: true,
-        isEnabledHome: true,
-        isEnabledLevelCeroLandings: true,
-        isEnabledMiniCart: true,
-      });
-    }
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLogo(false);
-      validateHybridation();
-    }, 4000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     (async () => {
@@ -94,37 +36,26 @@ export default function HomeApp(props: any) {
   }, [handleAnalyticsEvent]);
 
   useEffect(() => {
-    window.addEventListener('message', (event) => {
-      const key = Object.keys(event?.data);
-      if (key?.length > 0 && key[0] === 'HYBRIDATION') {
-        const dataEvent = JSON.parse(event.data.HYBRIDATION) as RemoteConfig;
-        setRemoteConfig(dataEvent);
-        setShowLogo(false);
-        localStorage.setItem('isHybridation', event.data.HYBRIDATION);
-      }
-    });
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('isHeadless', 'true');
+    }
   }, []);
 
-  if (showLogo) {
-    return <LogoLoader />; // Render the component for 1 second
-  }
-
   return (
-    <>
-      <Head>
-        <title>Easy.cl - Renueva el amor por tu hogar</title>
-        <meta name="description" content="Easy CL" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.webp" />
-      </Head>
-      <main>
-        <ErrorBoundary FallbackComponent={() => <></>}>
-          {remoteConfig.isEnabledHeader && <Header />}
-          {remoteConfig.isEnabledHome && <Home />}
-          {remoteConfig.isEnabledFooter && <Footer />}
-          {remoteConfig.isEnabledCart && <CartAside />}
-        </ErrorBoundary>
-      </main>
-    </>
+    <MainLayout>
+      <Home {...props} />
+    </MainLayout>
   );
 }
+
+export const getServerSideProps = async (ctx: any) => {
+  const home = await import('home/home');
+  if (home.getServerSideProps) {
+    return home.getServerSideProps(ctx);
+  }
+  return {
+    props: {},
+  };
+};
+
+export const revalidate = 30;

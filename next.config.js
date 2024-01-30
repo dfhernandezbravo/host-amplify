@@ -13,6 +13,10 @@ const getRemotesEntries = (entry) => {
       return `plp@${process.env.NEXT_PUBLIC_PLP_URI}/_next/static`;
     case 'pdp':
       return `pdp@${process.env.NEXT_PUBLIC_PDP_URI}/_next/static`;
+    case 'confirmation':
+      return `confirmation@${process.env.NEXT_PUBLIC_ORDERPLACED_URI}/_next/static`;
+    case 'account':
+      return `account@${process.env.NEXT_PUBLIC_ACCOUNT_URI}/_next/static`;
   }
 };
 
@@ -22,12 +26,19 @@ const remotes = (isServer) => {
     'header',
   )}/${location}/remoteEntry.js`;
   const homeURI = `${getRemotesEntries('home')}/${location}/remoteEntry.js`;
+  const confirmationURI = `${getRemotesEntries(
+    'confirmation',
+  )}/${location}/remoteEntry.js`;
+  const accountURI = `${getRemotesEntries(
+    'account',
+  )}/${location}/remoteEntry.js`;
   const cartURI = `${getRemotesEntries('cart')}/${location}/remoteEntry.js`;
   const plpURI = `${getRemotesEntries('plp')}/${location}/remoteEntry.js`;
   const pdpURI = `${getRemotesEntries('pdp')}/${location}/remoteEntry.js`;
-  console.log('home uri:', homeURI);
   return {
     home: homeURI,
+    confirmation: confirmationURI,
+    account: accountURI,
     headerFooter: headerFooterURI,
     cart: cartURI,
     plp: plpURI,
@@ -37,7 +48,9 @@ const remotes = (isServer) => {
 
 const nextConfig = {
   reactStrictMode: true,
+
   images: {
+    domains: ['easyclqa.vteximg.com.br'],
     remotePatterns: [
       {
         protocol: 'https',

@@ -10,13 +10,22 @@ metadata:
   namespace: ${KUBE_NAMESPACE}
 spec:
   rules:
-    - host: ${CI_PROJECT_NAME}.${ENDPOINT}
+    - host: ${DOMAIN_CCOM}
       http:
         paths:
-          - backend:
+          - pathType: ImplementationSpecific
+            backend:
               service:
-                name: ${CI_PROJECT_NAME}
+                name: cl-ccom-easy-host-headless
                 port:
                   name: http
-            pathType: ImplementationSpecific
+    - host: ${DOMAIN}
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: cl-ccom-easy-host-headless
+                port:
+                  name: http
 

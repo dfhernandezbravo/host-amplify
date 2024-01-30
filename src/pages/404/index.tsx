@@ -1,8 +1,10 @@
+import MainLayout from '@/presentation/components/layouts/main-layout';
+
 const PageNotFound = () => {
   return (
-    <div>
+    <MainLayout>
       <h1>Page not found</h1>
-    </div>
+    </MainLayout>
   );
 };
 export default PageNotFound;
