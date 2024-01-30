@@ -83,7 +83,7 @@ RUN echo "NEXT_PUBLIC_ENV --- $NEXT_PUBLIC_ENV"
 
 RUN npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=glpat-8ASRwMRojB3hcxaFgx3J
 RUN echo "npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=glpat-8ASRwMRojB3hcxaFgx3J"
-RUN if ["$ROBOTS_TXT" = "disabled"]; then \
+RUN if ["ROBOTS_TXT" = "disabled"]; then \
         echo "User-agent: *" > ./public/robots.txt && \
         echo "Disallow: /" >> ./public/robots.txt; \
     fi
