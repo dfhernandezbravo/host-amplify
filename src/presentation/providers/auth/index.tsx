@@ -7,6 +7,7 @@ import { CookiesProvider, useCookies } from 'react-cookie';
 import { useQuery } from 'react-query';
 import { updateShoppingCart } from '../store/modules/shopping-cart/slice';
 import AuthEvents from './auth-events';
+import { useRouter } from 'next/router';
 
 interface Props {
   children: React.ReactNode;
@@ -15,6 +16,7 @@ interface Props {
 const WrapperProvider: React.FC<Props> = ({ children }) => {
   const { cartId } = useAppSelector((state) => state.shoppingCart);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const [cookies, setCookie] = useCookies([
     AUTHCOOKIES.ACCESS_TOKEN,
@@ -37,6 +39,17 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     if (cookies.accessToken) refreshCart();
   }, [cookies.accessToken]);
+
+  // efecto para manejar social login
+  useEffect(() => {
+    const { query } = router;
+    const { authStatus, accessToken, refreshToken } = query;
+    if (authStatus === 'success') {
+      setCookie(AUTHCOOKIES.ACCESS_TOKEN, accessToken as string);
+      setCookie(AUTHCOOKIES.REFRESH_TOKEN, refreshToken as string);
+      router.push(router.pathname);
+    }
+  }, [router]);
 
   return <AuthEvents>{children}</AuthEvents>;
 };
