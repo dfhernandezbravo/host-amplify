@@ -5,7 +5,6 @@ Easy Headless is a web application based on a microfrontends architecture and de
 
 - Node.js v18.15.0
 -
-
 ## Installation
 
 To install the application dependencies, run the following command:
