@@ -31,6 +31,7 @@ ARG NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
 ARG NEXT_PUBLIC_BFF_WEB_URL
 ARG NEXT_PUBLIC_API_KEY_BFF_WEB
 ARG NEXT_PUBLIC_ENV
+ARG ROBOTS_TXT
 
 
 ENV NEXT_PUBLIC_HOME_URI=$NEXT_PUBLIC_HOME_URI
@@ -54,6 +55,7 @@ ENV NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=$NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
 ENV NEXT_PUBLIC_BFF_WEB_URL=$NEXT_PUBLIC_BFF_WEB_URL
 ENV NEXT_PUBLIC_API_KEY_BFF_WEB=$NEXT_PUBLIC_API_KEY_BFF_WEB
 ENV NEXT_PUBLIC_ENV=$NEXT_PUBLIC_ENV
+ENV ROBOTS_TXT=$ROBOTS_TXT
 
 
 RUN echo "======= HOST HEADLESS ENVIRONMENTS ======="
@@ -81,6 +83,10 @@ RUN echo "NEXT_PUBLIC_ENV --- $NEXT_PUBLIC_ENV"
 
 RUN npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=glpat-8ASRwMRojB3hcxaFgx3J
 RUN echo "npm config set -- //gitlab.com/api/v4/packages/npm/:_authToken=glpat-8ASRwMRojB3hcxaFgx3J"
+RUN if [ "$ROBOTS_TXT" = "disabled" ]; then \
+        echo "User-agent: *" > ./public/robots.txt && \
+        echo "Disallow: /" >> ./public/robots.txt; \
+    fi
 
 RUN NODE_ENV='' yarn install && \
 yarn build
