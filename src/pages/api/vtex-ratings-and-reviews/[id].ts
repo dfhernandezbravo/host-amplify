@@ -31,8 +31,6 @@ export default async function getProductReviews(
     const response = await axios.get(url);
 
     // eslint-disable-next-line no-debugger
-    // console.log('response',response)
-    // console.log('data', response.data.range)
     const reviewCreated = response.data.data.map((review: ReviewType) => {
       return {
         ...review,
@@ -48,6 +46,6 @@ export default async function getProductReviews(
 
     res.status(200).json(newSignature);
   } catch (error) {
-    console.log('Error', error);
+    console.error('Error', error);
   }
 }

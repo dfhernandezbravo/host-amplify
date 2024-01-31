@@ -162,6 +162,6 @@ export default async function handler(
       },
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
