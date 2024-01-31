@@ -10,7 +10,7 @@ metadata:
   namespace: ${KUBE_NAMESPACE}
 spec:
   rules:
-    - host: cl-ccom-easy-host-headless.ecomm-stg.cencosud.com
+    - host: ${DOMAIN_CCOM}
       http:
         paths:
           - pathType: ImplementationSpecific
@@ -19,7 +19,7 @@ spec:
                 name: cl-ccom-easy-host-headless
                 port:
                   name: http
-    - host: headless.qa.easy.cl
+    - host: ${DOMAIN}
       http:
         paths:
           - pathType: ImplementationSpecific
