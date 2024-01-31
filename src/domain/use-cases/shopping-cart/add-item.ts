@@ -42,19 +42,23 @@ const useAddItemShoppingCart = () => {
 
   const dispatchMinicartSimulateAddProductEvent = useCallback(
     (data: ProductEvent) => {
-      dispatchEvent({
-        name: SHOPPING_CART_EVENTS.SIMULATE_ADD_PRODUCT,
-        detail: {
-          product: data,
+      const eventDispatch = new CustomEvent(
+        SHOPPING_CART_EVENTS.SIMULATE_ADD_PRODUCT,
+        {
+          detail: {
+            product: data,
+          },
         },
-      });
+      );
+      window.dispatchEvent(eventDispatch);
+      document.dispatchEvent(eventDispatch);
     },
     [dispatchEvent],
   );
 
   const addItemToCart = useCallback(
     (event: Event) => {
-      event.stopImmediatePropagation();
+      event.preventDefault();
       const customEvent = event as CustomEvent<AddItemShoppingCartEvent>;
 
       const {
