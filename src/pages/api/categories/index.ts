@@ -12,6 +12,6 @@ export default async function handler(
     );
     res.json(data);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }

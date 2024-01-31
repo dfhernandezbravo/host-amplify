@@ -26,7 +26,7 @@ export const useSignIn = () => {
       },
       onError: (response) => {
         dispatchEvent({
-          name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,
+          name: AUTH_EVENTS.GET_SIGNUP_ERROR,
           detail: { success: false, error: response },
         });
       },
