@@ -6,8 +6,6 @@ export default async function handler(
   _req: NextApiRequest,
   res: NextApiResponse<any>,
 ) {
-  //console.log(_req.query.cartId);
-
   const headers = {
     'Content-Type': 'application/json',
     'x-api-key': process.env.NEXT_PUBLIC_API_KEY_BFF_WEB,
