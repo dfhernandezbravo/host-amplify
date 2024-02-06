@@ -1,29 +1,17 @@
-import { AccountPaths } from '@/domain/interfaces/account';
 import MainLayout from '@/presentation/components/layouts/main-layout';
-import AccountSidebarSkeleton from '@/presentation/components/skeletons/AccountSidebarSkeleton';
-import AccountComponents from '@/presentation/modules/AccountComponents';
-import { Container } from '@/presentation/modules/AccountComponents/styles';
+import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoader';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 import React from 'react';
 
-const Sidebar = dynamic(() => import('account/sidebar'), {
+const AccountLayout = dynamic(() => import('account/account-layout'), {
   ssr: false,
-  loading: () => <AccountSidebarSkeleton />,
+  loading: () => <LogoLoader />,
 });
 
-const Content = () => {
-  const router = useRouter();
-  const { content } = router.query;
-  const ContentComponent = AccountComponents[content as AccountPaths];
-  return ContentComponent ? (
-    <MainLayout>
-      <Container>
-        <Sidebar />
-        <ContentComponent />
-      </Container>
-    </MainLayout>
-  ) : null;
-};
+const Content = () => (
+  <MainLayout>
+    <AccountLayout />
+  </MainLayout>
+);
 
 export default Content;
