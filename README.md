@@ -2,7 +2,6 @@
 
 Easy Headless is a web application based on a microfrontends architecture and developed with NextJS.
 
-
 ## Requirements
 
 - Node.js v18.15.0
