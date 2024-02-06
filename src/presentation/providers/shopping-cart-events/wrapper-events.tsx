@@ -52,10 +52,10 @@ const WrapperEvents = ({ children }: Props) => {
         SHOPPING_CART_EVENTS.DISPATCH_GET_CART_ID,
         dispatchGetCartId,
       );
-      document.addEventListener(
-        SHOPPING_CART_EVENTS.DISPATCH_GET_CART,
-        dispatchCartEvent,
-      );
+      document.addEventListener(SHOPPING_CART_EVENTS.DISPATCH_GET_CART, (e) => {
+        e.preventDefault();
+        if (shoppingCart) dispatchCartEvent({ shoppingCart });
+      });
       document.addEventListener(
         SHOPPING_CART_EVENTS.REFRESH_CART_ID,
         refreshCartId,
@@ -93,7 +93,10 @@ const WrapperEvents = ({ children }: Props) => {
       );
       document.removeEventListener(
         SHOPPING_CART_EVENTS.DISPATCH_GET_CART,
-        dispatchCartEvent,
+        (e) => {
+          e.preventDefault();
+          if (shoppingCart) dispatchCartEvent({ shoppingCart });
+        },
       );
       document.removeEventListener(
         SHOPPING_CART_EVENTS.REFRESH_CART_ID,
@@ -118,9 +121,9 @@ const WrapperEvents = ({ children }: Props) => {
     updateShoppingCartWithoutItems,
   ]);
 
-  useEffect(() => {
-    dispatchCartEvent();
-  }, [dispatchCartEvent, shoppingCart]);
+  // useEffect(() => {
+  //   dispatchCartEvent();
+  // }, [dispatchCartEvent, shoppingCart]);
 
   useEffect(() => {
     dispatchGetCartId();
