@@ -9,7 +9,6 @@ import useUpdateItemShoppingCart from '@/domain/use-cases/shopping-cart/update-i
 import { useAppDispatch, useAppSelector } from '@/presentation/hooks/use-store';
 import React, { useEffect } from 'react';
 import authSlice from '../store/modules/auth/slice';
-import { ids } from 'webpack';
 
 interface Props {
   children: React.ReactNode;
