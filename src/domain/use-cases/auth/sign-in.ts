@@ -1,3 +1,4 @@
+import { useAppSelector } from '@/presentation/hooks/use-store';
 import { AUTHCOOKIES } from '@/application/infra/cookies';
 import { AUTH_EVENTS } from '@/application/infra/events/auth';
 import authService from '@/application/services/auth';
@@ -12,6 +13,7 @@ export const useSignIn = () => {
     AUTHCOOKIES.REFRESH_TOKEN,
   ]);
   const { dispatchEvent } = useEvents();
+  const { shoppingCart } = useAppSelector((state) => state.shoppingCart);
 
   const sigInMutation = useMutation(
     (request: SignInRequest) => authService().signIn(request),
