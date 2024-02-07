@@ -38,3 +38,4 @@ next-env.d.ts
 newrelic.js
 newrelic_agent.log
 **/dist/
+.vscode/settings.json
