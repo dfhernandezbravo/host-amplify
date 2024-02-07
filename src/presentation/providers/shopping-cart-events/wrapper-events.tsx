@@ -6,8 +6,9 @@ import useRemoveAllItemsShoppingCart from '@/domain/use-cases/shopping-cart/remo
 import useRemoveItemShoppingCart from '@/domain/use-cases/shopping-cart/remove-item';
 import useUpdateShoppingCart from '@/domain/use-cases/shopping-cart/update-cart';
 import useUpdateItemShoppingCart from '@/domain/use-cases/shopping-cart/update-item';
-import { useAppSelector } from '@/presentation/hooks/use-store';
+import { useAppDispatch, useAppSelector } from '@/presentation/hooks/use-store';
 import React, { useEffect } from 'react';
+import authSlice from '../store/modules/auth/slice';
 
 interface Props {
   children: React.ReactNode;
@@ -17,6 +18,10 @@ const WrapperEvents = ({ children }: Props) => {
   const { cartId, shoppingCart } = useAppSelector(
     (state) => state.shoppingCart,
   );
+  const { loggedIn } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const { setLoggedIn } = authSlice.actions;
+
   const { addItemToCart } = useAddItemShoppingCart();
   const { updateItemToCart } = useUpdateItemShoppingCart();
   const { removeItemShoppingCart } = useRemoveItemShoppingCart();
@@ -28,6 +33,7 @@ const WrapperEvents = ({ children }: Props) => {
 
   useEffect(() => {
     if (cartId && shoppingCart) {
+      dispatch(setLoggedIn(shoppingCart?.loggedIn || false));
       document.addEventListener(
         SHOPPING_CART_EVENTS.ADD_ITEM_SHOPPING_CART,
         addItemToCart,
@@ -121,9 +127,9 @@ const WrapperEvents = ({ children }: Props) => {
     updateShoppingCartWithoutItems,
   ]);
 
-  // useEffect(() => {
-  //   dispatchCartEvent();
-  // }, [dispatchCartEvent, shoppingCart]);
+  useEffect(() => {
+    if (shoppingCart) dispatchCartEvent({ shoppingCart });
+  }, [loggedIn]);
 
   useEffect(() => {
     dispatchGetCartId();
