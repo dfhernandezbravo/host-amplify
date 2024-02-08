@@ -1,18 +1,13 @@
 import MainLayout from '@/presentation/components/layouts/main-layout';
-import AccountSidebarSkeleton from '@/presentation/components/skeletons/AccountSidebarSkeleton';
+import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoader';
 import useSidebarContent from '@/presentation/hooks/useSidebarContent';
 import { useDevice } from '@cencosud-ds/easy-design-system';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { ComponentType } from 'react';
-
-const Sidebar: ComponentType<{ display: string }> = dynamic(
-  () => import('account/sidebar'),
-  {
-    ssr: false,
-    loading: () => <AccountSidebarSkeleton />,
-  },
-);
+const AccountLayout = dynamic(() => import('account/account-layout'), {
+  ssr: false,
+  loading: () => <LogoLoader />,
+});
 
 export const ROOT_PATH = 'account';
 
@@ -23,7 +18,7 @@ const Account = () => {
   const { data, error, loading } = useSidebarContent();
 
   if ((!loading && !data) || loading) {
-    return <AccountSidebarSkeleton />;
+    return <LogoLoader />;
   }
 
   if (device !== 'Phone' && data) {
@@ -38,7 +33,7 @@ const Account = () => {
 
   return (
     <MainLayout>
-      <Sidebar display="block" />
+      <AccountLayout />
     </MainLayout>
   );
 };

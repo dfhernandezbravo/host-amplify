@@ -9,7 +9,7 @@ const Plp = dynamic(() => import('plp/plp-eventos'), {
 
 export const getServerSideProps = async (ctx: any) => {
   const plp = await import('plp/plp-eventos');
-  if (plp.getServerSideProps) {
+  if (plp?.getServerSideProps) {
     return plp.getServerSideProps(ctx);
   }
   return {

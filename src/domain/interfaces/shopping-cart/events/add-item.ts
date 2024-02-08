@@ -1,11 +1,6 @@
-import { Product } from '@cencosud-ds/easy-design-system';
-
-export type ProductEvent = Pick<
-  Product,
-  'imageUrl' | 'productName' | 'productId' | 'brand' | 'prices'
-> & { quantity: number };
+import { Product } from '@/domain/entities/product';
 
 export interface AddItemShoppingCartEvent {
   cartId?: string;
-  product: ProductEvent;
+  product: Product;
 }
