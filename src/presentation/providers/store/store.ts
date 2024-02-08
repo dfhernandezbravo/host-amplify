@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import shoppingCartReducer from './modules/shopping-cart/reducer';
 import { persistStore } from 'redux-persist';
+import authReducer from './modules/auth/reducer';
 
 export const store = configureStore({
   reducer: {
     shoppingCart: shoppingCartReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
