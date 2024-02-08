@@ -6,7 +6,7 @@ import { AuthTokens } from '../http-request/tokens';
 import { AccessKeyValidationRequest } from '../http-request/acesskey-validation';
 
 export interface AuthService {
-  authGuest(): Promise<AxiosResponse<AuthTokens>>;
+  authGuest(): Promise<AxiosResponse<AuthTokens>> | null;
   signIn(request: SignInRequest): Promise<AxiosResponse<AuthTokens>>;
   setPassword(request: SetPasswordRequest): Promise<AxiosResponse<AuthTokens>>;
   signUp(request: SignUpRequest): Promise<AxiosResponse<AuthTokens>>;

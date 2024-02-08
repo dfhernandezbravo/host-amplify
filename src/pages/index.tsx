@@ -37,7 +37,7 @@ export default function HomeApp(props: any) {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      sessionStorage.setItem('isHeadless', 'true');
+      //sessionStorage.setItem('isHeadless', 'true');
     }
   }, []);
 
