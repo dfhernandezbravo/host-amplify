@@ -31,6 +31,7 @@ const useRemoveItemShoppingCart = () => {
     (event: Event) => {
       event.stopImmediatePropagation();
       const customEvent = event as CustomEvent<RemoveItemShoppingCartEvent>;
+      if (!cartId) return;
 
       const {
         detail: { cartId: cartIdEvent, itemIndex },

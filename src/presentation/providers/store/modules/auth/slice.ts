@@ -8,7 +8,12 @@ const authSlice = createSlice({
     setLoggedIn: (state, { payload }) => {
       state.loggedIn = payload;
     },
+    setHasAccessToken: (state, { payload }: { payload: boolean }) => {
+      state.hasAccessToken = payload;
+    },
   },
 });
+
+export const { setHasAccessToken } = authSlice.actions;
 
 export default authSlice;

@@ -1,5 +1,5 @@
 import shoppingCartService from '@/application/services/shopping-cart';
-import { useAppDispatch } from '@/presentation/hooks/use-store';
+import { useAppDispatch, useAppSelector } from '@/presentation/hooks/use-store';
 import {
   setCartId,
   updateShoppingCart,
@@ -18,12 +18,16 @@ const getCartId = async () => {
 
 const useGetCartId = () => {
   const dispatch = useAppDispatch();
+  const { cartId } = useAppSelector((state) => state.shoppingCart);
+  const { hasAccessToken } = useAppSelector((state) => state.auth);
+  console.log('cart', cartId);
+  console.log('hasAccess', hasAccessToken);
 
   const { data: orderFormId, refetch: fetchCartId } = useQuery(
     ['get-cart-id'],
     getCartId,
     {
-      enabled: false,
+      enabled: !Boolean(cartId) && hasAccessToken,
       onSuccess: (response) => {
         dispatch(setCartId(response));
       },

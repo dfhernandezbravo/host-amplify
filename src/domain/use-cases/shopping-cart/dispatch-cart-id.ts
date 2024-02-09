@@ -13,7 +13,7 @@ const useDispatchCartId = () => {
     const eventDispatch = new CustomEvent<GetCartIdEvent>(
       SHOPPING_CART_EVENTS.GET_CART_ID,
       {
-        detail: { cartId },
+        detail: { cartId: cartId || '' },
       },
     );
 
