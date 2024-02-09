@@ -24,6 +24,7 @@ const useUpdateItemShoppingCart = () => {
     (event: Event) => {
       event.stopImmediatePropagation();
       const customEvent = event as CustomEvent<UpdateItemShoppingCartEvent>;
+      if (!cartId) return;
 
       const {
         detail: { cartId: cartIdEvent, orderItems },
