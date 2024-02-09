@@ -13,13 +13,10 @@ const bffPrivateClient = axios.create({
 bffPrivateClient.interceptors.request.use(function (config) {
   const cookies = new Cookies();
   const accessToken = cookies.get(AUTHCOOKIES.ACCESS_TOKEN);
-  const controller = new AbortController();
 
-  if (!accessToken) controller.abort();
+  if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
 
-  config.headers.Authorization = `Bearer ${accessToken}`;
-
-  return { ...config, signal: controller.signal };
+  return config;
 });
 
 export default bffPrivateClient;
