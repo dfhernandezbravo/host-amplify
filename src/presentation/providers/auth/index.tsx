@@ -8,7 +8,6 @@ import { useQuery } from 'react-query';
 import { updateShoppingCart } from '../store/modules/shopping-cart/slice';
 import AuthEvents from './auth-events';
 import { useRouter } from 'next/router';
-import { setHasAccessToken } from '../store/modules/auth/slice';
 
 interface Props {
   children: React.ReactNode;
@@ -29,18 +28,17 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
     onSuccess: (response) => {
       setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken);
       setCookie(AUTHCOOKIES.REFRESH_TOKEN, response.refreshToken);
-      dispatch(setHasAccessToken(true));
     },
   });
 
-  // const refreshCart = useCallback(async () => {
-  //   const shoppingCart = await getShoppingCart(cartId);
-  //   if (shoppingCart) dispatch(updateShoppingCart(shoppingCart));
-  // }, [cartId, dispatch]);
+  const refreshCart = useCallback(async () => {
+    const shoppingCart = await getShoppingCart(cartId);
+    if (shoppingCart) dispatch(updateShoppingCart(shoppingCart));
+  }, [cartId, dispatch]);
 
-  // useEffect(() => {
-  //   if (cookies.accessToken) refreshCart();
-  // }, [cookies.accessToken, refreshCart]);
+  useEffect(() => {
+    if (cookies.accessToken) refreshCart();
+  }, [cookies.accessToken, refreshCart]);
 
   // efecto para manejar social login
   useEffect(() => {

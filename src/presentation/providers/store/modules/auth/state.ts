@@ -1,9 +1,3 @@
-type InitialStateAuth = {
-  loggedIn: boolean;
-  hasAccessToken: boolean;
-};
-
-export const initialStateAuth: InitialStateAuth = {
+export const initialStateAuth = {
   loggedIn: false,
-  hasAccessToken: false,
 };

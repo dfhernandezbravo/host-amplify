@@ -75,8 +75,6 @@ const useAddItemShoppingCart = () => {
         (item) => item.product.id === product.id,
       );
 
-      if (!cartId) return;
-
       if (productIndex < 0) {
         addItemMutation.mutate({
           cartId: cartIdEvent || cartId,

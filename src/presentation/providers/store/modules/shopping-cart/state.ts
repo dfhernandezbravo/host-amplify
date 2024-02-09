@@ -1,13 +1,13 @@
 import { ShoppingCart } from '@cencosud-ds/easy-design-system';
 
 export type ShoppingCartState = {
-  cartId: string | null;
+  cartId: string;
   shoppingCart: ShoppingCart | null;
   isLoadingShoppingCart: boolean;
 };
 
 export const initialStateShoppingCart: ShoppingCartState = {
-  cartId: null,
+  cartId: '',
   shoppingCart: null,
   isLoadingShoppingCart: false,
 };
