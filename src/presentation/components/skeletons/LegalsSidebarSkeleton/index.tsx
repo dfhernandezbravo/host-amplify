@@ -18,9 +18,10 @@ const LegalsSidebarSkeleton = () => {
     <>
       <Layout is={['Desktop', 'Tablet']}>
         <Box>
-          <CustomSkeleton $w={233.594} $h={19} $m="22px 17px 4px 0" />
-          <CustomSkeleton $w={233.594} $h={24} $m="0 17px 48px 0" />
-          <CustomSkeleton $w={233.594} $h={469} $m="0 17px 0 0" />
+          <CustomSkeleton $w={306.2} $h={52} $m="22px 17px 4px 0" />
+          <CustomSkeleton $w={306.2} $h={52} $m="0 17px 4px 0" />
+          <CustomSkeleton $w={306.2} $h={52} $m="0 17px 4px 0" />
+          <CustomSkeleton $w={306.2} $h={52} $m="0 17px 0 0" />
         </Box>
       </Layout>
     </>

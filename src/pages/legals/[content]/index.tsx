@@ -1,29 +1,28 @@
-import { LegalsPaths } from '@/domain/interfaces/legals';
 import MainLayout from '@/presentation/components/layouts/main-layout';
+import LegalsContentSkeleton from '@/presentation/components/skeletons/LegalsContentSkeleton';
 import LegalsSidebarSkeleton from '@/presentation/components/skeletons/LegalsSidebarSkeleton';
-import LegalsComponents from '@/presentation/modules/LegalsComponents';
 import { Container } from '@/presentation/modules/AccountComponents/styles';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 import React from 'react';
 
-const Sidebar = dynamic(() => import('home/Sidebar'), {
+const LegalsLayout = dynamic(() => import('home/legals-layout'), {
   ssr: false,
-  loading: () => <LegalsSidebarSkeleton />,
+  loading: () => (
+    <Container>
+      <LegalsSidebarSkeleton />
+      <LegalsContentSkeleton />
+    </Container>
+  ),
 });
 
 const Content = () => {
-  const router = useRouter();
-  const { content } = router.query;
-  const ContentComponent = LegalsComponents[content as LegalsPaths];
-  return ContentComponent ? (
+  return (
     <MainLayout>
       <Container>
-        <Sidebar />
-        <ContentComponent />
+        <LegalsLayout />
       </Container>
     </MainLayout>
-  ) : null;
+  );
 };
 
 export default Content;

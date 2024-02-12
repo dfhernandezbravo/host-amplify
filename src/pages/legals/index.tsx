@@ -6,8 +6,8 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { ComponentType } from 'react';
 
-const Sidebar: ComponentType<{ display: string }> = dynamic(
-  () => import('home/Sidebar'),
+const LegalsLayout: ComponentType = dynamic(
+  () => import('home/legals-layout'),
   {
     ssr: false,
     loading: () => <LegalsSidebarSkeleton />,
@@ -15,12 +15,14 @@ const Sidebar: ComponentType<{ display: string }> = dynamic(
 );
 
 export const ROOT_PATH = 'legals';
+const GROUP_NAME = 'sidebars';
+const PARAM_NAME = 'legals';
 
 const Legals = () => {
   const { device } = useDevice();
 
   const router = useRouter();
-  const { data, error, loading } = useSidebarContent();
+  const { data, error, loading } = useSidebarContent(GROUP_NAME, PARAM_NAME);
 
   if ((!loading && !data) || loading) {
     return <LegalsSidebarSkeleton />;
@@ -40,7 +42,7 @@ const Legals = () => {
 
   return (
     <MainLayout>
-      <Sidebar display="block" />
+      <LegalsLayout />
     </MainLayout>
   );
 };

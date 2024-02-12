@@ -18,16 +18,12 @@ const ContentLegalsSkeleton = () => {
     <>
       <Layout is={['Desktop', 'Tablet']}>
         <Box>
-          <CustomSkeleton $w={'105px'} $h={'19px'} $m="0 0 6px 0" />
-          <CustomSkeleton $w={'105px'} $h={'36.667px'} $m="0 0 55px 0" />
-          <CustomSkeleton $w={'625px'} $h={'368px'} $m="0 0 0 0" />
+          <CustomSkeleton $w={'855.91px'} $h={'668px'} $m="0 0 0 0" />
         </Box>
       </Layout>
       <Layout is={['Phone']}>
         <Box $width="100%">
-          <CustomSkeleton $w={'105px'} $h={'19px'} $m="0 0 6px 0" />
-          <CustomSkeleton $w={'105px'} $h={'36.667px'} $m="0 0 55px 0" />
-          <CustomSkeleton $w={'100%'} $h={'368px'} $m="0 0 0 0" />
+          <CustomSkeleton $w={'100%'} $h={'768px'} $m="0 0 0 0" />
         </Box>
       </Layout>
     </>

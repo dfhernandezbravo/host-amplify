@@ -10,12 +10,14 @@ const AccountLayout = dynamic(() => import('account/account-layout'), {
 });
 
 export const ROOT_PATH = 'account';
+const GROUP_NAME = 'account';
+const PARAM_NAME = 'sidebar';
 
 const Account = () => {
   const { device } = useDevice();
 
   const router = useRouter();
-  const { data, error, loading } = useSidebarContent();
+  const { data, error, loading } = useSidebarContent(GROUP_NAME, PARAM_NAME);
 
   if ((!loading && !data) || loading) {
     return <LogoLoader />;
