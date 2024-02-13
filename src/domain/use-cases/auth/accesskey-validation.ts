@@ -5,6 +5,7 @@ import { AccessKeyValidationRequest } from '@/domain/interfaces/auth/http-reques
 import { useEvents } from '@/presentation/hooks/use-events';
 import { useCookies } from 'react-cookie';
 import { useMutation } from 'react-query';
+import useGetShoppingCart from '../shopping-cart/get-cart';
 
 export const useAccessKeyValidation = () => {
   const [_cookies, setCookie] = useCookies([
@@ -12,6 +13,7 @@ export const useAccessKeyValidation = () => {
     AUTHCOOKIES.REFRESH_TOKEN,
   ]);
   const { dispatchEvent } = useEvents();
+  const { refreshCart } = useGetShoppingCart();
 
   const accessKeyValidationMutation = useMutation(
     (request: AccessKeyValidationRequest) =>
@@ -20,6 +22,7 @@ export const useAccessKeyValidation = () => {
       onSuccess: ({ data: response }) => {
         setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken);
         setCookie(AUTHCOOKIES.REFRESH_TOKEN, response.refreshToken);
+        refreshCart();
         dispatchEvent({
           name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,
           detail: { success: true },

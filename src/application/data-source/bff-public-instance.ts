@@ -8,4 +8,12 @@ const bffPublicClient = axios.create({
   },
 });
 
+bffPublicClient.interceptors.request.use(function (config) {
+  const controller = new AbortController();
+
+  // if (process.env.NEXT_PUBLIC_ENV === 'PRODUCTION') controller.abort();
+
+  return { ...config, signal: controller.signal };
+});
+
 export default bffPublicClient;

@@ -1,4 +1,3 @@
-import { useAppSelector } from '@/presentation/hooks/use-store';
 import { AUTHCOOKIES } from '@/application/infra/cookies';
 import { AUTH_EVENTS } from '@/application/infra/events/auth';
 import authService from '@/application/services/auth';
@@ -6,6 +5,7 @@ import { SignInRequest } from '@/domain/interfaces/auth/http-request/sign-in';
 import { useEvents } from '@/presentation/hooks/use-events';
 import { useCookies } from 'react-cookie';
 import { useMutation } from 'react-query';
+import useGetShoppingCart from '../shopping-cart/get-cart';
 
 export const useSignIn = () => {
   const [_cookies, setCookie] = useCookies([
@@ -13,7 +13,7 @@ export const useSignIn = () => {
     AUTHCOOKIES.REFRESH_TOKEN,
   ]);
   const { dispatchEvent } = useEvents();
-  const { shoppingCart } = useAppSelector((state) => state.shoppingCart);
+  const { refreshCart } = useGetShoppingCart();
 
   const sigInMutation = useMutation(
     (request: SignInRequest) => authService().signIn(request),
@@ -21,6 +21,7 @@ export const useSignIn = () => {
       onSuccess: ({ data: response }) => {
         setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken);
         setCookie(AUTHCOOKIES.REFRESH_TOKEN, response.refreshToken);
+        refreshCart();
         dispatchEvent({
           name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,
           detail: { success: true },
