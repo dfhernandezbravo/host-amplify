@@ -30,16 +30,12 @@ const useGetCartId = () => {
     },
   );
 
-  const { data: _data } = useQuery(
-    ['get-cart', orderFormId],
-    () => getShoppingCart(orderFormId),
-    {
-      enabled: !!orderFormId,
-      onSuccess: (response) => {
-        dispatch(updateShoppingCart(response));
-      },
+  useQuery(['get-cart', orderFormId], () => getShoppingCart(orderFormId), {
+    enabled: !!orderFormId,
+    onSuccess: (response) => {
+      dispatch(updateShoppingCart(response));
     },
-  );
+  });
 
   const refreshCartId = (event: Event) => {
     event.stopImmediatePropagation();

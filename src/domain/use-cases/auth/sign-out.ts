@@ -1,4 +1,6 @@
 import { AUTHCOOKIES } from '@/application/infra/cookies';
+import { useAppDispatch } from '@/presentation/hooks/use-store';
+import { setHasAccessToken } from '@/presentation/providers/store/modules/auth/slice';
 import { useCookies } from 'react-cookie';
 
 export const useSignOut = () => {
@@ -7,9 +9,12 @@ export const useSignOut = () => {
     AUTHCOOKIES.REFRESH_TOKEN,
   ]);
 
+  const dispatch = useAppDispatch();
+
   const signOut = (event: Event) => {
     event.stopImmediatePropagation();
     removeCookie(AUTHCOOKIES.ACCESS_TOKEN);
+    dispatch(setHasAccessToken(false));
   };
 
   return {
