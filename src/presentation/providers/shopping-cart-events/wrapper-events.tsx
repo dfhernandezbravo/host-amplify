@@ -33,7 +33,6 @@ const WrapperEvents = ({ children }: Props) => {
 
   useEffect(() => {
     if (cartId && shoppingCart) {
-      dispatch(setLoggedIn(shoppingCart?.loggedIn || false));
       document.addEventListener(
         SHOPPING_CART_EVENTS.ADD_ITEM_SHOPPING_CART,
         addItemToCart,
@@ -125,11 +124,9 @@ const WrapperEvents = ({ children }: Props) => {
     dispatchCartEvent,
     refreshCartId,
     updateShoppingCartWithoutItems,
+    dispatch,
+    setLoggedIn,
   ]);
-
-  useEffect(() => {
-    if (shoppingCart) dispatchCartEvent({ shoppingCart });
-  }, [loggedIn]);
 
   useEffect(() => {
     dispatchGetCartId();

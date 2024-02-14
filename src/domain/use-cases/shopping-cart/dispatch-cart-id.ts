@@ -28,7 +28,7 @@ const useDispatchCartId = () => {
     event?: Event;
     shoppingCart: ShoppingCart;
   }) => {
-    if (event) event.stopImmediatePropagation();
+    if (event) event.preventDefault();
 
     const eventDispatch = new CustomEvent<GetShoppingCartEvent>(
       SHOPPING_CART_EVENTS.GET_SHOPPING_CART,
@@ -36,6 +36,8 @@ const useDispatchCartId = () => {
         detail: { shoppingCart },
       },
     );
+
+    // console.log(eventDispatch);
 
     window.dispatchEvent(eventDispatch);
     document.dispatchEvent(eventDispatch);

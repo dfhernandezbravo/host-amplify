@@ -5,10 +5,12 @@ import { useAppDispatch, useAppSelector } from '@/presentation/hooks/use-store';
 import { updateShoppingCart } from '@/presentation/providers/store/modules/shopping-cart/slice';
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
+import useDispatchCartId from './dispatch-cart-id';
 
 const useUpdateItemShoppingCart = () => {
   const dispatch = useAppDispatch();
   const { cartId } = useAppSelector((state) => state.shoppingCart);
+  const { dispatchCartEvent } = useDispatchCartId();
 
   const updateItemMutation = useMutation(
     (request: UpdateItemsShoppingCartRequest) =>
@@ -16,6 +18,7 @@ const useUpdateItemShoppingCart = () => {
     {
       onSuccess(response) {
         dispatch(updateShoppingCart(response.data));
+        dispatchCartEvent({ shoppingCart: response.data });
       },
     },
   );
