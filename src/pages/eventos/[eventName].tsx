@@ -1,4 +1,3 @@
-import MainLayout from '@/presentation/components/layouts/main-layout';
 import SearchSkeleton from '@/presentation/components/skeletons/search-skeleton';
 import dynamic from 'next/dynamic';
 
@@ -18,11 +17,7 @@ export const getServerSideProps = async (ctx: any) => {
 };
 
 const EventsPLPPage = (props: any) => {
-  return (
-    <MainLayout>
-      <Plp {...props} />
-    </MainLayout>
-  );
+  return <Plp {...props} />;
 };
 
 export default EventsPLPPage;

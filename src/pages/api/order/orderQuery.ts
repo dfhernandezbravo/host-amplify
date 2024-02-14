@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 export const query = `
   query getOrderGroup($orderGroup: String) {
     orderGroup(orderGroup: $orderGroup) {

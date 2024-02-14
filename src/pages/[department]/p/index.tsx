@@ -1,4 +1,3 @@
-import MainLayout from '@/presentation/components/layouts/main-layout';
 import PdpSkeleton from '@/presentation/components/skeletons/pdp-skeleton/pdp-skeleton';
 import { GetStaticPaths, GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
@@ -9,21 +8,12 @@ const Pdp = dynamic(() => import('pdp/pdp'), {
   loading: () => <PdpSkeleton />,
 });
 
-const PdpComponent = (props: any) => {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('isHeadless', 'true');
-    }
-  }, []);
-
-  return (
-    <MainLayout>
-      <Pdp {...props} />
-    </MainLayout>
-  );
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+  return {
+    paths: [], //Indicates that no page needs be created at build time
+    fallback: 'blocking', //Indicates the type of fallback
+  };
 };
-
-export default PdpComponent;
 
 export const getStaticProps = async (ctx: GetStaticPropsContext) => {
   const pdp = await import('pdp/pdp');
@@ -35,9 +25,14 @@ export const getStaticProps = async (ctx: GetStaticPropsContext) => {
   };
 };
 
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  return {
-    paths: [], //indicates that no page needs be created at build time
-    fallback: 'blocking', //indicates the type of fallback
-  };
+const PdpComponent = (props: any) => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('isHeadless', 'true');
+    }
+  }, []);
+
+  return <Pdp {...props} />;
 };
+
+export default PdpComponent;

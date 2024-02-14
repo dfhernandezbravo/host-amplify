@@ -1,5 +1,5 @@
-import MainLayout from '@/presentation/components/layouts/main-layout';
 import SearchSkeleton from '@/presentation/components/skeletons/search-skeleton';
+
 import dynamic from 'next/dynamic';
 
 const Plp = dynamic(() => import('plp/plp-category'), {
@@ -18,11 +18,7 @@ export const getServerSideProps = async (ctx: any) => {
 };
 
 const PlpCategory = (props: any) => {
-  return (
-    <MainLayout>
-      <Plp {...props} />
-    </MainLayout>
-  );
+  return <Plp {...props} />;
 };
 
 export default PlpCategory;

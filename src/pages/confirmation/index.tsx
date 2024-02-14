@@ -3,13 +3,14 @@ import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoade
 import useAnalytics, { EventData } from '@/presentation/hooks/use-analytics';
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect } from 'react';
+import { NextPageWithLayout } from '../_app';
 
 const Confirmation = dynamic(() => import('confirmation/confirmation'), {
   ssr: false,
   loading: () => <LogoLoader />,
 });
 
-const ConfirmationPage = () => {
+const ConfirmationPage: NextPageWithLayout = () => {
   const { sendEvent } = useAnalytics();
   const handleAnalyticsEvent = useCallback(
     (event: Event) => {
@@ -26,5 +27,7 @@ const ConfirmationPage = () => {
   }, [handleAnalyticsEvent]);
   return <Confirmation />;
 };
+
+ConfirmationPage.getLayout = (page) => page;
 
 export default ConfirmationPage;
