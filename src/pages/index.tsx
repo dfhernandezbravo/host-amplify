@@ -1,9 +1,8 @@
 import { WINDOWS_EVENTS } from '@/application/infra/events';
 import detectOs from '@/helpers/detectOS';
-import MainLayout from '@/presentation/components/layouts/main-layout';
 import HomeSkeleton from '@/presentation/components/skeletons/HomeSkeleton/HomeSkeleton';
-import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoader';
 import useAnalytics, { EventData } from '@/presentation/hooks/use-analytics';
+import { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect } from 'react';
 
@@ -12,7 +11,19 @@ const Home = dynamic(() => import('home/home'), {
   loading: () => <HomeSkeleton />,
 });
 
-export default function HomeApp(props: any) {
+export const revalidate = 30;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const home = await import('home/home');
+  if (home.getServerSideProps) {
+    return home.getServerSideProps(ctx);
+  }
+  return {
+    props: {},
+  };
+};
+
+const HomeApp = (props: any) => {
   const { sendEvent } = useAnalytics();
 
   useEffect(() => {
@@ -41,21 +52,7 @@ export default function HomeApp(props: any) {
     }
   }, []);
 
-  return (
-    <MainLayout>
-      <Home {...props} />
-    </MainLayout>
-  );
-}
-
-export const getServerSideProps = async (ctx: any) => {
-  const home = await import('home/home');
-  if (home.getServerSideProps) {
-    return home.getServerSideProps(ctx);
-  }
-  return {
-    props: {},
-  };
+  return <Home {...props} />;
 };
 
-export const revalidate = 30;
+export default HomeApp;

@@ -67,11 +67,11 @@ const nextConfig = {
         exposes: {},
         extraOptions: {
           exposePages: true,
-          automaticAsyncBoundary: true,
+          automaticAsyncBoundary: false,
         },
       }),
     );
-    return config;
+    return { ...config };
   },
 };
 

@@ -1,10 +1,7 @@
-import React from 'react';
-import { MainImageSkeleton, GallerySkeletonContainer } from './style';
-import { Skeleton, useDevice } from '@cencosud-ds/easy-design-system';
+import { Skeleton } from '@cencosud-ds/easy-design-system';
+import { GallerySkeletonContainer } from './style';
 
 const GallerySkeleton = () => {
-  const { device } = useDevice();
-
   return (
     <GallerySkeletonContainer>
       <Skeleton />

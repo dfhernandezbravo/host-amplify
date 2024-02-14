@@ -1,7 +1,7 @@
 import shoppingCartService from '@/application/services/shopping-cart';
 import { useAppDispatch, useAppSelector } from '@/presentation/hooks/use-store';
 import { updateShoppingCart } from '@/presentation/providers/store/modules/shopping-cart/slice';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import useDispatchCartId from './dispatch-cart-id';
 
 export const getShoppingCart = async (cartId?: string) => {
@@ -29,7 +29,6 @@ const useGetShoppingCart = () => {
   );
 
   const refreshCart = (cartIdRecived?: string) => {
-    console.log('get Cart');
     getCartMutation.mutate(cartIdRecived || cartId);
   };
 

@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import { useCallback, useEffect } from 'react';
+import { NextPageWithLayout } from '../_app';
 
 const RemoteCart = dynamic(() => import('cart/cart'), {
   ssr: false,
@@ -22,7 +23,7 @@ interface ParsedUrlQueryForPage extends ParsedUrlQuery {
   cartId: string;
 }
 
-export default function Cart() {
+const Cart: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { cartId } = query as ParsedUrlQueryForPage;
   const { sendEvent } = useAnalytics();
@@ -58,4 +59,8 @@ export default function Cart() {
       <RemoteCart />
     </>
   );
-}
+};
+
+Cart.getLayout = (page) => page;
+
+export default Cart;

@@ -1,31 +1,23 @@
 import '@/presentation/assets/styles/globals.css';
-import AnalyticsProvider from '@/presentation/providers/analytics';
-import AuthProvider from '@/presentation/providers/auth';
-import ShoppingCartEvents from '@/presentation/providers/shopping-cart-events';
-import StoreProvider from '@/presentation/providers/store';
+import MainLayout from '@/presentation/components/layouts/main-layout';
+import ProvidersLayout from '@/presentation/components/layouts/providers-layout';
+import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import type { ReactElement, ReactNode } from 'react';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
 
-export default function App({ Component, pageProps }: AppProps) {
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout =
+    Component.getLayout ?? ((page) => <MainLayout>{page}</MainLayout>);
+
   return (
-    <StoreProvider>
-      <QueryClientProvider client={queryClient}>
-        <AnalyticsProvider>
-          <ShoppingCartEvents>
-            <AuthProvider>
-              <Component {...pageProps} />
-            </AuthProvider>
-          </ShoppingCartEvents>
-        </AnalyticsProvider>
-      </QueryClientProvider>
-    </StoreProvider>
+    <ProvidersLayout>{getLayout(<Component {...pageProps} />)}</ProvidersLayout>
   );
 }

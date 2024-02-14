@@ -1,5 +1,5 @@
-import MainLayout from '@/presentation/components/layouts/main-layout';
 import SearchSkeleton from '@/presentation/components/skeletons/search-skeleton';
+import { GetServerSidePropsContext } from 'next';
 import dynamic from 'next/dynamic';
 
 const Plp = dynamic(() => import('plp/plp-product'), {
@@ -7,7 +7,7 @@ const Plp = dynamic(() => import('plp/plp-product'), {
   loading: () => <SearchSkeleton />,
 });
 
-export const getServerSideProps = async (ctx: any) => {
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const plp = await import('plp/plp-product');
   if (plp.getServerSideProps) {
     return plp.getServerSideProps(ctx);
@@ -18,11 +18,7 @@ export const getServerSideProps = async (ctx: any) => {
 };
 
 const PlpProduct = (props: any) => {
-  return (
-    <MainLayout>
-      <Plp {...props} />
-    </MainLayout>
-  );
+  return <Plp {...props} />;
 };
 
 export default PlpProduct;
