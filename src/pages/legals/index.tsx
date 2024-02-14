@@ -1,31 +1,38 @@
 import MainLayout from '@/presentation/components/layouts/main-layout';
-import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoader';
+import LegalsSidebarSkeleton from '@/presentation/components/skeletons/LegalsSidebarSkeleton';
 import useSidebarContent from '@/presentation/hooks/useSidebarContent';
 import { useDevice } from '@cencosud-ds/easy-design-system';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-const AccountLayout = dynamic(() => import('account/account-layout'), {
-  ssr: false,
-  loading: () => <LogoLoader />,
-});
+import { ComponentType } from 'react';
 
-export const ROOT_PATH = 'account';
-const GROUP_NAME = 'account';
-const PARAM_NAME = 'sidebar';
+const LegalsLayout: ComponentType = dynamic(
+  () => import('home/legals-layout'),
+  {
+    ssr: false,
+    loading: () => <LegalsSidebarSkeleton />,
+  },
+);
 
-const Account = () => {
+export const ROOT_PATH = 'legals';
+const GROUP_NAME = 'sidebars';
+const PARAM_NAME = 'legals';
+
+const Legals = () => {
   const { device } = useDevice();
 
   const router = useRouter();
   const { data, error, loading } = useSidebarContent(GROUP_NAME, PARAM_NAME);
 
   if ((!loading && !data) || loading) {
-    return <LogoLoader />;
+    return <LegalsSidebarSkeleton />;
   }
 
   if (device !== 'Phone' && data) {
     const routeByDefault = data.value.find((route) => route.isDefault);
-    router.push(`/${ROOT_PATH}/${routeByDefault!.redirect.url || 'profile'}`);
+    router.push(
+      `/${ROOT_PATH}/${routeByDefault!.redirect.url || 'terms-and-conditions'}`,
+    );
     return null;
   }
 
@@ -35,9 +42,9 @@ const Account = () => {
 
   return (
     <MainLayout>
-      <AccountLayout />
+      <LegalsLayout />
     </MainLayout>
   );
 };
 
-export default Account;
+export default Legals;
