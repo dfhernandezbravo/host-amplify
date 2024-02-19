@@ -1,5 +1,5 @@
 import PdpSkeleton from '@/presentation/components/skeletons/pdp-skeleton/pdp-skeleton';
-import { GetStaticPaths, GetStaticPropsContext } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 
@@ -8,17 +8,10 @@ const Pdp = dynamic(() => import('pdp/pdp'), {
   loading: () => <PdpSkeleton />,
 });
 
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  return {
-    paths: [], //Indicates that no page needs be created at build time
-    fallback: 'blocking', //Indicates the type of fallback
-  };
-};
-
-export const getStaticProps = async (ctx: GetStaticPropsContext) => {
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const pdp = await import('pdp/pdp');
-  if (pdp.getStaticProps) {
-    return pdp.getStaticProps(ctx);
+  if (pdp.getServerSideProps) {
+    return pdp.getServerSideProps(ctx);
   }
   return {
     props: {},
