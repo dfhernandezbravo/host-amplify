@@ -32,7 +32,7 @@ const MainLayout = ({ children }: MainLayoutStruct) => {
       </Head>
       <main>
         <Header />
-        {children}
+        <div style={{ minHeight: '50vh' }}>{children}</div>
         <Footer />
         <CartAside />
       </main>

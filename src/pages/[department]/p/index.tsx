@@ -1,6 +1,5 @@
-import MainLayout from '@/presentation/components/layouts/main-layout';
 import PdpSkeleton from '@/presentation/components/skeletons/pdp-skeleton/pdp-skeleton';
-import { GetStaticPaths, GetStaticPropsContext } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 
@@ -9,6 +8,16 @@ const Pdp = dynamic(() => import('pdp/pdp'), {
   loading: () => <PdpSkeleton />,
 });
 
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const pdp = await import('pdp/pdp');
+  if (pdp.getServerSideProps) {
+    return pdp.getServerSideProps(ctx);
+  }
+  return {
+    props: {},
+  };
+};
+
 const PdpComponent = (props: any) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -16,28 +25,7 @@ const PdpComponent = (props: any) => {
     }
   }, []);
 
-  return (
-    <MainLayout>
-      <Pdp {...props} />
-    </MainLayout>
-  );
+  return <Pdp {...props} />;
 };
 
 export default PdpComponent;
-
-export const getStaticProps = async (ctx: GetStaticPropsContext) => {
-  const pdp = await import('pdp/pdp');
-  if (pdp.getStaticProps) {
-    return pdp.getStaticProps(ctx);
-  }
-  return {
-    props: {},
-  };
-};
-
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  return {
-    paths: [], //indicates that no page needs be created at build time
-    fallback: 'blocking', //indicates the type of fallback
-  };
-};

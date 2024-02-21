@@ -1,13 +1,13 @@
 import { AUTHCOOKIES } from '@/application/infra/cookies';
 import { signInGuest } from '@/domain/use-cases/auth/sign-in-guest';
-import { getShoppingCart } from '@/domain/use-cases/shopping-cart/get-cart';
+import useGetShoppingCart from '@/domain/use-cases/shopping-cart/get-cart';
 import { useAppDispatch, useAppSelector } from '@/presentation/hooks/use-store';
-import React, { useCallback, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import { useQuery } from 'react-query';
-import { updateShoppingCart } from '../store/modules/shopping-cart/slice';
 import AuthEvents from './auth-events';
-import { useRouter } from 'next/router';
+import { setHasAccessToken } from '../store/modules/auth/slice';
 
 interface Props {
   children: React.ReactNode;
@@ -15,6 +15,7 @@ interface Props {
 
 const WrapperProvider: React.FC<Props> = ({ children }) => {
   const { cartId } = useAppSelector((state) => state.shoppingCart);
+  const { refreshCart } = useGetShoppingCart();
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -28,17 +29,10 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
     onSuccess: (response) => {
       setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken);
       setCookie(AUTHCOOKIES.REFRESH_TOKEN, response.refreshToken);
+      dispatch(setHasAccessToken(true));
+      if (cartId) refreshCart();
     },
   });
-
-  const refreshCart = useCallback(async () => {
-    const shoppingCart = await getShoppingCart(cartId);
-    if (shoppingCart) dispatch(updateShoppingCart(shoppingCart));
-  }, [cartId, dispatch]);
-
-  useEffect(() => {
-    if (cookies.accessToken) refreshCart();
-  }, [cookies.accessToken, refreshCart]);
 
   // efecto para manejar social login
   useEffect(() => {
@@ -49,7 +43,7 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
       setCookie(AUTHCOOKIES.REFRESH_TOKEN, refreshToken as string);
       router.push(router.pathname);
     }
-  }, [router]);
+  }, [router, setCookie]);
 
   return <AuthEvents>{children}</AuthEvents>;
 };

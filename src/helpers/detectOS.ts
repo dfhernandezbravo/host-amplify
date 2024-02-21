@@ -1,13 +1,13 @@
 import { NextPageContext } from 'next';
 
 const detectOs = async (ctx: NextPageContext) => {
-  let isIos = (ctx?.req?.headers['user-agent'] || navigator.userAgent).match(
+  const isIos = (ctx?.req?.headers['user-agent'] || navigator.userAgent).match(
     /iPhone|iPad|iPod/i,
   );
-  let isDesktop = (
+  const isDesktop = (
     ctx?.req?.headers['user-agent'] || navigator.userAgent
   ).match(/Windows|Macintosh|Ubuntu|Linux/i);
-  let isAndroid = (
+  const isAndroid = (
     ctx?.req?.headers['user-agent'] || navigator.userAgent
   ).match(/Android/i);
 

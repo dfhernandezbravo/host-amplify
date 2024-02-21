@@ -18,7 +18,7 @@ const WrapperEvents = ({ children }: Props) => {
   const { cartId, shoppingCart } = useAppSelector(
     (state) => state.shoppingCart,
   );
-  const { loggedIn } = useAppSelector((state) => state.auth);
+
   const dispatch = useAppDispatch();
   const { setLoggedIn } = authSlice.actions;
 
@@ -33,7 +33,6 @@ const WrapperEvents = ({ children }: Props) => {
 
   useEffect(() => {
     if (cartId && shoppingCart) {
-      dispatch(setLoggedIn(shoppingCart?.loggedIn || false));
       document.addEventListener(
         SHOPPING_CART_EVENTS.ADD_ITEM_SHOPPING_CART,
         addItemToCart,
@@ -125,11 +124,9 @@ const WrapperEvents = ({ children }: Props) => {
     dispatchCartEvent,
     refreshCartId,
     updateShoppingCartWithoutItems,
+    dispatch,
+    setLoggedIn,
   ]);
-
-  useEffect(() => {
-    if (shoppingCart) dispatchCartEvent({ shoppingCart });
-  }, [loggedIn]);
 
   useEffect(() => {
     dispatchGetCartId();

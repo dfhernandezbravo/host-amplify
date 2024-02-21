@@ -1,5 +1,4 @@
 import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoader';
-import MainLayout from '@/presentation/components/layouts/main-layout';
 import { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 
@@ -19,11 +18,7 @@ export const getStaticProps = async (ctx: GetStaticPropsContext) => {
 };
 
 const TermsAndConditionsPage = (props: any) => {
-  return (
-    <MainLayout>
-      <TermsAndConditions {...props} />
-    </MainLayout>
-  );
+  return <TermsAndConditions {...props} />;
 };
 
 export default TermsAndConditionsPage;
