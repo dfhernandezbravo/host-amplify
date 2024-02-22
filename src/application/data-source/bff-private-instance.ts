@@ -13,11 +13,15 @@ const bffPrivateClient = axios.create({
 bffPrivateClient.interceptors.request.use(function (config) {
   const cookies = new Cookies();
   const accessToken = cookies.get(AUTHCOOKIES.ACCESS_TOKEN);
+  const accessUser = cookies.get(AUTHCOOKIES.ACCESS_USER);
   const controller = new AbortController();
+  const environment = process.env.NEXT_PUBLIC_ENV;
 
-  if (!accessToken) controller.abort();
+  if (environment === 'PRODUCTION' && !accessUser) {
+    controller.abort();
+  }
 
-  config.headers.Authorization = `Bearer ${accessToken}`;
+  if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
 
   return { ...config, signal: controller.signal };
 });
