@@ -46,12 +46,6 @@ const HomeApp = (props: any) => {
     document.addEventListener(WINDOWS_EVENTS.Analytics, handleAnalyticsEvent);
   }, [handleAnalyticsEvent]);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('isHeadless', 'true');
-    }
-  }, []);
-
   return <Home {...props} />;
 };
 

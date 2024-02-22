@@ -1,7 +1,7 @@
 import { HeaderProps } from '@/domain/interfaces/header';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import FooterSkeleton from '../../skeletons/FooterSkeleton/FooterSkeleton';
 import HeaderSkeleton from '../../skeletons/HeaderSkeleton/HeaderSkeleton';
 
@@ -25,6 +25,12 @@ type MainLayoutStruct = {
 };
 
 const MainLayout = ({ children }: MainLayoutStruct) => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('isHeadless', 'true');
+    }
+  }, []);
+
   return (
     <>
       <Head>
