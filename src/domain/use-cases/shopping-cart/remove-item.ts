@@ -14,7 +14,7 @@ interface Props {
 const useRemoveItemShoppingCart = () => {
   const { cartId } = useAppSelector((state) => state.shoppingCart);
   const dispatch = useAppDispatch();
-  const { dispatchCartEvent } = useDispatchCartId();
+  const { dispatchCartEvent, dispatchErrorCart } = useDispatchCartId();
 
   const removeItemMutation = useMutation(
     (request: Props) =>
@@ -26,6 +26,9 @@ const useRemoveItemShoppingCart = () => {
       onSuccess: (response) => {
         dispatch(updateShoppingCart(response.data));
         dispatchCartEvent({ shoppingCart: response.data });
+      },
+      onError: (error) => {
+        dispatchErrorCart(error);
       },
     },
   );
