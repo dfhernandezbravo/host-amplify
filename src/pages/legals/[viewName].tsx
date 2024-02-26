@@ -1,48 +1,47 @@
-import { LegalsQueryParamns } from '@/domain/interfaces/legals/query-params';
 import { getLegalLinks } from '@/domain/use-cases/legals/get-legals-link';
 import LegalsLayout from '@/presentation/components/layouts/legals-layout';
+import LegalsContentSkeleton from '@/presentation/components/skeletons/LegalsContentSkeleton';
 import { useAppDispatch } from '@/presentation/hooks/use-store';
 import { setLegalsLinks } from '@/presentation/providers/store/modules/legals/slice';
 import { LegalLiks } from '@/presentation/providers/store/modules/legals/state';
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import { NextPageWithLayout } from '../_app';
-// import dynamic from 'next/dynamic';
 
 interface Props {
   links: LegalLiks[];
+  content: any;
 }
 
-// const LegalsLayout = dynamic(
-//   () => import('home/legals-layout'),
-//   {
-//     ssr: false,
-//     loading: () => <LegalsSidebarSkeleton />,
-//   },
-// );
+const LegalsPage = dynamic<{ content: any }>(() => import('home/legals'), {
+  ssr: false,
+  loading: () => <LegalsContentSkeleton />,
+});
 
 export const getServerSideProps = (async (context) => {
-  const { query } = context;
-  const { content } = query as LegalsQueryParamns;
-
-  console.log(content);
-
   const links = await getLegalLinks();
+  const page = await import('home/legals');
+  if (page?.getServerSideProps) {
+    const content = await page.getServerSideProps(context);
+
+    return {
+      props: {
+        links,
+        ...content.props,
+      },
+    };
+  }
+
   return {
-    props: {
-      links,
-    },
+    props: {},
   };
 }) satisfies GetServerSideProps<Props>;
 
-const Legals: NextPageWithLayout<Props> = ({ links, ...rest }) => {
-  const { query } = useRouter();
-  const { content } = query as LegalsQueryParamns;
+const Legals: NextPageWithLayout<Props> = ({ links, content }) => {
   const dispatch = useAppDispatch();
-
   dispatch(setLegalsLinks(links));
 
-  return <div style={{ height: '100vh' }}>{content}</div>;
+  return <LegalsPage content={content} />;
 };
 
 Legals.getLayout = (page) => <LegalsLayout>{page}</LegalsLayout>;

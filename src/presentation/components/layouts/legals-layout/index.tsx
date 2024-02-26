@@ -11,7 +11,7 @@ const LegalsLayout = ({ children }: Props) => {
     <MainLayout>
       <div className="flex flex-row gap-16 justify-center p-4">
         <LinksSidebar />
-        <div className="md:w-[956px] bg-white rounded-md">{children}</div>
+        <div className="md:w-[956px] bg-white rounded-md p-2">{children}</div>
       </div>
     </MainLayout>
   );
