@@ -4,7 +4,7 @@ metadata:
   annotations:
     ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/ingress.class: ${INGRESS_CLASS}
-      alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:116948010203:certificate/84aae3ae-1a92-42a3-860c-ec0ef22f78b7
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:116948010203:certificate/84aae3ae-1a92-42a3-860c-ec0ef22f78b7
   labels:
     app: ${CI_PROJECT_NAME}  
   name: ${CI_PROJECT_NAME}-ingress
