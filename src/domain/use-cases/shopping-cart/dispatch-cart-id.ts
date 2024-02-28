@@ -37,8 +37,6 @@ const useDispatchCartId = () => {
       },
     );
 
-    // console.log(eventDispatch);
-
     window.dispatchEvent(eventDispatch);
     document.dispatchEvent(eventDispatch);
   };
