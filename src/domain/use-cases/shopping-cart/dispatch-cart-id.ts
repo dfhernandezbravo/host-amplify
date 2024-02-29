@@ -3,6 +3,7 @@ import { GetCartIdEvent } from '@/domain/interfaces/shopping-cart/events/get-car
 import { GetShoppingCartEvent } from '@/domain/interfaces/shopping-cart/events/get-shopping-cart';
 import { useAppSelector } from '@/presentation/hooks/use-store';
 import { ShoppingCart } from '@cencosud-ds/easy-design-system';
+import { AxiosError } from 'axios';
 
 const useDispatchCartId = () => {
   const { cartId } = useAppSelector((state) => state.shoppingCart);
@@ -37,7 +38,18 @@ const useDispatchCartId = () => {
       },
     );
 
-    // console.log(eventDispatch);
+    window.dispatchEvent(eventDispatch);
+    document.dispatchEvent(eventDispatch);
+  };
+
+  const dispatchErrorCart = (errorRecived: unknown) => {
+    const error = errorRecived as AxiosError;
+    const eventDispatch = new CustomEvent(
+      SHOPPING_CART_EVENTS.GET_SHOPPING_CART_ERROR,
+      {
+        detail: { error: error.response?.data },
+      },
+    );
 
     window.dispatchEvent(eventDispatch);
     document.dispatchEvent(eventDispatch);
@@ -46,6 +58,7 @@ const useDispatchCartId = () => {
   return {
     dispatchGetCartId,
     dispatchCartEvent,
+    dispatchErrorCart,
   };
 };
 

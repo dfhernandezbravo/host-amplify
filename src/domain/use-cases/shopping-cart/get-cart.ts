@@ -16,7 +16,7 @@ export const getShoppingCart = async (cartId?: string) => {
 const useGetShoppingCart = () => {
   const dispatch = useAppDispatch();
   const { cartId } = useAppSelector((state) => state.shoppingCart);
-  const { dispatchCartEvent } = useDispatchCartId();
+  const { dispatchCartEvent, dispatchErrorCart } = useDispatchCartId();
 
   const getCartMutation = useMutation(
     (cartId: string) => getShoppingCart(cartId),
@@ -24,6 +24,9 @@ const useGetShoppingCart = () => {
       onSuccess: (response) => {
         dispatch(updateShoppingCart(response));
         dispatchCartEvent({ shoppingCart: response });
+      },
+      onError: (error) => {
+        dispatchErrorCart(error);
       },
     },
   );
