@@ -17,7 +17,7 @@ spec:
           - pathType: ImplementationSpecific
             backend:
               service:
-                name: cl-ccom-easy-host-headless
+                name: ${CI_PROJECT_NAME}
                 port:
                   name: http
     - host: ${DOMAIN}
@@ -26,7 +26,7 @@ spec:
           - pathType: ImplementationSpecific
             backend:
               service:
-                name: cl-ccom-easy-host-headless
+                name: ${CI_PROJECT_NAME}
                 port:
                   name: http
 
