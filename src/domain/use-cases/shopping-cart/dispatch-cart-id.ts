@@ -50,6 +50,9 @@ const useDispatchCartId = () => {
         detail: { error: error.response?.data },
       },
     );
+
+    window.dispatchEvent(eventDispatch);
+    document.dispatchEvent(eventDispatch);
   };
 
   return {
