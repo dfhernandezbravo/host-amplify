@@ -1,5 +1,6 @@
 import { AUTHCOOKIES } from '@/application/infra/cookies';
 import { signInGuest } from '@/domain/use-cases/auth/sign-in-guest';
+import { AUTH_EVENTS } from '@/application/infra/events/auth';
 import useGetShoppingCart from '@/domain/use-cases/shopping-cart/get-cart';
 import { useAppDispatch, useAppSelector } from '@/presentation/hooks/use-store';
 import { useRouter } from 'next/router';
@@ -8,6 +9,7 @@ import { CookiesProvider, useCookies } from 'react-cookie';
 import { useQuery } from 'react-query';
 import AuthEvents from './auth-events';
 import { setHasAccessToken } from '../store/modules/auth/slice';
+import { useEvents } from '@/presentation/hooks/use-events';
 
 interface Props {
   children: React.ReactNode;
@@ -17,6 +19,7 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
   const { cartId } = useAppSelector((state) => state.shoppingCart);
   const { refreshCart } = useGetShoppingCart();
   const dispatch = useAppDispatch();
+  const { dispatchEvent } = useEvents();
   const router = useRouter();
 
   const [cookies, setCookie] = useCookies([
@@ -41,6 +44,11 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
     if (authStatus === 'success') {
       setCookie(AUTHCOOKIES.ACCESS_TOKEN, accessToken as string);
       setCookie(AUTHCOOKIES.REFRESH_TOKEN, refreshToken as string);
+      dispatchEvent({
+        name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,
+        detail: { success: true },
+      });
+      if (cartId) refreshCart();
       router.push(router.pathname);
     }
   }, [router, setCookie]);
