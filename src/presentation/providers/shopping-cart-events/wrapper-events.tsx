@@ -58,8 +58,7 @@ const WrapperEvents = ({ children }: Props) => {
         dispatchGetCartId,
       );
       document.addEventListener(SHOPPING_CART_EVENTS.DISPATCH_GET_CART, (e) => {
-        e.preventDefault();
-        e.stopImmediatePropagation();
+        e.stopPropagation();
         if (shoppingCart) dispatchCartEvent({ shoppingCart });
       });
       document.addEventListener(
@@ -100,8 +99,7 @@ const WrapperEvents = ({ children }: Props) => {
       document.removeEventListener(
         SHOPPING_CART_EVENTS.DISPATCH_GET_CART,
         (e) => {
-          e.preventDefault();
-          e.stopImmediatePropagation();
+          e.stopPropagation();
           if (shoppingCart) dispatchCartEvent({ shoppingCart });
         },
       );

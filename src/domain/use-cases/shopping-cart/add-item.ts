@@ -12,7 +12,8 @@ import useDispatchCartId from './dispatch-cart-id';
 
 const useAddItemShoppingCart = () => {
   const dispatch = useAppDispatch();
-  const { dispatchCartEvent, dispatchErrorCart } = useDispatchCartId();
+  const { dispatchCartEvent, dispatchErrorCart, dispatchMiniCartEvent } =
+    useDispatchCartId();
 
   const { cartId, shoppingCart } = useAppSelector(
     (state) => state.shoppingCart,
@@ -25,6 +26,7 @@ const useAddItemShoppingCart = () => {
       onSuccess: (response) => {
         dispatch(updateShoppingCart(response.data));
         dispatchCartEvent({ shoppingCart: response.data });
+        dispatchMiniCartEvent({ shoppingCart: response.data });
       },
       onError: (error) => {
         dispatchErrorCart(error);
@@ -39,6 +41,7 @@ const useAddItemShoppingCart = () => {
       onSuccess(response) {
         dispatch(updateShoppingCart(response.data));
         dispatchCartEvent({ shoppingCart: response.data });
+        dispatchMiniCartEvent({ shoppingCart: response.data });
       },
       onError: (error) => {
         dispatchErrorCart(error);

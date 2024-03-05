@@ -42,6 +42,26 @@ const useDispatchCartId = () => {
     document.dispatchEvent(eventDispatch);
   };
 
+  const dispatchMiniCartEvent = ({
+    event,
+    shoppingCart,
+  }: {
+    event?: Event;
+    shoppingCart: ShoppingCart;
+  }) => {
+    if (event) event.stopPropagation();
+
+    const eventDispatch = new CustomEvent<GetShoppingCartEvent>(
+      SHOPPING_CART_EVENTS.UPDATE_MINI_CART,
+      {
+        detail: { shoppingCart },
+      },
+    );
+
+    window.dispatchEvent(eventDispatch);
+    document.dispatchEvent(eventDispatch);
+  };
+
   const dispatchErrorCart = (errorRecived: unknown) => {
     const error = errorRecived as AxiosError;
     const eventDispatch = new CustomEvent(
@@ -59,6 +79,7 @@ const useDispatchCartId = () => {
     dispatchGetCartId,
     dispatchCartEvent,
     dispatchErrorCart,
+    dispatchMiniCartEvent,
   };
 };
 
