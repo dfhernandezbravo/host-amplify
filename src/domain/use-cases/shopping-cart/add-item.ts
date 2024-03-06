@@ -87,7 +87,15 @@ const useAddItemShoppingCart = () => {
       if (productIndex < 0) {
         addItemMutation.mutate({
           cartId: cartIdEvent || cartId,
-          orderItems: [{ id: product.id, quantity: product.quantity }],
+          orderItems: [
+            {
+              id: product.id,
+              quantity: product.quantity,
+              paintingCode: product.paintingCode
+                ? product.paintingCode
+                : undefined,
+            },
+          ],
         });
       } else {
         updateItemMutation.mutate({
@@ -97,6 +105,9 @@ const useAddItemShoppingCart = () => {
               index: productIndex,
               quantity:
                 product.quantity + shoppingCart.items[productIndex].quantity,
+              paintingCode: product.paintingCode
+                ? product.paintingCode
+                : undefined,
             },
           ],
         });
