@@ -3,6 +3,7 @@ import { useAccessKeyValidation } from '@/domain/use-cases/auth/accesskey-valida
 import { useSetPassword } from '@/domain/use-cases/auth/set-password';
 import { useSignIn } from '@/domain/use-cases/auth/sign-in';
 import { useSignOut } from '@/domain/use-cases/auth/sign-out';
+import { useSignUp } from '@/domain/use-cases/auth/sign-up';
 import React, { useEffect } from 'react';
 
 interface Props {
@@ -14,6 +15,7 @@ const AuthEvents: React.FC<Props> = ({ children }) => {
   const { signIn } = useSignIn();
   const { setPassword } = useSetPassword();
   const { accessKeyValidation } = useAccessKeyValidation();
+  const { signUp } = useSignUp();
 
   useEffect(() => {
     document.addEventListener(AUTH_EVENTS.DISPATCH_LOGOUT, signOut);
@@ -23,6 +25,7 @@ const AuthEvents: React.FC<Props> = ({ children }) => {
       AUTH_EVENTS.DISPATCH_ACCESS_KEY_VALIDATION,
       accessKeyValidation,
     );
+    document.addEventListener(AUTH_EVENTS.DISPATCH_SIGNUP, signUp);
 
     return () => {
       document.removeEventListener(AUTH_EVENTS.DISPATCH_LOGOUT, signOut);
@@ -35,6 +38,7 @@ const AuthEvents: React.FC<Props> = ({ children }) => {
         AUTH_EVENTS.DISPATCH_ACCESS_KEY_VALIDATION,
         accessKeyValidation,
       );
+      document.removeEventListener(AUTH_EVENTS.DISPATCH_SIGNUP, signUp);
     };
   }, [signOut]);
 

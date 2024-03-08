@@ -10,7 +10,8 @@ import useDispatchCartId from './dispatch-cart-id';
 const useUpdateItemShoppingCart = () => {
   const dispatch = useAppDispatch();
   const { cartId } = useAppSelector((state) => state.shoppingCart);
-  const { dispatchCartEvent, dispatchErrorCart } = useDispatchCartId();
+  const { dispatchCartEvent, dispatchErrorCart, dispatchMiniCartEvent } =
+    useDispatchCartId();
 
   const updateItemMutation = useMutation(
     (request: UpdateItemsShoppingCartRequest) =>
@@ -19,6 +20,7 @@ const useUpdateItemShoppingCart = () => {
       onSuccess(response) {
         dispatch(updateShoppingCart(response.data));
         dispatchCartEvent({ shoppingCart: response.data });
+        dispatchMiniCartEvent({ shoppingCart: response.data });
       },
       onError: (error) => {
         dispatchErrorCart(error);
