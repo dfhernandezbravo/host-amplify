@@ -20,13 +20,16 @@ export const withCustomer: MiddlewareFactory = (next) => {
       return NextResponse.redirect(url);
     }
 
-    const customer = await getCustomer(
-      request.cookies.get(AUTHCOOKIES.ACCESS_TOKEN)?.value || '',
-    );
+    const accessToken =
+      request.cookies.get(AUTHCOOKIES.ACCESS_TOKEN)?.value || '';
 
-    if (customer) return next(request, _event);
+    const customer = await getCustomer(accessToken);
 
-    const url = new URL(`/`, request.url);
-    return NextResponse.redirect(url);
+    if (!customer) {
+      const url = new URL(`/`, request.url);
+      return NextResponse.redirect(url);
+    }
+
+    return next(request, _event);
   };
 };
