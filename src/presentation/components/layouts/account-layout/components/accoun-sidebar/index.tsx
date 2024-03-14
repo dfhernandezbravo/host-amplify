@@ -40,7 +40,10 @@ const AccountSidebar = () => {
       >
         Cerrar Sesión
       </button>
-      <ModalLogout isOpen={isOpenLogout} />
+      <ModalLogout
+        isOpen={isOpenLogout}
+        onClose={() => setIsOpenLogout(false)}
+      />
     </div>
   );
 };

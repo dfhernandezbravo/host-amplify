@@ -11,8 +11,8 @@ export const useSignOut = () => {
 
   const dispatch = useAppDispatch();
 
-  const signOut = (event: Event) => {
-    event.stopImmediatePropagation();
+  const signOut = (event?: Event) => {
+    if (event) event.stopImmediatePropagation();
     removeCookie(AUTHCOOKIES.ACCESS_TOKEN);
     dispatch(setHasAccessToken(false));
   };
