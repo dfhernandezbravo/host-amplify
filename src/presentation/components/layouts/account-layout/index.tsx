@@ -13,9 +13,9 @@ const AccountLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <MainLayout>
-      <div className="flex flex-row gap-16 justify-center p-4">
-        <div>
-          <div className="flex flex-col mb-4">
+      <div className="flex flex-col md:flex-row gap-16 justify-center p-4 ">
+        <div className="hidden md:block">
+          <div className="flex flex-col mb-4  ">
             <span className="text-lg">Hola</span>
             <strong className="text-lg">{cookies.SoftLogin}!</strong>
           </div>
