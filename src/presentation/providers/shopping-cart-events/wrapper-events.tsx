@@ -9,6 +9,7 @@ import useUpdateItemShoppingCart from '@/domain/use-cases/shopping-cart/update-i
 import { useAppDispatch, useAppSelector } from '@/presentation/hooks/use-store';
 import React, { useEffect } from 'react';
 import authSlice from '../store/modules/auth/slice';
+import { useUpdateShoppingCartCustomer } from '@/domain/use-cases/shopping-cart/update-customer';
 
 interface Props {
   children: React.ReactNode;
@@ -30,6 +31,7 @@ const WrapperEvents = ({ children }: Props) => {
     useUpdateShoppingCart();
   const { dispatchGetCartId, dispatchCartEvent } = useDispatchCartId();
   const { refreshCartId } = useGetCartId();
+  const { updateShoppingCartCustomer } = useUpdateShoppingCartCustomer();
 
   useEffect(() => {
     if (cartId && shoppingCart) {
@@ -68,6 +70,10 @@ const WrapperEvents = ({ children }: Props) => {
       document.addEventListener(
         SHOPPING_CART_EVENTS.DISPATCH_SHOPPING_CART_WITHOUT_ITEMS,
         updateShoppingCartWithoutItems,
+      );
+      document.addEventListener(
+        SHOPPING_CART_EVENTS.DISPATCH_UPDATE_CUSTOMER_SHOPPING_CART,
+        updateShoppingCartCustomer,
       );
     }
 
@@ -111,6 +117,10 @@ const WrapperEvents = ({ children }: Props) => {
         SHOPPING_CART_EVENTS.DISPATCH_SHOPPING_CART_WITHOUT_ITEMS,
         updateShoppingCartWithoutItems,
       );
+      document.addEventListener(
+        SHOPPING_CART_EVENTS.DISPATCH_UPDATE_CUSTOMER_SHOPPING_CART,
+        updateShoppingCartCustomer,
+      );
     };
   }, [
     cartId,
@@ -126,6 +136,7 @@ const WrapperEvents = ({ children }: Props) => {
     updateShoppingCartWithoutItems,
     dispatch,
     setLoggedIn,
+    updateShoppingCartCustomer,
   ]);
 
   useEffect(() => {

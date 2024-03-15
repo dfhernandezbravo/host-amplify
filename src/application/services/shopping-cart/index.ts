@@ -19,6 +19,9 @@ const shoppingCartService: ShoppingCartService = {
 
   removeAllItemsShoppingCart: (cartId) =>
     httpInstance.delete(`/shoppingcart/${cartId}/items`),
+
+  updateCustomer: (cartId, customer) =>
+    httpInstance.put(`/shoppingcart/${cartId}/customer`, customer),
 };
 
 export default shoppingCartService;
