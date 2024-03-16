@@ -20,11 +20,11 @@ export const useSignIn = () => {
     {
       onSuccess: ({ data: response }) => {
         setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken, {
-          domain: `${process.env.NEXT_COOKIE_DOMAIN}`,
+          domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
           path: '/',
         });
         setCookie(AUTHCOOKIES.REFRESH_TOKEN, response.refreshToken, {
-          domain: `${process.env.NEXT_COOKIE_DOMAIN}`,
+          domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
           path: '/',
         });
         refreshCart();
