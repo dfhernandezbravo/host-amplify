@@ -35,7 +35,7 @@ export const useSignUp = () => {
       },
       onError: (response) => {
         dispatchEvent({
-          name: AUTH_EVENTS.GET_SIGNUP_ERROR,
+          name: AUTH_EVENTS.GET_CREATE_ACCOUNT_ERROR,
           detail: { success: false, error: response },
         });
       },
