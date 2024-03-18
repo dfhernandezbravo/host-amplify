@@ -9,6 +9,7 @@ import { updateShoppingCart } from '@/presentation/providers/store/modules/shopp
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import useDispatchCartId from './dispatch-cart-id';
+import { ProductShoppingCart } from '@cencosud-ds/easy-design-system';
 
 const useAddItemShoppingCart = () => {
   const dispatch = useAppDispatch();
@@ -87,9 +88,11 @@ const useAddItemShoppingCart = () => {
       const calculatePaintingCode = (): PaintingCode | undefined => {
         if (!product.paintingCode) return undefined;
 
-        const filteredColor = shoppingCart?.items?.[
-          productIndex
-        ]?.product?.colorCodes?.find(
+        const itemProduct: ProductShoppingCart & {
+          colorCodes?: PaintingCode[];
+        } = shoppingCart?.items?.[productIndex]?.product;
+
+        const filteredColor = itemProduct?.colorCodes?.find(
           (item: PaintingCode) => item.code === product?.paintingCode?.code,
         );
 
