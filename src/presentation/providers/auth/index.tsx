@@ -30,8 +30,14 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
   useQuery(['sign-in-guest'], signInGuest, {
     enabled: !cookies.accessToken,
     onSuccess: (response) => {
-      setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken);
-      setCookie(AUTHCOOKIES.REFRESH_TOKEN, response.refreshToken);
+      setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken, {
+        domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
+        path: '/',
+      });
+      setCookie(AUTHCOOKIES.REFRESH_TOKEN, response.refreshToken, {
+        domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
+        path: '/',
+      });
       dispatch(setHasAccessToken(true));
       if (cartId) refreshCart();
     },
@@ -42,8 +48,14 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
     const { query } = router;
     const { authStatus, accessToken, refreshToken } = query;
     if (authStatus === 'success') {
-      setCookie(AUTHCOOKIES.ACCESS_TOKEN, accessToken as string);
-      setCookie(AUTHCOOKIES.REFRESH_TOKEN, refreshToken as string);
+      setCookie(AUTHCOOKIES.ACCESS_TOKEN, accessToken, {
+        domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
+        path: '/',
+      });
+      setCookie(AUTHCOOKIES.REFRESH_TOKEN, refreshToken, {
+        domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
+        path: '/',
+      });
       dispatchEvent({
         name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,
         detail: { success: true },
