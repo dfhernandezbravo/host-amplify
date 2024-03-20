@@ -5,19 +5,19 @@ import {
   Container,
   Icon,
 } from './CategoriesCarouselSkeleton.styles';
-import useBreakpoints from '@/presentation/hooks/useBreakpoints';
+import useDevice from '@/presentation/hooks/useDevice';
 import CarouselDots from './CarouselDots/CarouselDots';
 import { Skeleton } from '@cencosud-ds/easy-design-system';
 
 const CategoriesCarouselSkeleton = () => {
-  const { isXs, isSm, isMd } = useBreakpoints();
+  const { device } = useDevice();
 
   return (
     <>
       <Container>
         {[...Array(8)].map((category, i) => (
           <CategorySkeleton
-            isMobile={isXs || isSm || isMd}
+            isMobile={device === 'Phone' || device === 'Tablet'}
             key={`category-skeleton-${i}`}
             index={i}
           >
