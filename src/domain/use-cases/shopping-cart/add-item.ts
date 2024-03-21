@@ -1,6 +1,6 @@
 import { SHOPPING_CART_EVENTS } from '@/application/infra/events/shopping-cart';
 import shoppingCartService from '@/application/services/shopping-cart';
-import { Product } from '@/domain/entities/product';
+import { PaintingCode, Product } from '@/domain/entities/product';
 import { AddItemShoppingCartEvent } from '@/domain/interfaces/shopping-cart/events/add-item';
 import { AddItemsShoppingCartRequest } from '@/domain/interfaces/shopping-cart/http-request/add-items';
 import { UpdateItemsShoppingCartRequest } from '@/domain/interfaces/shopping-cart/http-request/update-items';
@@ -9,6 +9,7 @@ import { updateShoppingCart } from '@/presentation/providers/store/modules/shopp
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import useDispatchCartId from './dispatch-cart-id';
+import { ProductShoppingCart } from '@cencosud-ds/easy-design-system';
 
 const useAddItemShoppingCart = () => {
   const dispatch = useAppDispatch();
@@ -84,12 +85,45 @@ const useAddItemShoppingCart = () => {
         (item) => item.product.id === product.id,
       );
 
+      const calculatePaintingCode = (): PaintingCode | undefined => {
+        if (!product.paintingCode) return undefined;
+
+        const itemProduct: ProductShoppingCart & {
+          colorCodes?: PaintingCode[];
+        } = shoppingCart?.items?.[productIndex]?.product;
+
+        const filteredColor = itemProduct?.colorCodes?.find(
+          (item: PaintingCode) => item.code === product?.paintingCode?.code,
+        );
+
+        if (filteredColor) {
+          return {
+            ...product.paintingCode,
+            quantity: product.quantity + filteredColor.quantity,
+          };
+        }
+        return {
+          ...product.paintingCode,
+          quantity: product.quantity,
+        };
+      };
+
       if (productIndex < 0) {
         addItemMutation.mutate({
           cartId: cartIdEvent || cartId,
-          orderItems: [{ id: product.id, quantity: product.quantity }],
+          orderItems: [
+            {
+              id: product.id,
+              quantity: product.quantity,
+              paintingCode: product.paintingCode
+                ? { ...product.paintingCode, quantity: product.quantity }
+                : undefined,
+            },
+          ],
         });
       } else {
+        const paintingCode = calculatePaintingCode();
+
         updateItemMutation.mutate({
           cartId: cartIdEvent || cartId,
           orderItems: [
@@ -97,6 +131,7 @@ const useAddItemShoppingCart = () => {
               index: productIndex,
               quantity:
                 product.quantity + shoppingCart.items[productIndex].quantity,
+              paintingCode: paintingCode,
             },
           ],
         });

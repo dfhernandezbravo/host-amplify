@@ -19,8 +19,14 @@ export const useSetPassword = () => {
     (request: SetPasswordRequest) => authService().setPassword(request),
     {
       onSuccess: ({ data: response }) => {
-        setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken);
-        setCookie(AUTHCOOKIES.REFRESH_TOKEN, response.refreshToken);
+        setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken, {
+          domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
+          path: '/',
+        });
+        setCookie(AUTHCOOKIES.REFRESH_TOKEN, response.refreshToken, {
+          domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
+          path: '/',
+        });
         refreshCart();
         dispatchEvent({
           name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,
