@@ -1,16 +1,15 @@
-import SearchSkeleton from '@/presentation/components/skeletons/search-skeleton';
-import dynamic from 'next/dynamic';
-import { NextPageWithLayout } from '../_app';
-import { useCallback, useEffect } from 'react';
 import { WINDOWS_EVENTS } from '@/application/infra/events';
+import SearchSkeleton from '@/presentation/components/skeletons/search-skeleton';
 import useAnalytics, { EventData } from '@/presentation/hooks/use-analytics';
+import dynamic from 'next/dynamic';
+import { useCallback, useEffect } from 'react';
 
 const Plp = dynamic(() => import('plp/plp-search'), {
   ssr: false,
   loading: () => <SearchSkeleton />,
 });
 
-const SearchPLPPage: NextPageWithLayout = () => {
+const SearchPLPPage = () => {
   const { sendEvent } = useAnalytics();
   const handleAnalyticsEvent = useCallback(
     (event: Event) => {
@@ -28,7 +27,5 @@ const SearchPLPPage: NextPageWithLayout = () => {
 
   return <Plp />;
 };
-
-SearchPLPPage.getLayout = (page) => page;
 
 export default SearchPLPPage;
