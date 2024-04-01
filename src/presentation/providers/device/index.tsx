@@ -31,7 +31,7 @@ const DeviceProvider: React.FC<Props> = ({ children }) => {
     return () => {
       document.removeEventListener(DEVICE_EVENTS.DispatchGetDevice, getDevice);
     };
-  }, []);
+  }, [getDevice]);
 
   return children;
 };
