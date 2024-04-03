@@ -27,6 +27,17 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
     AUTHCOOKIES.REFRESH_TOKEN,
   ]);
 
+  const handleRedirect = () => {
+    // se remueven parametros authStatus, accessToken y refreshToken de la url
+    const url = new URL(window.location.href);
+    const searchParams = url.searchParams;
+    searchParams.delete('authStatus');
+    searchParams.delete('accessToken');
+    searchParams.delete('refreshToken');
+    url.search = searchParams.toString();
+    router.push(url);
+  };
+
   useQuery(['sign-in-guest'], signInGuest, {
     enabled: !cookies.accessToken,
     onSuccess: (response) => {
@@ -61,7 +72,8 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
         detail: { success: true },
       });
       if (cartId) refreshCart();
-      router.push(router.pathname);
+
+      handleRedirect();
     }
   }, [router, setCookie]);
 
