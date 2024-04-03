@@ -58,7 +58,6 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     const { query } = router;
     const { authStatus, accessToken, refreshToken } = query;
-    console.log('authStatus', authStatus, accessToken, refreshToken);
     if (authStatus === 'success') {
       setCookie(AUTHCOOKIES.ACCESS_TOKEN, accessToken, {
         domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
