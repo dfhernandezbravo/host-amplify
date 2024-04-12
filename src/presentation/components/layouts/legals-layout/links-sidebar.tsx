@@ -4,35 +4,46 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const LinksSidebar = () => {
+interface Props {
+  shouldBeNegative: boolean;
+}
+
+const LinksSidebar = ({ shouldBeNegative }: Props) => {
   const { links } = useAppSelector((state) => state.legals);
   const { query } = useRouter();
   const { viewName } = query as LegalsQueryParamns;
 
   return (
-    <div className="max-w-64 bg-white rounded-md h-fit py-2 hidden lg:block">
-      {links.map((link, index) => (
-        <Link
-          href={`${link.redirect.url}`}
-          target={link.redirect.target || ''}
-          key={link.id}
-        >
-          <div
-            className={clsx(
-              'px-4 py-3 border-b font-semibold text-sm',
-              {
-                ' text-red-900 bg-red-100 border-l-4 border-l-red-900':
-                  viewName === link.id,
-              },
-              {
-                'border-b-0': index + 1 === links.length,
-              },
-            )}
+    <div
+      style={{
+        filter: shouldBeNegative ? 'invert(1)' : '',
+      }}
+      className="max-w-64 bg-white rounded-md h-fit py-2 hidden lg:block"
+    >
+      {links.map((link) => {
+        let classes = 'border-l-4';
+        if (viewName === link.id) {
+          if (shouldBeNegative) {
+            classes = classes + ' text-white bg-black border-l-white';
+          } else {
+            classes = classes + ' text-red-900 bg-red-100 border-l-red-900';
+          }
+        }
+        return (
+          <Link
+            href={`${link.redirect.url}`}
+            target={link.redirect.target || ''}
+            key={link.id}
           >
-            {link.label}
-          </div>
-        </Link>
-      ))}
+            <div
+              style={{ fontSize: '1em' }}
+              className={clsx('px-4 py-3 border-b font-semibold ') + classes}
+            >
+              {link.label}
+            </div>
+          </Link>
+        );
+      })}
     </div>
   );
 };
