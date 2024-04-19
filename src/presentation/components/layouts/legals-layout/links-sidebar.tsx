@@ -17,8 +17,9 @@ const LinksSidebar = ({ shouldBeNegative }: Props) => {
     <div
       style={{
         filter: shouldBeNegative ? 'invert(1)' : '',
+        border: shouldBeNegative ? '1px solid black' : '1px solid transparent',
       }}
-      className="max-w-64 bg-white rounded-md h-fit py-2 hidden lg:block"
+      className="bg-white rounded-md h-fit py-2"
     >
       {links.map((link) => {
         let classes = 'border-l-4';

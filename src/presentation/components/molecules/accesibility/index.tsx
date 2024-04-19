@@ -1,14 +1,23 @@
-import Image from 'next/image';
-import accessibilities from './assets';
+import ModalContent, { Sizes } from './ModalContent';
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import DesktopButtons from './DesktopButtons';
+import MobileButtons from './MobileButtons';
 
-const size = 50;
+const Modal = dynamic(() =>
+  import('@ccom-easy-design-system/molecules.modal').then(
+    (module) => module.Modal,
+  ),
+);
+
+export const size = 50;
 
 interface Props {
   shouldBeNegative: boolean;
   toggleNegative: () => void;
   incrementFontSize: () => void;
   decrementFontSize: () => void;
-  openModal: () => void;
+  fontSize: string;
 }
 
 const Accessibility = ({
@@ -16,49 +25,50 @@ const Accessibility = ({
   toggleNegative,
   incrementFontSize,
   decrementFontSize,
-  openModal,
+  fontSize,
 }: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div
-      className="p-3 h-fit rounded-md bg-white"
-      style={{ filter: shouldBeNegative ? 'invert(1)' : '' }}
-    >
-      <h1 className="font-bold py-2 text-lg">Accesibilidad:</h1>
-      <span className="flex gap-2">
-        <button onClick={incrementFontSize}>
-          <Image
-            width={size}
-            height={size}
-            src={accessibilities[0].src}
-            alt={accessibilities[0].alt}
-          />
-        </button>
-        <button onClick={decrementFontSize}>
-          <Image
-            width={size}
-            height={size}
-            src={accessibilities[1].src}
-            alt={accessibilities[1].alt}
-          />
-        </button>
-        <button onClick={toggleNegative}>
-          <Image
-            width={size}
-            height={size}
-            src={accessibilities[2].src}
-            alt={accessibilities[2].alt}
-          />
-        </button>
-        <button onClick={openModal}>
-          <Image
-            width={size}
-            height={size}
-            src={accessibilities[3].src}
-            alt={accessibilities[3].alt}
-          />
-        </button>
-      </span>
-    </div>
+    <>
+      <div
+        className="p-3 h-fit rounded-md bg-white"
+        style={{
+          border: shouldBeNegative
+            ? '1px solid black'
+            : '1px solid transparent',
+        }}
+      >
+        <h1
+          style={{ fontSize: '1.3em' }}
+          className="font-bold pb-2 text-center lg:text-left"
+        >
+          Accesibilidad
+        </h1>
+        <DesktopButtons
+          incrementFontSize={incrementFontSize}
+          decrementFontSize={decrementFontSize}
+          toggleNegative={toggleNegative}
+          openModal={() => setIsOpen(true)}
+          fontSize={fontSize}
+        />
+        <MobileButtons
+          incrementFontSize={incrementFontSize}
+          decrementFontSize={decrementFontSize}
+          toggleNegative={toggleNegative}
+          openModal={() => setIsOpen(true)}
+          fontSize={fontSize}
+        />
+      </div>
+      <Modal
+        title="Accesabilidad"
+        isOpen={isOpen}
+        setIsOpen={() => setIsOpen((prev) => !prev)}
+        isAccessibility={shouldBeNegative}
+      >
+        <ModalContent fontSize={fontSize as keyof Sizes} />
+      </Modal>
+    </>
   );
 };
 

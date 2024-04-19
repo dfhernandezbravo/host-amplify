@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import MainLayout from '../main-layout';
 import LinksSidebar from './links-sidebar';
 import Accessibility from '../../molecules/accesibility';
-import Modal from '../../atoms/modal';
 
 interface Props {
   children: React.ReactNode;
@@ -19,7 +18,6 @@ const fontSizes = [
 ];
 
 const LegalsLayout = ({ children }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [shouldBeNegative, setShouldBeNegative] = useState(false);
   const [fontSizeIndex, setFontSizeIndex] = useState(3);
 
@@ -48,32 +46,30 @@ const LegalsLayout = ({ children }: Props) => {
     <MainLayout>
       <div
         style={{ fontSize: fontSizes[fontSizeIndex] }}
-        className={`flex flex-row gap-16 justify-center p-4 [&>div]:border ${shouldBeNegative ? '[&>div]:border-black [&_h2>button]:border-black' : ''}`}
+        className={`flex flex-col lg:flex-row gap-3 justify-center p-4 [&>div]:border ${shouldBeNegative ? '[&>div]:border-black [&_h2>button]:border-black' : ''}`}
       >
-        <LinksSidebar shouldBeNegative={shouldBeNegative} />
+        <aside>
+          <div className="flex flex-col gap-3 sticky top-36 h-fit">
+            <Accessibility
+              shouldBeNegative={shouldBeNegative}
+              incrementFontSize={incrementFontSize}
+              decrementFontSize={decrementFontSize}
+              toggleNegative={toggleNegative}
+              fontSize={fontSizes[fontSizeIndex]}
+            />
+            <LinksSidebar shouldBeNegative={shouldBeNegative} />
+          </div>
+        </aside>
+
         <div
           style={{
             filter: shouldBeNegative ? 'invert(1)' : '',
           }}
-          className="md:w-[956px] bg-white rounded-md p-2 w-full"
+          className="bg-white rounded-md p-2 w-full"
         >
           {children}
         </div>
-        <Accessibility
-          shouldBeNegative={shouldBeNegative}
-          incrementFontSize={incrementFontSize}
-          decrementFontSize={decrementFontSize}
-          toggleNegative={toggleNegative}
-          openModal={() => setIsOpen(true)}
-        />
       </div>
-      <Modal
-        title="Accesabilidad"
-        isOpen={isOpen}
-        setIsOpen={() => setIsOpen((prev) => !prev)}
-      >
-        Hello there!!!
-      </Modal>
     </MainLayout>
   );
 };
