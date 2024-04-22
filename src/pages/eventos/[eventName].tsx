@@ -9,17 +9,7 @@ const Plp = dynamic(() => import('plp/plp-eventos'), {
   loading: () => <SearchSkeleton />,
 });
 
-export const getServerSideProps = async (ctx: any) => {
-  const plp = await import('plp/plp-eventos');
-  if (plp?.getServerSideProps) {
-    return plp.getServerSideProps(ctx);
-  }
-  return {
-    props: {},
-  };
-};
-
-const EventsPLPPage = (props: any) => {
+const EventsPLPPage = () => {
   const { sendEvent } = useAnalytics();
   const handleAnalyticsEvent = useCallback(
     (event: Event) => {
@@ -34,7 +24,8 @@ const EventsPLPPage = (props: any) => {
   useEffect(() => {
     document.addEventListener(WINDOWS_EVENTS.Analytics, handleAnalyticsEvent);
   }, [handleAnalyticsEvent]);
-  return <Plp {...props} />;
+
+  return <Plp />;
 };
 
 export default EventsPLPPage;
