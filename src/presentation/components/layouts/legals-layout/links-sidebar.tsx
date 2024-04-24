@@ -16,7 +16,6 @@ const LinksSidebar = ({ shouldBeNegative }: Props) => {
   return (
     <div
       style={{
-        filter: shouldBeNegative ? 'invert(1)' : '',
         border: shouldBeNegative ? '1px solid black' : '1px solid transparent',
       }}
       className="bg-white rounded-md h-fit py-2"

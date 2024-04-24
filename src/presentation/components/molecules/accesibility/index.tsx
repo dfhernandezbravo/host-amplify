@@ -65,6 +65,7 @@ const Accessibility = ({
         isOpen={isOpen}
         setIsOpen={() => setIsOpen((prev) => !prev)}
         isAccessibility={shouldBeNegative}
+        width="70%"
       >
         <ModalContent fontSize={fontSize as keyof Sizes} />
       </Modal>

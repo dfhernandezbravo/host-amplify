@@ -85,6 +85,10 @@
   version "0.0.7"
   resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.tooltip/-/atoms.tooltip-0.0.7.tgz#9a9cc55d48ed8b394aed2e2bb06415fb02101cd8"
   integrity sha512-gaSMFbjbg2/TZsmwHvmV/naLqyRW8jD7WT7f3Z+zqk9FYEHvBs5SFo9Cv1nz+GOo2Di9/XkSouO3H/RIkmA6GQ==
+"@ccom-easy-design-system/atoms.tooltip@^0.0.9":
+  version "0.0.9"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.tooltip/-/atoms.tooltip-0.0.9.tgz#215a538be67f012d81547154b2ebdc18de613f1a"
+  integrity sha512-mabA4DBIDu6f5X6+/jFrgeiAXFEHALMO2wZZW23yOJe2WG7I+nYudGducNeX5PNsHZ6zzeBVvNpv3+MkDUTLFA==
   dependencies:
     styled-components "^6.1.6"
 
@@ -117,18 +121,18 @@
   resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/hooks.use-media-query/-/hooks.use-media-query-0.0.2.tgz#83eadccba9e45836d537ffef3282d08a9fc6efd2"
   integrity sha512-u5ZJvBGC+VNXoRgGzt7lLmHcuL34zjok27pktUM/1eLnQeSisM7AWRuPHobEgZ5trGdXc1LE4AsZ1JVznyOFXA==
 
-"@ccom-easy-design-system/molecules.modal@^0.0.26":
-  version "0.0.26"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/molecules.modal/-/molecules.modal-0.0.26.tgz#c8241641c53e11cbedb6ae25af1041605e3beddf"
-  integrity sha512-dK9AyoFcoRvd08lbbi/5PRRA+BLvR8l2K84IZ/SZTp6u7Q+nLC5mCFRMCnHfofkBb/zMIbhAYMuuiiP3OMk29A==
+"@ccom-easy-design-system/molecules.modal@^0.0.27":
+  version "0.0.27"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/molecules.modal/-/molecules.modal-0.0.27.tgz#4a9a23857170714a653a77c48f61dca6cdc88e69"
+  integrity sha512-I4QEt3xY+zmsEKuyUAYfoCp6cEDHV/BW3T7sdBYIaA+FPkvkhIIriO26THgMoXjaUXbMDY3oF33I8DxPExTDmg==
   dependencies:
-    "@ccom-easy-design-system/theme.easy" "0.0.10"
+    "@ccom-easy-design-system/theme.easy" "0.0.11"
     styled-components "^6.1.6"
 
-"@ccom-easy-design-system/theme.easy@0.0.10":
-  version "0.0.10"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/theme.easy/-/theme.easy-0.0.10.tgz#c73205fb3ee5e67e36d3c45d3e47d7fb092f4ecc"
-  integrity sha512-bXTQwvNZ57ZQOTepXHUt3vlX8smsqjHGDQAIAf39q61VV2nPC+SuLuTmsLQ1/PI/xaghav9mtXTLrLAXkJTIzw==
+"@ccom-easy-design-system/theme.easy@0.0.11":
+  version "0.0.11"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/theme.easy/-/theme.easy-0.0.11.tgz#e3d1d6b3e9cc2984d962c3aad0d90ff4c48133fe"
+  integrity sha512-E0r/kyxWY5+9jF0ee95H4OISXRPiynKaYgeYQkQ0psYu6JSVUh/gi3nH+5O/D3rNf3hKxnrglVVIIbtdtJ2ErA==
   dependencies:
     styled-components "^6.1.6"
 

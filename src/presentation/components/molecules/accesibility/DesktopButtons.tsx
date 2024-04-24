@@ -1,15 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import dynamic from 'next/dynamic';
 import accessibilities from './assets';
 import Image from 'next/image';
 import { size } from '.';
-
-// @ts-expect-error
-const Tooltip = dynamic(() =>
-  import('@ccom-easy-design-system/atoms.tooltip').then(
-    (module) => module.Tooltip,
-  ),
-);
+import Tooltip from '../../atoms/tooltip';
 
 interface Props {
   toggleNegative: () => void;
@@ -32,7 +24,11 @@ const DesktopButtons = ({
       text="Aumentar tamaño del texto"
       fontSize={fontSize}
     >
-      <button onClick={incrementFontSize}>
+      <button
+        onClick={incrementFontSize}
+        disabled={fontSize === 'xx-large'}
+        className="disabled:opacity-[0.4] disabled:cursor-not-allowed"
+      >
         <Image
           width={size}
           height={size}
@@ -41,12 +37,12 @@ const DesktopButtons = ({
         />
       </button>
     </Tooltip>
-    <Tooltip
-      position="bottom-right"
-      text="Disminuir tamaño del texto"
-      fontSize={fontSize}
-    >
-      <button onClick={decrementFontSize}>
+    <Tooltip text="Disminuir tamaño del texto" fontSize={fontSize}>
+      <button
+        onClick={decrementFontSize}
+        disabled={fontSize === 'medium'}
+        className="disabled:opacity-[0.4] disabled:cursor-not-allowed"
+      >
         <Image
           width={size}
           height={size}
@@ -65,7 +61,11 @@ const DesktopButtons = ({
         />
       </button>
     </Tooltip>
-    <Tooltip text="¿Qué es accesibilidad?" fontSize={fontSize}>
+    <Tooltip
+      position="bottom-left"
+      text="¿Qué es accesibilidad?"
+      fontSize={fontSize}
+    >
       <button onClick={openModal}>
         <Image
           width={size}
