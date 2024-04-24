@@ -1,5 +1,4 @@
 import PdpSkeleton from '@/presentation/components/skeletons/pdp-skeleton/pdp-skeleton';
-import { GetServerSidePropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect } from 'react';
 import useAnalytics, { EventData } from '@/presentation/hooks/use-analytics';
@@ -9,16 +8,6 @@ const Pdp = dynamic(() => import('pdp/pdp'), {
   ssr: false,
   loading: () => <PdpSkeleton />,
 });
-
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  const pdp = await import('pdp/pdp');
-  if (pdp.getServerSideProps) {
-    return pdp.getServerSideProps(ctx);
-  }
-  return {
-    props: { repo: null },
-  };
-};
 
 const PdpComponent = (props: any) => {
   const { sendEvent } = useAnalytics();
