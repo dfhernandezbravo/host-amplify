@@ -1,10 +1,11 @@
-import { Layout, Skeleton } from '@cencosud-ds/easy-design-system';
+import Skeleton from '@/presentation/components/atoms/skeleton';
+import Layout from '@/presentation/components/layouts/layout';
 
 const FiltersSkeleton = () => (
   <Layout is={['Desktop']}>
     <Skeleton
-      animation="pulse"
-      borderRadius="0.5rem"
+      animationtype="pulse"
+      radius="0.5rem"
       height="auto"
       width="18rem"
     />

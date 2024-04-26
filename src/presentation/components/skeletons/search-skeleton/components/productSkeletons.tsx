@@ -1,23 +1,13 @@
-import { Skeleton } from '@cencosud-ds/easy-design-system';
 import { useRouter } from 'next/router';
 import { ProductSkeletonsWrapper } from '../styles';
+import Skeleton from '@/presentation/components/atoms/skeleton';
 
 const gridSkeleton = (
-  <Skeleton
-    animation="pulse"
-    borderRadius="0.5rem"
-    height="488px"
-    width="auto"
-  />
+  <Skeleton animationtype="pulse" radius="0.5rem" height="488px" width="auto" />
 );
 
 const listSkeleton = (
-  <Skeleton
-    animation="pulse"
-    borderRadius="0.5rem"
-    height="200px"
-    width="100%"
-  />
+  <Skeleton animationtype="pulse" radius="0.5rem" height="200px" width="100%" />
 );
 
 interface Props {
