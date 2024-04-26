@@ -1,47 +1,41 @@
 import styled from 'styled-components';
 
-export const ContainerDesktop = styled.div`
+export const SearchSkeletonWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-`;
+  gap: 1rem;
+  padding: 2rem;
 
-export const SearchSkeletonContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  width: 80rem;
-  gap: 12px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    '. facets order order order .'
-    '. facets products products products .';
-`;
+  width: 80%;
+  margin: 0 auto;
 
-export const FacetSkeleton = styled.div`
-  grid-area: facets;
-`;
-
-export const OrderSkeleton = styled.div`
-  grid-area: order;
-  height: 100px;
-  margin-bottom: 4px;
-`;
-
-export const ProductsSkeleton = styled.div`
-  grid-area: products;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+  @media (width <= 1024px) {
+    width: 95%;
   }
 
-  @media screen and (max-width: 767px) {
+  @media (width <= 500px) {
+    width: 100%;
+    padding: 2rem 0.5rem;
+  }
+`;
+
+export const SorterAndProductSkeletonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 1rem;
+`;
+
+export const ProductSkeletonsWrapper = styled.div<{ isGrid: boolean }>`
+  display: ${({ isGrid }) => (isGrid ? 'grid' : 'flex')};
+  flex-direction: column;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+
+  @media (width <= 700px) {
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+  }
+
+  @media (width <= 500px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 `;
