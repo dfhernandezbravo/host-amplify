@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "@ccom-easy-design-system/atoms.button": "^0.0.11",
+    "@ccom-easy-design-system/atoms.layout": "^0.0.10",
+    "@ccom-easy-design-system/atoms.skeleton": "^0.0.3",
     "@ccom-easy-design-system/molecules.modal": "^0.0.6",
     "@ccom-easy-design-system/theme.theme-provider": "^0.0.15",
     "@cencosud-ds/easy-design-system": "^1.1.15",
