@@ -22,10 +22,16 @@ export const useSignIn = () => {
         setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken, {
           domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
           path: '/',
+          expires: response.accessTokenExpired
+            ? new Date(response.accessTokenExpired * 1000)
+            : undefined,
         });
         setCookie(AUTHCOOKIES.REFRESH_TOKEN, response.refreshToken, {
           domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
           path: '/',
+          expires: response.refreshTokenExpired
+            ? new Date(response.refreshTokenExpired * 1000)
+            : undefined,
         });
         refreshCart();
         dispatchEvent({
