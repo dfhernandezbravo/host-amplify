@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const GallerySkeletonContainer = styled.div`
   display: flex;
   width: 70%;
+  position: relative;
+  height: min-content;
 
   @media (max-width: 768px) {
     width: 100%;
