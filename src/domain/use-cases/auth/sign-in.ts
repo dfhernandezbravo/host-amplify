@@ -6,6 +6,7 @@ import { useEvents } from '@/presentation/hooks/use-events';
 import { useCookies } from 'react-cookie';
 import { useMutation } from 'react-query';
 import useGetShoppingCart from '../shopping-cart/get-cart';
+import { useUpdateShoppingCartCustomer } from '../shopping-cart/update-customer';
 
 export const useSignIn = () => {
   const [_cookies, setCookie] = useCookies([
@@ -14,6 +15,7 @@ export const useSignIn = () => {
   ]);
   const { dispatchEvent } = useEvents();
   const { refreshCart } = useGetShoppingCart();
+  const { verifyAndUpdateCustomerInCart } = useUpdateShoppingCartCustomer();
 
   const sigInMutation = useMutation(
     (request: SignInRequest) => authService().signIn(request),
@@ -32,6 +34,10 @@ export const useSignIn = () => {
           name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,
           detail: { success: true },
         });
+
+        if (response.accessToken) {
+          verifyAndUpdateCustomerInCart(response.accessToken);
+        }
       },
       onError: (response) => {
         dispatchEvent({

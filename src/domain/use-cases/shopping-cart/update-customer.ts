@@ -5,12 +5,15 @@ import { Customer } from '@/domain/entities/customer';
 import shoppingCartService from '@/application/services/shopping-cart';
 import { updateShoppingCart } from '@/presentation/providers/store/modules/shopping-cart/slice';
 import { useCallback } from 'react';
+import { TokenDecoded } from '@/domain/entities/auth/token';
 
 export const useUpdateShoppingCartCustomer = () => {
   const dispatch = useAppDispatch();
   const { dispatchErrorCart } = useDispatchCartId();
 
-  const { cartId } = useAppSelector((state) => state.shoppingCart);
+  const { cartId, shoppingCart } = useAppSelector(
+    (state) => state.shoppingCart,
+  );
 
   const mutation = useMutation(
     (request: Customer) => shoppingCartService.updateCustomer(cartId, request),
@@ -35,18 +38,33 @@ export const useUpdateShoppingCartCustomer = () => {
     [mutation],
   );
 
-  const updateShoppingCartCustomerEmail = useCallback(
-    (email: string) => {
-      const customer: Customer = {
-        email,
-      };
-      mutation.mutateAsync(customer);
+  const decodeToken = (token: string): TokenDecoded | null => {
+    const parts = token.split('.');
+    const encodedPayload = parts[1];
+    const decodedPayload = window.atob(encodedPayload);
+    const decodedData = JSON.parse(decodedPayload);
+    return decodedData;
+  };
+
+  const verifyAndUpdateCustomerInCart = useCallback(
+    (accessToken: string) => {
+      const jwtData = decodeToken(accessToken as string);
+      if (
+        jwtData?.username &&
+        shoppingCart?.customer?.email !== jwtData.username
+      ) {
+        const customer: Customer = {
+          email: jwtData.username,
+        };
+        mutation.mutateAsync(customer);
+      }
     },
     [mutation],
   );
 
   return {
     updateShoppingCartCustomer,
-    updateShoppingCartCustomerEmail,
+    verifyAndUpdateCustomerInCart,
+    decodeToken,
   };
 };

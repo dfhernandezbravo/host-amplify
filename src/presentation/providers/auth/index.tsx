@@ -15,22 +15,14 @@ import { useUpdateShoppingCartCustomer } from '@/domain/use-cases/shopping-cart/
 interface Props {
   children: React.ReactNode;
 }
-interface TokenDecoded {
-  exp: number;
-  iat: number;
-  sub: string;
-  username: string;
-}
 
 const WrapperProvider: React.FC<Props> = ({ children }) => {
-  const { cartId, shoppingCart } = useAppSelector(
-    (state) => state.shoppingCart,
-  );
+  const { cartId } = useAppSelector((state) => state.shoppingCart);
   const { refreshCart } = useGetShoppingCart();
   const dispatch = useAppDispatch();
   const { dispatchEvent } = useEvents();
   const router = useRouter();
-  const { updateShoppingCartCustomerEmail } = useUpdateShoppingCartCustomer();
+  const { verifyAndUpdateCustomerInCart } = useUpdateShoppingCartCustomer();
 
   const [cookies, setCookie] = useCookies([
     AUTHCOOKIES.ACCESS_TOKEN,
@@ -46,14 +38,6 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
     searchParams.delete('refreshToken');
     url.search = searchParams.toString();
     router.push(url);
-  };
-
-  const decodeToken = (token: string): TokenDecoded | null => {
-    const parts = token.split('.');
-    const encodedPayload = parts[1];
-    const decodedPayload = window.atob(encodedPayload);
-    const decodedData = JSON.parse(decodedPayload);
-    return decodedData;
   };
 
   useQuery(['sign-in-guest'], signInGuest, {
@@ -91,15 +75,7 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
       });
       if (cartId) refreshCart();
 
-      if (accessToken) {
-        const jwtData = decodeToken(accessToken as string);
-        if (
-          jwtData?.username &&
-          shoppingCart?.customer?.email !== jwtData.username
-        ) {
-          updateShoppingCartCustomerEmail(jwtData.username);
-        }
-      }
+      verifyAndUpdateCustomerInCart(accessToken as string);
 
       handleRedirect();
     }
