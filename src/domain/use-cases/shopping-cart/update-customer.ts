@@ -35,7 +35,18 @@ export const useUpdateShoppingCartCustomer = () => {
     [mutation],
   );
 
+  const updateShoppingCartCustomerEmail = useCallback(
+    (email: string) => {
+      const customer: Customer = {
+        email,
+      };
+      mutation.mutateAsync(customer);
+    },
+    [mutation],
+  );
+
   return {
     updateShoppingCartCustomer,
+    updateShoppingCartCustomerEmail,
   };
 };
