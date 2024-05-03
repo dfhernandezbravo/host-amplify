@@ -7,27 +7,12 @@ const Landing = dynamic(() => import('home/landingN0'), {
   loading: () => <></>,
 });
 
-export const getServerSideProps = async (ctx: any) => {
-  const landing = await import('home/landingN0');
-  if (landing?.getServerSideProps) {
-    return landing.getServerSideProps(ctx);
-  }
-  return {
-    props: {},
-  };
-};
-
-const LandingN0 = (props: any) => {
+const LandingN0 = () => {
   const router = useRouter();
-  return (
-    <>
-      {router?.asPath?.includes('map=ft') ? (
-        <PageNotFound />
-      ) : (
-        <Landing {...props} />
-      )}
-    </>
-  );
+  if (router?.asPath?.includes('map=ft')) {
+    return <PageNotFound />;
+  }
+  return <Landing />;
 };
 
 export default LandingN0;
