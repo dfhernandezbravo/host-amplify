@@ -2,6 +2,7 @@ import accessibilities from './assets';
 import Image from 'next/image';
 import { size } from '.';
 import Tooltip from '../../atoms/tooltip';
+import { AccessibilityButton, DesktopButtonsWrapper } from './styles';
 
 interface Props {
   toggleNegative: () => void;
@@ -18,64 +19,62 @@ const DesktopButtons = ({
   openModal,
   fontSize,
 }: Props) => (
-  <div className="hidden lg:flex gap-2 justify-around">
+  <DesktopButtonsWrapper>
     <Tooltip
       position="bottom-right"
       text="Aumentar tamaño del texto"
       fontSize={fontSize}
     >
-      <button
+      <AccessibilityButton
         onClick={incrementFontSize}
         disabled={fontSize === 'xx-large'}
-        className="disabled:opacity-[0.4] disabled:cursor-not-allowed"
       >
         <Image
           width={size}
           height={size}
-          src={accessibilities[0].src}
-          alt={accessibilities[0].alt}
+          src={accessibilities.incrementFontSize.src}
+          alt={accessibilities.incrementFontSize.alt}
         />
-      </button>
+      </AccessibilityButton>
     </Tooltip>
     <Tooltip text="Disminuir tamaño del texto" fontSize={fontSize}>
-      <button
+      <AccessibilityButton
         onClick={decrementFontSize}
         disabled={fontSize === 'medium'}
-        className="disabled:opacity-[0.4] disabled:cursor-not-allowed"
       >
         <Image
           width={size}
           height={size}
-          src={accessibilities[1].src}
-          alt={accessibilities[1].alt}
+          src={accessibilities.decrementFontSize.src}
+          alt={accessibilities.decrementFontSize.alt}
         />
-      </button>
+      </AccessibilityButton>
     </Tooltip>
     <Tooltip text="Contraste" fontSize={fontSize}>
-      <button onClick={toggleNegative}>
+      <AccessibilityButton onClick={toggleNegative}>
         <Image
           width={size}
           height={size}
-          src={accessibilities[2].src}
-          alt={accessibilities[2].alt}
+          src={accessibilities.darkMode.src}
+          alt={accessibilities.darkMode.alt}
         />
-      </button>
+      </AccessibilityButton>
     </Tooltip>
     <Tooltip
       position="bottom-left"
       text="¿Qué es accesibilidad?"
       fontSize={fontSize}
     >
-      <button onClick={openModal}>
+      <AccessibilityButton onClick={openModal}>
         <Image
           width={size}
           height={size}
-          src={accessibilities[3].src}
-          alt={accessibilities[3].alt}
+          src={accessibilities.questions.src}
+          alt={accessibilities.questions.alt}
         />
-      </button>
+      </AccessibilityButton>
     </Tooltip>
-  </div>
+  </DesktopButtonsWrapper>
 );
 
 export default DesktopButtons;

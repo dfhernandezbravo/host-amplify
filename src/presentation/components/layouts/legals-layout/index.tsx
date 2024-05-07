@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import MainLayout from '../main-layout';
 import LinksSidebar from './links-sidebar';
 import Accessibility from '../../molecules/accesibility';
+import { LegalsLayoutContainer } from './styles';
 
 interface Props {
   children: React.ReactNode;
@@ -14,6 +15,13 @@ const LegalsLayout = ({ children }: Props) => {
   const [fontSizeIndex, setFontSizeIndex] = useState(0);
   const layoutRef = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
+    return () => {
+      document.body.style.filter = '';
+      document.body.style.backgroundColor = '';
+    };
+  }, []);
+
   const incrementFontSize = () => {
     if (fontSizeIndex + 1 === fontSizes.length) return;
     setFontSizeIndex((prev) => prev + 1);
@@ -25,27 +33,21 @@ const LegalsLayout = ({ children }: Props) => {
   };
 
   const toggleNegative = () => {
-    if (!shouldBeNegative) {
-      document.body.style.filter = 'grayscale(100%)';
-      document.body.style.backgroundColor = 'black';
-      layoutRef.current!.style.filter = 'invert(1)';
-    } else {
-      document.body.style.filter = '';
-      document.body.style.backgroundColor = '';
-      layoutRef.current!.style.filter = '';
-    }
+    document.body.style.filter = `${!shouldBeNegative ? 'grayscale(100%)' : ''}`;
+    document.body.style.backgroundColor = `${!shouldBeNegative ? 'black' : ''}`;
+    layoutRef.current!.style.filter = `${!shouldBeNegative ? 'invert(1)' : ''}`;
     setShouldBeNegative((prev) => !prev);
   };
 
   return (
     <MainLayout>
-      <div
+      <LegalsLayoutContainer
         ref={layoutRef}
-        style={{ fontSize: fontSizes[fontSizeIndex] }}
-        className={`flex flex-col lg:flex-row gap-3 justify-center p-4 [&>div]:border ${shouldBeNegative ? '[&>div]:border-black [&_h2>button]:border-black' : ''}`}
+        fontSize={fontSizes[fontSizeIndex]}
+        isNegative={shouldBeNegative}
       >
-        <aside className="xl:w-max 2xl:w-fit">
-          <div className="flex flex-col gap-3 sticky top-40 h-fit">
+        <aside>
+          <div>
             <Accessibility
               shouldBeNegative={shouldBeNegative}
               incrementFontSize={incrementFontSize}
@@ -57,10 +59,8 @@ const LegalsLayout = ({ children }: Props) => {
           </div>
         </aside>
 
-        <div className="bg-white rounded-md p-2 xl:w-full 2xl:max-w-7xl">
-          {children}
-        </div>
-      </div>
+        <div>{children}</div>
+      </LegalsLayoutContainer>
     </MainLayout>
   );
 };

@@ -81,16 +81,15 @@
   version "0.0.3"
   resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.skeleton/-/atoms.skeleton-0.0.3.tgz#a21ef6615415d261b861fb09b211fd1051bcf346"
   integrity sha512-YdXmtECuQADDUJgogdla5jLJwfr+AtCW7vV5W1JkYZV7mqirv8p8PJVm7l6QzWB9NzSyMm9KITqIQiK98aaGnw==
-"@ccom-easy-design-system/atoms.tooltip@^0.0.7":
-  version "0.0.7"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.tooltip/-/atoms.tooltip-0.0.7.tgz#9a9cc55d48ed8b394aed2e2bb06415fb02101cd8"
-  integrity sha512-gaSMFbjbg2/TZsmwHvmV/naLqyRW8jD7WT7f3Z+zqk9FYEHvBs5SFo9Cv1nz+GOo2Di9/XkSouO3H/RIkmA6GQ==
-"@ccom-easy-design-system/atoms.tooltip@^0.0.9":
-  version "0.0.9"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.tooltip/-/atoms.tooltip-0.0.9.tgz#215a538be67f012d81547154b2ebdc18de613f1a"
-  integrity sha512-mabA4DBIDu6f5X6+/jFrgeiAXFEHALMO2wZZW23yOJe2WG7I+nYudGducNeX5PNsHZ6zzeBVvNpv3+MkDUTLFA==
   dependencies:
     styled-components "^6.1.6"
+
+"@ccom-easy-design-system/atoms.tooltip@^0.0.10":
+  version "0.0.10"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.tooltip/-/atoms.tooltip-0.0.10.tgz#8a3b3dba80d02447685bf8788b77e8543b2085dd"
+  integrity sha512-h5eod1dNReN6Ayah86UZKpIr3q+TeOVJf/O+UA5ywOs7fU5bMpS47SDmKxdm09jcC9uYLeXYxZj4sQVBnJJdFQ==
+  dependencies:
+    styled-components "6.1.6"
 
 "@ccom-easy-design-system/hooks.use-breadcrumbs@0.0.4":
   version "0.0.4"
@@ -5104,6 +5103,21 @@ strip-json-comments@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
+
+styled-components@6.1.6:
+  version "6.1.6"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-6.1.6.tgz#c75c4f994136545b3bcc11608db5363710b78c0e"
+  integrity sha512-DgTLULSC29xpabJ24bbn1+hulU6vvGFQf4RPwBOJrm8WJFnN42yXpo5voBt3jDSJBa5tBd1L6PqswJjQ0wRKdg==
+  dependencies:
+    "@emotion/is-prop-valid" "1.2.1"
+    "@emotion/unitless" "0.8.0"
+    "@types/stylis" "4.2.0"
+    css-to-react-native "3.2.0"
+    csstype "3.1.2"
+    postcss "8.4.31"
+    shallowequal "1.1.0"
+    stylis "4.3.1"
+    tslib "2.5.0"
 
 styled-components@^6.1.0, styled-components@^6.1.6, styled-components@^6.1.8:
   version "6.1.8"

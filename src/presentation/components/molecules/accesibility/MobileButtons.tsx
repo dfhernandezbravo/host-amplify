@@ -1,6 +1,7 @@
 import accessibilities from './assets';
 import Image from 'next/image';
 import { size } from '.';
+import { AccessibilityButton, MobileButtonsWrapper } from './styles';
 
 interface Props {
   toggleNegative: () => void;
@@ -18,53 +19,58 @@ const MobileButtons = ({
   fontSize,
 }: Props) => {
   return (
-    <div className="grid grid-cols-2 grid-rows-2 md:grid-rows-1 md:grid-cols-4 items-center justify-center gap-3 pt-3 lg:hidden">
-      <div className="flex flex-col justify-start items-center">
-        <button onClick={incrementFontSize}>
+    <MobileButtonsWrapper>
+      <div>
+        <AccessibilityButton
+          onClick={incrementFontSize}
+          disabled={fontSize === 'xx-large'}
+        >
           <Image
             width={size}
             height={size}
-            src={accessibilities[0].src}
-            alt={accessibilities[0].alt}
+            src={accessibilities.incrementFontSize.src}
+            alt={accessibilities.incrementFontSize.alt}
           />
-        </button>
-        <span className="text-center">Aumentar tamaño del texto</span>
+        </AccessibilityButton>
+        <span>Aumentar tamaño del texto</span>
       </div>
-      <div className="flex flex-col justify-start items-center">
-        <button onClick={decrementFontSize}>
+      <div>
+        <AccessibilityButton
+          onClick={decrementFontSize}
+          disabled={fontSize === 'medium'}
+        >
           <Image
             width={size}
             height={size}
-            src={accessibilities[1].src}
-            alt={accessibilities[1].alt}
+            src={accessibilities.decrementFontSize.src}
+            alt={accessibilities.decrementFontSize.alt}
           />
-        </button>
-        <span className="text-center">Disminuir tamaño del texto</span>
+        </AccessibilityButton>
+        <span>Disminuir tamaño del texto</span>
       </div>
-
-      <div className="flex flex-col justify-start items-center">
-        <button onClick={toggleNegative}>
+      <div>
+        <AccessibilityButton onClick={toggleNegative}>
           <Image
             width={size}
             height={size}
-            src={accessibilities[2].src}
-            alt={accessibilities[2].alt}
+            src={accessibilities.darkMode.src}
+            alt={accessibilities.darkMode.alt}
           />
-        </button>
-        <span className="text-center">Contraste</span>
+        </AccessibilityButton>
+        <span>Contraste</span>
       </div>
-      <div className="flex flex-col justify-start items-center">
-        <button onClick={openModal}>
+      <div>
+        <AccessibilityButton onClick={openModal}>
           <Image
             width={size}
             height={size}
-            src={accessibilities[3].src}
-            alt={accessibilities[3].alt}
+            src={accessibilities.questions.src}
+            alt={accessibilities.questions.alt}
           />
-        </button>
-        <span className="text-center">¿Qué es accesibilidad?</span>
+        </AccessibilityButton>
+        <span>¿Qué es accesibilidad?</span>
       </div>
-    </div>
+    </MobileButtonsWrapper>
   );
 };
 

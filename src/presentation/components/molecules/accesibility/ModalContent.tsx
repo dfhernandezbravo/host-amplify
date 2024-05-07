@@ -2,9 +2,6 @@ import Image from 'next/image';
 import accessibilities from './assets';
 
 export interface Sizes {
-  'xx-small': number;
-  'x-small': number;
-  small: number;
   medium: number;
   large: number;
   'x-large': number;
@@ -12,9 +9,6 @@ export interface Sizes {
 }
 
 const sizes: Sizes = {
-  'xx-small': 20,
-  'x-small': 25,
-  small: 30,
   medium: 35,
   large: 40,
   'x-large': 45,
@@ -46,14 +40,14 @@ const ModalContent = ({ fontSize }: Props) => (
         <Image
           width={sizes[fontSize]}
           height={sizes[fontSize]}
-          src={accessibilities[0].src}
-          alt={accessibilities[0].alt}
+          src={accessibilities.incrementFontSize.src}
+          alt={accessibilities.incrementFontSize.alt}
         />
         <Image
           width={sizes[fontSize]}
           height={sizes[fontSize]}
-          src={accessibilities[1].src}
-          alt={accessibilities[1].alt}
+          src={accessibilities.decrementFontSize.src}
+          alt={accessibilities.decrementFontSize.alt}
         />
       </span>
     </h4>
@@ -67,8 +61,8 @@ const ModalContent = ({ fontSize }: Props) => (
         <Image
           width={sizes[fontSize]}
           height={sizes[fontSize]}
-          src={accessibilities[2].src}
-          alt={accessibilities[2].alt}
+          src={accessibilities.darkMode.src}
+          alt={accessibilities.darkMode.alt}
         />
       </span>
     </h4>
