@@ -59,7 +59,7 @@ export const useUpdateShoppingCartCustomer = () => {
         mutation.mutateAsync(customer);
       }
     },
-    [mutation],
+    [mutation, shoppingCart?.customer?.email],
   );
 
   return {

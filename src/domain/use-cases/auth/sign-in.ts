@@ -7,20 +7,24 @@ import { useCookies } from 'react-cookie';
 import { useMutation } from 'react-query';
 import useGetShoppingCart from '../shopping-cart/get-cart';
 import { useUpdateShoppingCartCustomer } from '../shopping-cart/update-customer';
+import useAnalyticsAuth from './use-analytics-auth';
 
 export const useSignIn = () => {
+  const { dispatchEvent } = useEvents();
+  const { sendLoginEvent } = useAnalyticsAuth();
+
   const [_cookies, setCookie] = useCookies([
     AUTHCOOKIES.ACCESS_TOKEN,
     AUTHCOOKIES.REFRESH_TOKEN,
   ]);
-  const { dispatchEvent } = useEvents();
+
   const { refreshCart } = useGetShoppingCart();
   const { verifyAndUpdateCustomerInCart } = useUpdateShoppingCartCustomer();
 
   const sigInMutation = useMutation(
     (request: SignInRequest) => authService().signIn(request),
     {
-      onSuccess: ({ data: response }) => {
+      onSuccess: async ({ data: response }) => {
         setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken, {
           domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
           path: '/',
@@ -35,7 +39,8 @@ export const useSignIn = () => {
             ? new Date(response.refreshTokenExpired * 1000)
             : undefined,
         });
-        refreshCart();
+        await refreshCart();
+        sendLoginEvent();
         dispatchEvent({
           name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,
           detail: { success: true },
