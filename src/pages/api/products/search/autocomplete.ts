@@ -74,7 +74,6 @@ export default async function handler(
     };
     res.json(dataResponse);
   } catch (error) {
-    console.log(' >>>ERROR <<< ::', error);
     throw new Error('Oh no!!');
   }
 }
