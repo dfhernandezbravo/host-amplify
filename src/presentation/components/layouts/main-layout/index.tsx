@@ -36,7 +36,7 @@ const MainLayout = ({ children }: MainLayoutStruct) => {
       <Head>
         <title>Easy.cl - Renueva el amor por tu hogar</title>
       </Head>
-      <main className="overflow-y-scroll no-scrollbar">
+      <main>
         <Header />
         <div style={{ minHeight: '50vh' }}>{children}</div>
         <Footer />
