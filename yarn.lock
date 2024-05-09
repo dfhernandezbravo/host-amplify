@@ -84,6 +84,13 @@
   dependencies:
     styled-components "^6.1.6"
 
+"@ccom-easy-design-system/atoms.tooltip@^0.0.10":
+  version "0.0.10"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/atoms.tooltip/-/atoms.tooltip-0.0.10.tgz#8a3b3dba80d02447685bf8788b77e8543b2085dd"
+  integrity sha512-h5eod1dNReN6Ayah86UZKpIr3q+TeOVJf/O+UA5ywOs7fU5bMpS47SDmKxdm09jcC9uYLeXYxZj4sQVBnJJdFQ==
+  dependencies:
+    styled-components "6.1.6"
+
 "@ccom-easy-design-system/hooks.use-breadcrumbs@0.0.4":
   version "0.0.4"
   resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/hooks.use-breadcrumbs/-/hooks.use-breadcrumbs-0.0.4.tgz#494df01bcc1d04dda49a490aafdb99a7154189a9"
@@ -113,12 +120,19 @@
   resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/hooks.use-media-query/-/hooks.use-media-query-0.0.2.tgz#83eadccba9e45836d537ffef3282d08a9fc6efd2"
   integrity sha512-u5ZJvBGC+VNXoRgGzt7lLmHcuL34zjok27pktUM/1eLnQeSisM7AWRuPHobEgZ5trGdXc1LE4AsZ1JVznyOFXA==
 
-"@ccom-easy-design-system/molecules.modal@^0.0.6":
-  version "0.0.6"
-  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/molecules.modal/-/molecules.modal-0.0.6.tgz#0b4e6bae136c658a25a578b730585aca46f60c00"
-  integrity sha512-j/Yi9Q2NS51ELIzbz2GsVHg8rGYmh9XbnAbGnAiwqG23R5yTCsQmp8b0oRoZs6U5i2Pd56LrDA78NRZ1dsCI/A==
+"@ccom-easy-design-system/molecules.modal@^0.0.27":
+  version "0.0.27"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/molecules.modal/-/molecules.modal-0.0.27.tgz#4a9a23857170714a653a77c48f61dca6cdc88e69"
+  integrity sha512-I4QEt3xY+zmsEKuyUAYfoCp6cEDHV/BW3T7sdBYIaA+FPkvkhIIriO26THgMoXjaUXbMDY3oF33I8DxPExTDmg==
   dependencies:
-    "@ccom-easy-design-system/theme.easy" "0.0.9"
+    "@ccom-easy-design-system/theme.easy" "0.0.11"
+    styled-components "^6.1.6"
+
+"@ccom-easy-design-system/theme.easy@0.0.11":
+  version "0.0.11"
+  resolved "https://node-registry.bit.cloud/@ccom-easy-design-system/theme.easy/-/theme.easy-0.0.11.tgz#e3d1d6b3e9cc2984d962c3aad0d90ff4c48133fe"
+  integrity sha512-E0r/kyxWY5+9jF0ee95H4OISXRPiynKaYgeYQkQ0psYu6JSVUh/gi3nH+5O/D3rNf3hKxnrglVVIIbtdtJ2ErA==
+  dependencies:
     styled-components "^6.1.6"
 
 "@ccom-easy-design-system/theme.easy@0.0.9":
@@ -5089,6 +5103,21 @@ strip-json-comments@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
+
+styled-components@6.1.6:
+  version "6.1.6"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-6.1.6.tgz#c75c4f994136545b3bcc11608db5363710b78c0e"
+  integrity sha512-DgTLULSC29xpabJ24bbn1+hulU6vvGFQf4RPwBOJrm8WJFnN42yXpo5voBt3jDSJBa5tBd1L6PqswJjQ0wRKdg==
+  dependencies:
+    "@emotion/is-prop-valid" "1.2.1"
+    "@emotion/unitless" "0.8.0"
+    "@types/stylis" "4.2.0"
+    css-to-react-native "3.2.0"
+    csstype "3.1.2"
+    postcss "8.4.31"
+    shallowequal "1.1.0"
+    stylis "4.3.1"
+    tslib "2.5.0"
 
 styled-components@^6.1.0, styled-components@^6.1.6, styled-components@^6.1.8:
   version "6.1.8"

@@ -70,7 +70,6 @@ const useAddItemShoppingCart = () => {
     (event: Event) => {
       event.preventDefault();
       const customEvent = event as CustomEvent<AddItemShoppingCartEvent>;
-
       const {
         detail: { cartId: cartIdEvent, product },
       } = customEvent;

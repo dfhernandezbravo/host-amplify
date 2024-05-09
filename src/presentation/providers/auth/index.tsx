@@ -10,6 +10,7 @@ import { useQuery } from 'react-query';
 import AuthEvents from './auth-events';
 import { setHasAccessToken } from '../store/modules/auth/slice';
 import { useEvents } from '@/presentation/hooks/use-events';
+import { useUpdateShoppingCartCustomer } from '@/domain/use-cases/shopping-cart/update-customer';
 
 interface Props {
   children: React.ReactNode;
@@ -21,6 +22,7 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
   const dispatch = useAppDispatch();
   const { dispatchEvent } = useEvents();
   const router = useRouter();
+  const { verifyAndUpdateCustomerInCart } = useUpdateShoppingCartCustomer();
 
   const [cookies, setCookie] = useCookies([
     AUTHCOOKIES.ACCESS_TOKEN,
@@ -44,10 +46,16 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
       setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken, {
         domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
         path: '/',
+        expires: response.accessTokenExpired
+          ? new Date(response.accessTokenExpired * 1000)
+          : undefined,
       });
       setCookie(AUTHCOOKIES.REFRESH_TOKEN, response.refreshToken, {
         domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
         path: '/',
+        expires: response.refreshTokenExpired
+          ? new Date(response.refreshTokenExpired * 1000)
+          : undefined,
       });
       dispatch(setHasAccessToken(true));
       if (cartId) refreshCart();
@@ -72,6 +80,8 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
         detail: { success: true },
       });
       if (cartId) refreshCart();
+
+      verifyAndUpdateCustomerInCart(accessToken as string);
 
       handleRedirect();
     }
