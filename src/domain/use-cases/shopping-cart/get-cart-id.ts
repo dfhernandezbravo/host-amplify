@@ -6,6 +6,8 @@ import {
 } from '@/presentation/providers/store/modules/shopping-cart/slice';
 import { useQuery } from 'react-query';
 import { getShoppingCart } from './get-cart';
+import { useCookies } from 'react-cookie';
+import { SHOPPING_CART_COOKIES } from '@/application/infra/cookies';
 
 const getCartId = async () => {
   try {
@@ -18,20 +20,19 @@ const getCartId = async () => {
 
 const useGetCartId = () => {
   const dispatch = useAppDispatch();
+  const [cookies, setCookies] = useCookies([SHOPPING_CART_COOKIES.CART_ID]);
+  const cartId = cookies.cartId;
 
-  const { data: orderFormId, refetch: fetchCartId } = useQuery(
-    ['get-cart-id'],
-    getCartId,
-    {
-      enabled: false,
-      onSuccess: (response) => {
-        dispatch(setCartId(response));
-      },
+  const { refetch: fetchCartId } = useQuery(['get-cart-id'], getCartId, {
+    enabled: false,
+    onSuccess: (response) => {
+      dispatch(setCartId(response));
+      setCookies(SHOPPING_CART_COOKIES.CART_ID, response);
     },
-  );
+  });
 
-  useQuery(['get-cart', orderFormId], () => getShoppingCart(orderFormId), {
-    enabled: !!orderFormId,
+  useQuery(['get-cart', cartId], () => getShoppingCart(cartId), {
+    enabled: !!cartId,
     onSuccess: (response) => {
       dispatch(updateShoppingCart(response));
     },

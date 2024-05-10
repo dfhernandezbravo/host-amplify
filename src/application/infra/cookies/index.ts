@@ -4,3 +4,7 @@ export enum AUTHCOOKIES {
   ACCESS_USER = 'accessUser',
   SOFT_LOGIN = 'SoftLogin',
 }
+
+export enum SHOPPING_CART_COOKIES {
+  CART_ID = 'cartId',
+}

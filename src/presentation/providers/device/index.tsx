@@ -1,7 +1,4 @@
-import { DEVICE_EVENTS } from '@/application/infra/events/custom-hooks/device';
-import useDispatchDevice from '@/domain/use-cases/devices/dispatch-devices';
-import useDevice from '@/presentation/hooks/use-device';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 interface Props {
   children: React.ReactNode;
@@ -18,20 +15,20 @@ export interface GetDeviceEvent {
 }
 
 const DeviceProvider: React.FC<Props> = ({ children }) => {
-  const { dispatchDevice } = useDispatchDevice();
-  const device = useDevice();
+  // const { dispatchDevice } = useDispatchDevice();
+  // const device = useDevice();
 
-  const getDevice = (e: Event) => {
-    e.stopPropagation();
-    dispatchDevice(device);
-  };
+  // const getDevice = (e: Event) => {
+  //   e.stopPropagation();
+  //   dispatchDevice(device);
+  // };
 
-  useEffect(() => {
-    document.addEventListener(DEVICE_EVENTS.DispatchGetDevice, getDevice);
-    return () => {
-      document.removeEventListener(DEVICE_EVENTS.DispatchGetDevice, getDevice);
-    };
-  }, [getDevice]);
+  // useEffect(() => {
+  //   document.addEventListener(DEVICE_EVENTS.DispatchGetDevice, getDevice);
+  //   return () => {
+  //     document.removeEventListener(DEVICE_EVENTS.DispatchGetDevice, getDevice);
+  //   };
+  // }, [getDevice]);
 
   return children;
 };
