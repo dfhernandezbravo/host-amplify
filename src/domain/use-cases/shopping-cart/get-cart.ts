@@ -32,7 +32,7 @@ const useGetShoppingCart = () => {
   );
 
   const refreshCart = async (cartIdRecived?: string) => {
-    await getCartMutation.mutateAsync(cartIdRecived || cartId);
+    return await getCartMutation.mutateAsync(cartIdRecived || cartId);
   };
 
   return {

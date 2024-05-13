@@ -1,14 +1,14 @@
 import { WINDOWS_EVENTS } from '@/application/infra/events';
 import { useEvents } from '@/presentation/hooks/use-events';
-import { useAppSelector } from '@/presentation/hooks/use-store';
+import { ShoppingCart } from '@cencosud-ds/easy-design-system';
 
 const useAnalyticsAuth = () => {
   const { dispatchEvent } = useEvents();
-  const { shoppingCart } = useAppSelector((state) => state.shoppingCart);
 
-  const sendLoginEvent = () => {
+  const sendLoginEvent = async (shoppingCart: ShoppingCart) => {
     const customer = shoppingCart?.customer;
     if (!customer) return;
+
     const { userId, document, email } = customer;
 
     dispatchEvent({
