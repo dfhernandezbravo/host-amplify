@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 import { useCallback, useEffect } from 'react';
 
 const Home = dynamic(() => import('home/home'), {
-  ssr: false,
+  ssr: true,
   loading: () => <HomeSkeleton />,
 });
 
