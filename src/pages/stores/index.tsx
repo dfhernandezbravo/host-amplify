@@ -1,10 +1,10 @@
-import SearchSkeleton from '@/presentation/components/skeletons/search-skeleton';
+import HomeSkeleton from '@/presentation/components/skeletons/HomeSkeleton/HomeSkeleton';
 
 import dynamic from 'next/dynamic';
 
 const Stores = dynamic(() => import('home/stores'), {
   ssr: false,
-  loading: () => <SearchSkeleton />,
+  loading: () => <HomeSkeleton />,
 });
 
 const StoresPage = () => {
