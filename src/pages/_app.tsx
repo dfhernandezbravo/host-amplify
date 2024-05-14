@@ -4,8 +4,10 @@ import ProvidersLayout from '@/presentation/components/layouts/providers-layout'
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
+import PageNotFound from './404';
 // eslint-disable-next-line camelcase
 import { Open_Sans } from 'next/font/google';
+import ServerError from '@/presentation/components/molecules/ServerError';
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -23,6 +25,21 @@ type AppPropsWithLayout = AppProps & {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout =
     Component.getLayout ?? ((page) => <MainLayout>{page}</MainLayout>);
+
+  if (pageProps?.statusCode === 404) {
+    return (
+      <ProvidersLayout>
+        {getLayout(<PageNotFound {...pageProps} />)}
+      </ProvidersLayout>
+    );
+  }
+  if (pageProps?.statusCode === 500) {
+    return (
+      <ProvidersLayout>
+        {getLayout(<ServerError {...pageProps} />)}
+      </ProvidersLayout>
+    );
+  }
 
   return (
     <main className={openSans.className}>

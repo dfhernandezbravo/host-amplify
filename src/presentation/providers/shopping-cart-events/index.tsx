@@ -1,6 +1,10 @@
+import {
+  AUTHCOOKIES,
+  SHOPPING_CART_COOKIES,
+} from '@/application/infra/cookies';
 import useGetCartId from '@/domain/use-cases/shopping-cart/get-cart-id';
-import { useAppSelector } from '@/presentation/hooks/use-store';
 import React, { useCallback, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import WrapperEvents from './wrapper-events';
 
 interface Props {
@@ -8,17 +12,19 @@ interface Props {
 }
 
 const ShoppingCartEvents: React.FC<Props> = ({ children }) => {
-  const { cartId } = useAppSelector((state) => state.shoppingCart);
-  const { hasAccessToken } = useAppSelector((state) => state.auth);
+  const [cookies] = useCookies([
+    AUTHCOOKIES.ACCESS_TOKEN,
+    SHOPPING_CART_COOKIES.CART_ID,
+  ]);
   const { fetchCartId } = useGetCartId();
 
-  const getAccessToken = useCallback(() => {
-    if (cartId === '' && hasAccessToken) fetchCartId();
-  }, [cartId, hasAccessToken, fetchCartId]);
+  const getCartId = useCallback(() => {
+    if (!cookies.cartId && cookies.accessToken) fetchCartId();
+  }, [cookies, fetchCartId]);
 
   useEffect(() => {
-    getAccessToken();
-  }, [getAccessToken]);
+    getCartId();
+  }, [getCartId]);
 
   return <WrapperEvents>{children}</WrapperEvents>;
 };
