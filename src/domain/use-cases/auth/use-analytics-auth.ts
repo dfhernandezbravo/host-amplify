@@ -5,9 +5,9 @@ import { ShoppingCart } from '@cencosud-ds/easy-design-system';
 const useAnalyticsAuth = () => {
   const { dispatchEvent } = useEvents();
 
-  const sendLoginEvent = async (
+  const sendLoginOrGetIntoEvent = async (
     shoppingCart: ShoppingCart,
-    islogining = true,
+    isLoginEvent = true,
   ) => {
     const customer = shoppingCart?.customer;
     const isLogged = shoppingCart?.loggedIn;
@@ -24,13 +24,13 @@ const useAnalyticsAuth = () => {
         idEcommerce: userId,
         userCiid: btoa(document || ''),
         category: 'Identificación usuario',
-        accion: islogining ? 'Inicio de sesión' : 'Ingreso',
+        accion: isLoginEvent ? 'Inicio de sesión' : 'Ingreso',
         tag: isLogged ? 'usuario registrado' : 'usuario guest',
       },
     });
   };
 
-  return { sendLoginEvent };
+  return { sendLoginOrGetIntoEvent };
 };
 
 export default useAnalyticsAuth;

@@ -20,7 +20,7 @@ interface Props {
 }
 
 const WrapperProvider: React.FC<Props> = ({ children }) => {
-  const { sendLoginEvent } = useAnalyticsAuth();
+  const { sendLoginOrGetIntoEvent } = useAnalyticsAuth();
   const { cartId, shoppingCart } = useAppSelector(
     (state) => state.shoppingCart,
   );
@@ -43,7 +43,7 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
     );
     if (shoppingCartUser !== sessionStorageUser) {
       sessionStorage.setItem(AUTH_SESSION_STORAGE_ITEMS.USER, shoppingCartUser);
-      sendLoginEvent(shoppingCart, false);
+      sendLoginOrGetIntoEvent(shoppingCart, false);
     }
   }, [shoppingCart]);
 
@@ -105,7 +105,7 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
       const cartWithUpdatedCustomer = await verifyAndUpdateCustomerInCart(
         accessToken as string,
       );
-      await sendLoginEvent(cartWithUpdatedCustomer || cartRefreshed);
+      await sendLoginOrGetIntoEvent(cartWithUpdatedCustomer || cartRefreshed);
     };
     if (router?.query?.authStatus === 'success')
       updateCredentialsToSocialLogin();

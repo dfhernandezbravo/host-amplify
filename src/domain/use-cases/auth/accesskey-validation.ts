@@ -10,7 +10,7 @@ import { useUpdateShoppingCartCustomer } from '../shopping-cart/update-customer'
 import useAnalyticsAuth from './use-analytics-auth';
 
 export const useAccessKeyValidation = () => {
-  const { sendLoginEvent } = useAnalyticsAuth();
+  const { sendLoginOrGetIntoEvent } = useAnalyticsAuth();
   const [_cookies, setCookie] = useCookies([
     AUTHCOOKIES.ACCESS_TOKEN,
     AUTHCOOKIES.REFRESH_TOKEN,
@@ -41,7 +41,7 @@ export const useAccessKeyValidation = () => {
           response.accessToken,
         );
 
-        sendLoginEvent(cartWithUpdatedCustomer || cartRefreshed);
+        sendLoginOrGetIntoEvent(cartWithUpdatedCustomer || cartRefreshed);
       },
       onError: (response) => {
         dispatchEvent({

@@ -14,7 +14,7 @@ export const useSignUp = () => {
     AUTHCOOKIES.ACCESS_TOKEN,
     AUTHCOOKIES.REFRESH_TOKEN,
   ]);
-  const { sendLoginEvent } = useAnalyticsAuth();
+  const { sendLoginOrGetIntoEvent } = useAnalyticsAuth();
   const { dispatchEvent } = useEvents();
   const { refreshCart } = useGetShoppingCart();
   const { verifyAndUpdateCustomerInCart } = useUpdateShoppingCartCustomer();
@@ -36,7 +36,7 @@ export const useSignUp = () => {
         const cartWithUpdatedCustomer = await verifyAndUpdateCustomerInCart(
           response.accessToken,
         );
-        sendLoginEvent(cartWithUpdatedCustomer || cartRefreshed);
+        sendLoginOrGetIntoEvent(cartWithUpdatedCustomer || cartRefreshed);
 
         dispatchEvent({
           name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,

@@ -11,7 +11,7 @@ import useAnalyticsAuth from './use-analytics-auth';
 
 export const useSignIn = () => {
   const { dispatchEvent } = useEvents();
-  const { sendLoginEvent } = useAnalyticsAuth();
+  const { sendLoginOrGetIntoEvent } = useAnalyticsAuth();
 
   const [_cookies, setCookie] = useCookies([
     AUTHCOOKIES.ACCESS_TOKEN,
@@ -51,7 +51,7 @@ export const useSignIn = () => {
           response.accessToken,
         );
 
-        sendLoginEvent(cartWithUpdatedCustomer || cartRefreshed);
+        sendLoginOrGetIntoEvent(cartWithUpdatedCustomer || cartRefreshed);
       },
       onError: (response) => {
         dispatchEvent({
