@@ -39,3 +39,9 @@ newrelic.js
 newrelic_agent.log
 **/dist/
 .vscode/settings.json
+**/public/sw.js
+**/public/workbox-*.js
+**/public/worker-*.js
+**/public/sw.js.map
+**/public/workbox-*.js.map
+**/public/worker-*.js.map
