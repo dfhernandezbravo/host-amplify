@@ -1,13 +1,13 @@
 import '@/presentation/assets/styles/globals.css';
 import MainLayout from '@/presentation/components/layouts/main-layout';
 import ProvidersLayout from '@/presentation/components/layouts/providers-layout';
+import ServerError from '@/presentation/components/molecules/ServerError';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
 import PageNotFound from './404';
 // eslint-disable-next-line camelcase
 import { Open_Sans } from 'next/font/google';
-import ServerError from '@/presentation/components/molecules/ServerError';
 
 const openSans = Open_Sans({
   subsets: ['latin'],

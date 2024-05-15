@@ -1,0 +1,29 @@
+{
+    "theme_color": "#ae131c",
+    "background_color": "#ae131c",
+    "icons": [
+        {
+            "purpose": "maskable",
+            "sizes": "512x512",
+            "src": "icon512_maskable.png",
+            "type": "image/png"
+        },
+        {
+            "purpose": "any",
+            "sizes": "512x512",
+            "src": "icon512_rounded.png",
+            "type": "image/png"
+        }
+    ],
+    "orientation": "any",
+    "display": "standalone",
+    "dir": "auto",
+    "lang": "es-419",
+    "name": "Easy.cl",
+    "short_name": "Easy.cl",
+    "start_url": "/",
+    "scope": "https://easy.cl",
+    "description": "Mejoramiento del hogar",
+    "id": "https://easy.cl",
+    "prefer_related_applications": true
+}
