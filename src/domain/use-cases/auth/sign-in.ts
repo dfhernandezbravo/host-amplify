@@ -39,20 +39,19 @@ export const useSignIn = () => {
             ? new Date(response.refreshTokenExpired * 1000)
             : undefined,
         });
-        // await refreshCart();
-        // sendLoginEvent();
-        const refreshedCart = await refreshCart();
-        sendLoginEvent(refreshedCart);
+
+        const cartRefreshed = await refreshCart();
+
         dispatchEvent({
           name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,
           detail: { success: true },
         });
 
-        if (response.accessToken) {
-          const resp = await verifyAndUpdateCustomerInCart(
-            response.accessToken,
-          );
-        }
+        const cartWithUpdatedCustomer = await verifyAndUpdateCustomerInCart(
+          response.accessToken,
+        );
+
+        sendLoginEvent(cartWithUpdatedCustomer || cartRefreshed);
       },
       onError: (response) => {
         dispatchEvent({

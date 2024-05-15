@@ -57,7 +57,8 @@ export const useUpdateShoppingCartCustomer = () => {
         const customer: Customer = {
           email: jwtData.username,
         };
-        await mutation.mutateAsync(customer);
+        const { data } = await mutation.mutateAsync(customer);
+        return data;
       }
     },
     [mutation, shoppingCart?.customer?.email],

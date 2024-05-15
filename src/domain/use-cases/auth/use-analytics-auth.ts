@@ -5,8 +5,13 @@ import { ShoppingCart } from '@cencosud-ds/easy-design-system';
 const useAnalyticsAuth = () => {
   const { dispatchEvent } = useEvents();
 
-  const sendLoginEvent = async (shoppingCart: ShoppingCart) => {
+  const sendLoginEvent = async (
+    shoppingCart: ShoppingCart,
+    islogining = true,
+  ) => {
     const customer = shoppingCart?.customer;
+    const isLogged = shoppingCart?.loggedIn;
+
     if (!customer) return;
 
     const { userId, document, email } = customer;
@@ -17,10 +22,10 @@ const useAnalyticsAuth = () => {
         event: 'userData',
         userId: btoa(email),
         idEcommerce: userId,
-        userCiid: btoa(document),
+        userCiid: btoa(document || ''),
         category: 'Identificación usuario',
-        accion: 'Ingreso',
-        tag: 'usuario registrado',
+        accion: islogining ? 'Inicio de sesión' : 'Ingreso',
+        tag: isLogged ? 'usuario registrado' : 'usuario guest',
       },
     });
   };

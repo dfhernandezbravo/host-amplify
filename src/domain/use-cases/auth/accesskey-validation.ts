@@ -6,20 +6,24 @@ import { useEvents } from '@/presentation/hooks/use-events';
 import { useCookies } from 'react-cookie';
 import { useMutation } from 'react-query';
 import useGetShoppingCart from '../shopping-cart/get-cart';
+import { useUpdateShoppingCartCustomer } from '../shopping-cart/update-customer';
+import useAnalyticsAuth from './use-analytics-auth';
 
 export const useAccessKeyValidation = () => {
+  const { sendLoginEvent } = useAnalyticsAuth();
   const [_cookies, setCookie] = useCookies([
     AUTHCOOKIES.ACCESS_TOKEN,
     AUTHCOOKIES.REFRESH_TOKEN,
   ]);
   const { dispatchEvent } = useEvents();
   const { refreshCart } = useGetShoppingCart();
+  const { verifyAndUpdateCustomerInCart } = useUpdateShoppingCartCustomer();
 
   const accessKeyValidationMutation = useMutation(
     (request: AccessKeyValidationRequest) =>
       authService().accessKeyValidation(request),
     {
-      onSuccess: ({ data: response }) => {
+      onSuccess: async ({ data: response }) => {
         setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken, {
           domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
           path: '/',
@@ -28,11 +32,16 @@ export const useAccessKeyValidation = () => {
           domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
           path: '/',
         });
-        refreshCart();
+        const cartRefreshed = await refreshCart();
         dispatchEvent({
           name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,
           detail: { success: true },
         });
+        const cartWithUpdatedCustomer = await verifyAndUpdateCustomerInCart(
+          response.accessToken,
+        );
+
+        sendLoginEvent(cartWithUpdatedCustomer || cartRefreshed);
       },
       onError: (response) => {
         dispatchEvent({
