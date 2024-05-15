@@ -48,7 +48,7 @@ const remotes = (isServer) => {
 
 const nextConfig = {
   reactStrictMode: true,
-
+  swcMinify: true,
   images: {
     domains: ['easyclqa.vteximg.com.br'],
     remotePatterns: [
