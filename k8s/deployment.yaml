@@ -61,7 +61,7 @@ spec:
               port: 8080
             initialDelaySeconds: 100
             timeoutSeconds: 30
-        resources:
+          resources:
             requests:
               memory: 6300Mi
               cpu: "2"
