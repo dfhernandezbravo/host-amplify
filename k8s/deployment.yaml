@@ -61,12 +61,12 @@ spec:
               port: 8080
             initialDelaySeconds: 100
             timeoutSeconds: 30
-          resources:
+        resources:
             requests:
-              memory: 2100Mi
-              cpu: '3000m'
+              memory: 6300Mi
+              cpu: "2"
             limits:
-              memory: 2100Mi
-              cpu: '3000m'
+              memory: 6300Mi
+              cpu: "2"
       imagePullSecrets:
         - name: gitlab-registry-credentials
