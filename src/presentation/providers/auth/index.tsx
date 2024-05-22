@@ -11,13 +11,19 @@ import AuthEvents from './auth-events';
 import { setHasAccessToken } from '../store/modules/auth/slice';
 import { useEvents } from '@/presentation/hooks/use-events';
 import { useUpdateShoppingCartCustomer } from '@/domain/use-cases/shopping-cart/update-customer';
+import { ShoppingCart } from '@cencosud-ds/easy-design-system';
+import useAnalyticsAuth from '@/domain/use-cases/auth/use-analytics-auth';
+import { AUTH_SESSION_STORAGE_ITEMS } from '@/application/infra/sessionStorageItems';
 
 interface Props {
   children: React.ReactNode;
 }
 
 const WrapperProvider: React.FC<Props> = ({ children }) => {
-  const { cartId } = useAppSelector((state) => state.shoppingCart);
+  const { sendLoginOrGetIntoEvent } = useAnalyticsAuth();
+  const { cartId, shoppingCart } = useAppSelector(
+    (state) => state.shoppingCart,
+  );
   const { refreshCart } = useGetShoppingCart();
   const dispatch = useAppDispatch();
   const { dispatchEvent } = useEvents();
@@ -28,6 +34,18 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
     AUTHCOOKIES.ACCESS_TOKEN,
     AUTHCOOKIES.REFRESH_TOKEN,
   ]);
+
+  useEffect(() => {
+    if (!shoppingCart?.customer?.email) return;
+    const shoppingCartUser = shoppingCart.customer.email;
+    const sessionStorageUser = sessionStorage.getItem(
+      AUTH_SESSION_STORAGE_ITEMS.USER,
+    );
+    if (shoppingCartUser !== sessionStorageUser) {
+      sessionStorage.setItem(AUTH_SESSION_STORAGE_ITEMS.USER, shoppingCartUser);
+      sendLoginOrGetIntoEvent(shoppingCart, false);
+    }
+  }, [shoppingCart]);
 
   const handleRedirect = () => {
     // se remueven parametros authStatus, accessToken y refreshToken de la url
@@ -64,9 +82,11 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
 
   // efecto para manejar social login
   useEffect(() => {
-    const { query } = router;
-    const { authStatus, accessToken, refreshToken } = query;
-    if (authStatus === 'success') {
+    const updateCredentialsToSocialLogin = async () => {
+      handleRedirect();
+      let cartRefreshed!: ShoppingCart;
+      const { query } = router;
+      const { accessToken, refreshToken } = query;
       setCookie(AUTHCOOKIES.ACCESS_TOKEN, accessToken, {
         domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
         path: '/',
@@ -79,12 +99,16 @@ const WrapperProvider: React.FC<Props> = ({ children }) => {
         name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,
         detail: { success: true },
       });
-      if (cartId) refreshCart();
-
-      verifyAndUpdateCustomerInCart(accessToken as string);
-
-      handleRedirect();
-    }
+      if (cartId) {
+        cartRefreshed = await refreshCart();
+      }
+      const cartWithUpdatedCustomer = await verifyAndUpdateCustomerInCart(
+        accessToken as string,
+      );
+      await sendLoginOrGetIntoEvent(cartWithUpdatedCustomer || cartRefreshed);
+    };
+    if (router?.query?.authStatus === 'success')
+      updateCredentialsToSocialLogin();
   }, [router, setCookie]);
 
   return <AuthEvents>{children}</AuthEvents>;

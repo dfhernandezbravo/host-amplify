@@ -43,11 +43,12 @@ export const useUpdateShoppingCartCustomer = () => {
     const encodedPayload = parts[1];
     const decodedPayload = window.atob(encodedPayload);
     const decodedData = JSON.parse(decodedPayload);
+
     return decodedData;
   };
 
   const verifyAndUpdateCustomerInCart = useCallback(
-    (accessToken: string) => {
+    async (accessToken: string) => {
       const jwtData = decodeToken(accessToken as string);
       if (
         jwtData?.username &&
@@ -56,10 +57,11 @@ export const useUpdateShoppingCartCustomer = () => {
         const customer: Customer = {
           email: jwtData.username,
         };
-        mutation.mutateAsync(customer);
+        const { data } = await mutation.mutateAsync(customer);
+        return data;
       }
     },
-    [mutation],
+    [mutation, shoppingCart?.customer?.email],
   );
 
   return {
