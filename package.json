@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='-r @newrelic/next' rm -rf .next && next dev --port 3000",
-    "dev-windows": "next dev --port 3000",
-    "build": "next build",
-    "start": "NODE_OPTIONS='-r @newrelic/next' next start",
-    "start:prod": "next build && next start -p 3000",
+    "dev": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && rm -rf .next && next dev --port 3000",
+    "build": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && next build",
+    "start": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && NODE_OPTIONS='-r @newrelic/next' && next start",
+    "start:prod": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && next build && next start -p 3000",
     "lint": "next lint",
     "prepare": "husky install",
     "format": "prettier --write . --config .prettierrc"
@@ -22,7 +21,7 @@
     "@cencosud-ds/easy-design-system": "^1.1.15",
     "@elgorditosalsero/react-gtm-hook": "^2.7.2",
     "@emotion/react": "^11.11.1",
-    "@module-federation/nextjs-mf": "^6.4.0",
+    "@module-federation/nextjs-mf": "^8.3.16",
     "@newrelic/next": "^0.7.0",
     "@reduxjs/toolkit": "^2.0.1",
     "axios": "^1.4.0",
@@ -40,9 +39,9 @@
     "react-redux": "^9.0.4",
     "redux-persist": "^6.0.0",
     "sass": "^1.62.1",
-    "sharp": "^0.33.3",
+    "sharp": "^0.33.4",
     "styled-components": "^6.1.8",
-    "webpack": "^5.80.0"
+    "webpack": "^5.91.0"
   },
   "browserslist": [
     "chrome 64",

@@ -1,13 +1,7 @@
 import { WINDOWS_EVENTS } from '@/application/infra/events';
-import SearchSkeleton from '@/presentation/components/skeletons/search-skeleton';
 import useAnalytics, { EventData } from '@/presentation/hooks/use-analytics';
-import dynamic from 'next/dynamic';
 import { useCallback, useEffect } from 'react';
-
-const Plp = dynamic(() => import('plp/plp-eventos'), {
-  ssr: false,
-  loading: () => <SearchSkeleton />,
-});
+import Plp from 'plp/plp-eventos';
 
 const EventsPLPPage = () => {
   const { sendEvent } = useAnalytics();

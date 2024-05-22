@@ -1,24 +1,11 @@
 import { WINDOWS_EVENTS } from '@/application/infra/events';
-import { HeaderProps } from '@/domain/interfaces/header';
-import HeaderSkeleton from '@/presentation/components/skeletons/HeaderSkeleton/HeaderSkeleton';
-import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoader';
 import useAnalytics, { EventData } from '@/presentation/hooks/use-analytics';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import { useCallback, useEffect } from 'react';
 import { NextPageWithLayout } from '../_app';
-
-const RemoteCart = dynamic(() => import('cart/cart'), {
-  ssr: false,
-  loading: () => <LogoLoader />,
-});
-
-const Header = dynamic<HeaderProps>(() => import('headerFooter/header'), {
-  ssr: false,
-  loading: () => <HeaderSkeleton />,
-});
-
+import RemoteCart from 'cart/cart';
+import Header from 'headerFooter/header';
 interface ParsedUrlQueryForPage extends ParsedUrlQuery {
   cartId: string;
 }

@@ -1,13 +1,7 @@
-import PdpSkeleton from '@/presentation/components/skeletons/pdp-skeleton/pdp-skeleton';
-import dynamic from 'next/dynamic';
 import { useCallback, useEffect } from 'react';
 import useAnalytics, { EventData } from '@/presentation/hooks/use-analytics';
 import { WINDOWS_EVENTS } from '@/application/infra/events';
-
-const Pdp = dynamic(() => import('pdp/pdp'), {
-  ssr: false,
-  loading: () => <PdpSkeleton />,
-});
+import Pdp from 'pdp/pdp';
 
 const PdpComponent = (props: any) => {
   const { sendEvent } = useAnalytics();
