@@ -1,10 +1,4 @@
-import SearchSkeleton from '@/presentation/components/skeletons/search-skeleton';
-import dynamic from 'next/dynamic';
-
-const Plp = dynamic(() => import('plp/plp-cluster'), {
-  ssr: false,
-  loading: () => <SearchSkeleton />,
-});
+import Plp from 'plp/plp-cluster';
 
 const ClusterPLPPage = () => {
   return <Plp />;

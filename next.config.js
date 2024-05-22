@@ -58,6 +58,19 @@ const nextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000',
+          },
+        ],
+      },
+    ];
+  },
   webpack(config, options) {
     config.plugins.push(
       new NextFederationPlugin({
@@ -86,6 +99,7 @@ module.exports = withPWA({
   reactStrictMode: true,
   compiler: {
     styledComponents: true,
+    removeConsole: true,
   },
   ...nextConfig,
 });

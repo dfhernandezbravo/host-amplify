@@ -1,22 +1,16 @@
 import { WINDOWS_EVENTS } from '@/application/infra/events';
 import detectOs from '@/helpers/detectOS';
-import HomeSkeleton from '@/presentation/components/skeletons/HomeSkeleton/HomeSkeleton';
 import useAnalytics, { EventData } from '@/presentation/hooks/use-analytics';
-import { GetServerSideProps } from 'next';
-import dynamic from 'next/dynamic';
+import { GetStaticProps } from 'next';
 import { useCallback, useEffect } from 'react';
-
-const Home = dynamic(() => import('home/home'), {
-  ssr: true,
-  loading: () => <HomeSkeleton />,
-});
+import Home from 'home/home';
 
 export const revalidate = 30;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = async (ctx) => {
   const home = await import('home/home');
-  if (home.getServerSideProps) {
-    return home.getServerSideProps(ctx);
+  if (home.getStaticProps) {
+    return home.getStaticProps(ctx);
   }
   return {
     props: {},

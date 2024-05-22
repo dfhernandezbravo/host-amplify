@@ -1,10 +1,4 @@
-import LogoLoader from '@/presentation/components/skeletons/LogoLoader/LogoLoader';
-import dynamic from 'next/dynamic';
-
-const AccountLayout = dynamic(() => import('account/account-layout'), {
-  ssr: false,
-  loading: () => <LogoLoader />,
-});
+import AccountLayout from 'account/account-layout';
 
 const Content = () => <AccountLayout />;
 

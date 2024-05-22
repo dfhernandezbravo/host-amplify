@@ -1,12 +1,7 @@
 import { NextPageWithLayout } from '@/pages/_app';
 import AccountLayout from '@/presentation/components/layouts/account-layout';
-import dynamic from 'next/dynamic';
 import React from 'react';
-
-const PageRemote = dynamic(() => import('account/orders'), {
-  ssr: false,
-  loading: () => <></>,
-});
+import PageRemote from 'account/orders';
 
 const Page: NextPageWithLayout = () => {
   return <PageRemote />;

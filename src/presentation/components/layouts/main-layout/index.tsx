@@ -1,24 +1,8 @@
-import { HeaderProps } from '@/domain/interfaces/header';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import React, { ReactNode, useEffect } from 'react';
-import FooterSkeleton from '../../skeletons/FooterSkeleton/FooterSkeleton';
-import HeaderSkeleton from '../../skeletons/HeaderSkeleton/HeaderSkeleton';
-
-const Header = dynamic<HeaderProps>(() => import('headerFooter/header'), {
-  ssr: false,
-  loading: () => <HeaderSkeleton />,
-});
-
-const Footer = dynamic(() => import('headerFooter/footer'), {
-  ssr: false,
-  loading: () => <FooterSkeleton />,
-});
-
-const CartAside = dynamic(() => import('cart/cartAside'), {
-  ssr: false,
-  loading: () => <></>,
-});
+import Header from 'headerFooter/header';
+import Footer from 'headerFooter/footer';
+import CartAside from 'cart/cartAside';
 
 type MainLayoutStruct = {
   children: ReactNode;
