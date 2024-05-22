@@ -6,19 +6,23 @@ import { useCookies } from 'react-cookie';
 import { useMutation } from 'react-query';
 import useGetShoppingCart from '../shopping-cart/get-cart';
 import { SignUpRequest } from '@/domain/interfaces/auth/http-request/sign-up';
+import useAnalyticsAuth from './use-analytics-auth';
+import { useUpdateShoppingCartCustomer } from '../shopping-cart/update-customer';
 
 export const useSignUp = () => {
   const [_cookies, setCookie] = useCookies([
     AUTHCOOKIES.ACCESS_TOKEN,
     AUTHCOOKIES.REFRESH_TOKEN,
   ]);
+  const { sendLoginOrGetIntoEvent } = useAnalyticsAuth();
   const { dispatchEvent } = useEvents();
   const { refreshCart } = useGetShoppingCart();
+  const { verifyAndUpdateCustomerInCart } = useUpdateShoppingCartCustomer();
 
   const signUpMutation = useMutation(
     (request: SignUpRequest) => authService().signUp(request),
     {
-      onSuccess: ({ data: response }) => {
+      onSuccess: async ({ data: response }) => {
         setCookie(AUTHCOOKIES.ACCESS_TOKEN, response.accessToken, {
           domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
           path: '/',
@@ -27,7 +31,13 @@ export const useSignUp = () => {
           domain: `${process.env.NEXT_PUBLIC_COOKIE_DOMAIN}`,
           path: '/',
         });
-        refreshCart();
+
+        const cartRefreshed = await refreshCart();
+        const cartWithUpdatedCustomer = await verifyAndUpdateCustomerInCart(
+          response.accessToken,
+        );
+        sendLoginOrGetIntoEvent(cartWithUpdatedCustomer || cartRefreshed);
+
         dispatchEvent({
           name: AUTH_EVENTS.GET_SIGNUP_SUCCESS,
           detail: { success: true },
