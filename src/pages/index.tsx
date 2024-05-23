@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next';
 import { useCallback, useEffect } from 'react';
 import Home from 'home/home';
 
-export const revalidate = 30;
+export const revalidate = 60;
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const home = await import('home/home');
