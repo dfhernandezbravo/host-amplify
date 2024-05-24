@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && rm -rf .next && next dev --port 3000",
-    "build": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && next build",
-    "start": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && NODE_OPTIONS='-r @newrelic/next' && next start",
+    "build": "NEXT_PRIVATE_LOCAL_WEBPACK=true next build",
+    "start": "NEXT_PRIVATE_LOCAL_WEBPACK=true next start",
     "start:prod": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && next build && next start -p 3000",
     "lint": "next lint",
     "prepare": "husky install",
