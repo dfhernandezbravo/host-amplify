@@ -6,13 +6,6 @@ import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
 import PageNotFound from './404';
-// eslint-disable-next-line camelcase
-import { Open_Sans } from 'next/font/google';
-
-const openSans = Open_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-});
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -42,7 +35,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   }
 
   return (
-    <main className={openSans.className}>
+    <main>
       <ProvidersLayout>
         {getLayout(<Component {...pageProps} />)}
       </ProvidersLayout>
